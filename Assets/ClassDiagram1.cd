@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Assets.StoryTemplate.Infrastructure.CanvasBuilder">
+    <Position X="12.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\CanvasBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.A">
+    <Position X="5.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAgAIAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\A.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.An">
+    <Position X="7.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\An.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.ClickAction" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\ClickAction.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.ComponentBuilder&lt;T&gt;">
+    <Position X="9.25" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAAAAAAAAAAAAAAgAAAAEAAIAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\ComponentBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindObject&lt;T&gt;">
+    <Position X="10.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindCanvas" Collapsed="true">
+    <Position X="10.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindImage" Collapsed="true">
+    <Position X="12.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindButton" Collapsed="true">
+    <Position X="8.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.ImageBuilder">
+    <Position X="9.75" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\ImageBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.IMG2Sprite">
+    <Position X="5.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAIAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\IMG2Sprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.SceneBuilder">
+    <Position X="5.5" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\SceneBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ButtonBuilder">
+    <Position X="7.5" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\ButtonBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameObjectBuilder">
+    <Position X="14.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\GameObjectBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Story">
+    <Position X="15.75" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAYAAQAAAgAAAEAGACCAAAAFAAAAAIAAAgAAAAAAA=</HashCode>
+      <FileName>Assets\Story.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Interaction">
+    <Position X="17.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAABBQAAAIAAACAAAAAAICAAAAAAAACAAAACAAE=</HashCode>
+      <FileName>Assets\Interaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.Resources">
+    <Position X="3.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACAgAAAAACA=</HashCode>
+      <FileName>Assets\Resources.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.GameController">
+    <Position X="20.5" Y="1.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAACAAkABAAAgAAEAAAQAIAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Assets\GameController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Act">
+    <Position X="17.75" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAIAAAAAEAAAAAAAEAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Act.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

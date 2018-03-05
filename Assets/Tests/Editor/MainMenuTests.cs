@@ -14,19 +14,13 @@ namespace Assets.Tests
         [Test]
         public void Exit_Button_Present()
         {
-            var btnName = "btnExit";
+            var btnName = "ExitButton";
             var testButton = GetButton(btnName);
 
             Assert.IsNotNull(testButton);
         }
 
-        [Test]
-        public void Story_One_Button_Present()
-        {
-            var btnName = "btnStoryOne";
-            var testButton = GetButton(btnName);
+        
 
-            Assert.IsNotNull(testButton);
-        }
     }
 }
