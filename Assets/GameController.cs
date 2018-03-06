@@ -13,7 +13,7 @@ namespace Assets
 {
     public class GameController : MonoBehaviour
     {
-        
+
         private Dictionary<string, Story> _stories; //list of stories available in the platform
         private bool _init = true; //flag for async methods that run on first update frame
         private Story _currentStory; //currently active story
@@ -53,7 +53,7 @@ namespace Assets
 
             //add panels to the list
             FillPanels();
-            
+
             //show the main menu control bar
             ShowPanel(FindPanel.GO("ControlBar"));
 
@@ -62,21 +62,21 @@ namespace Assets
 
             // add ExitGame callback to ExitButton listener
             FindButton.Named("ExitButton").onClick.AddListener(ExitGame);
-            
+
             //Testing text transition (fade in)
             var text = FindText.Named("TextGameTitle");
             VisualEffects.SetTextTransparent(text);
             ElementsToCrossfade.Add(text.gameObject);
 
-            
+
 
             //Canvas initialization
             var mainMenuCanvas = FindCanvas.Named("MainMenuCanvas");
-            
-            mainMenuCanvas.transform.SetAsLastSibling();
-            _canvases["mainMenuCanvas"]=mainMenuCanvas;
 
-            
+            mainMenuCanvas.transform.SetAsLastSibling();
+            _canvases["mainMenuCanvas"] = mainMenuCanvas;
+
+
 
             foreach (var story in Stories.Values)
             {
@@ -87,7 +87,7 @@ namespace Assets
             }
 
 
-            
+
 
 
 
@@ -120,13 +120,13 @@ namespace Assets
             EnableCanvas(canvas);
             var panel = FindPanel.GO("ControlBar");
             panel.transform.SetParent(canvas.transform);
-            ShowPanel(panel,Color.grey);
+            ShowPanel(panel, Color.grey);
             Destroy(FindButton.Named("BackButton").gameObject);
         }
 
         private async void LoadButtons()
         {
-            
+
             if (Stories.Count > 0) //a hack, have to refactor at some point
             {
                 var a = IMG2Sprite.Instance(Stories.Values.ElementAt(0).SnakeCase() + "spriter");
@@ -137,7 +137,7 @@ namespace Assets
                 ImageStory1.name = Stories.Values.ElementAt(0).SnakeCase();
                 VisualEffects.SetImageTransparent(ImageStory1);
                 ElementsToCrossfade.Add(ImageStory1.gameObject);
-                
+
 
 
                 var ImageStory2 = FindImage.Named("ImageStory2");
@@ -151,16 +151,17 @@ namespace Assets
                 {
                     if (x)
                     {
-                        
+
                         _cabinInTheWoods = new CabinInTheWoods(story.ToString(), story.Description, story.ImageUrl);
                         x = false;
                     }
+
                     FindImage.Named(story.SnakeCase()).gameObject.AddComponent<LaunchGame>();
                 }
 
             }
 
-           
+
         }
 
         // Update is called once per frame
@@ -199,19 +200,20 @@ namespace Assets
                     {
                         itemsToRemove.Add(element);
                     }
-                }//test if the element is text
+                } //test if the element is text
                 else if (text)
                 {
                     VisualEffects.TextFadeIn(text, 1.0f, 0.8f);
                     if (Math.Abs(text.color.a - 1.0f) < 0.0001)
                     {
                         itemsToRemove.Add(element);
-                        
+
                     }
                 }
 
-                
+
             }
+
             //cleanup the elements which completed transition
             foreach (var item in itemsToRemove)
             {
@@ -229,7 +231,7 @@ namespace Assets
             Application.Quit();
         }
 
-      
+
 
         public void DisableAllCanvases()
         {
@@ -249,7 +251,7 @@ namespace Assets
 
         public void ShowPanel(GameObject panel)
         {
-           ShowPanel(panel, Color.black);
+            ShowPanel(panel, Color.black);
         }
 
         public void ShowPanel(GameObject panel, Color color)
@@ -279,6 +281,20 @@ namespace Assets
         {
             var savegame = JsonUtility.ToJson(CabinInTheWoods);
             TextSave.WriteString(savegame);
+        }
+
+        public void LoadGame()
+        {
+            var savegame = TextSave.ReadString();
+            var json = JSON.Parse(savegame);
+            var count = json["choices"].Count;
+            if (count > 0)
+                for (var i = 0; i < count; i++)
+                {
+                    CabinInTheWoods.choices.Add(json["choices"][i]);
+                    Debug.Log(json["choices"][i]);
+                }
+            
         }
     }
 }

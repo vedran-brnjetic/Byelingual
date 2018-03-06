@@ -73,6 +73,19 @@ namespace Assets.StoryTemplate.Infrastructure
             //apply the game controller action to the back button
             saveButton.onClick.AddListener(gc.SaveGame);
 
+
+            ///////////////////////////Load Button
+            var loadButton = Instantiate(panel.GetComponentInChildren<Button>(), panel.transform, true);
+            loadButton.name = "LoadButton";
+            loadButton.transform.SetParent(panel.transform);
+            loadButton.gameObject.GetComponentInChildren<Text>().text = "Load";
+
+            //move button a bit to the left
+            loadButton.transform.Translate(50f, 0, 0);
+
+            //apply the game controller action to the back button
+            loadButton.onClick.AddListener(gc.LoadGame);
+
             if (gc.CurrentStory.SnakeCase() == "cabin_in_the_woods")
             {
                 gc.CabinInTheWoods.PlayIntro();
