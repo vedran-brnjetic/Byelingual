@@ -123,7 +123,7 @@
   <Class Name="Assets.GameController">
     <Position X="20.5" Y="1.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>ACQAAAAAACAAkABAAAgAAEAAAQAIAAAAAAQAAAAAAAA=</HashCode>
+      <HashCode>ACQAAACAACAAkAhAAAhAAEAAAQAoAAAAAEQAAgAAgAA=</HashCode>
       <FileName>Assets\GameController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -132,6 +132,13 @@
     <TypeIdentifier>
       <HashCode>BAAAAAAAAIAAAAAEAAAAAAAEAAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>Assets\Act.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.VisualEffects">
+    <Position X="3.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgEAgAAAAAAQAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\VisualEffects.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -30,6 +30,14 @@ namespace Assets.StoryTemplate.Infrastructure
 
     }
 
+    public class FindSprite : FindObject<Sprite>
+    {
+        public static Sprite InResources(string sprite)
+        {
+            return UnityEngine.Resources.Load<Sprite>("CabinInTheWoods/Images/" + sprite);
+        }
+    }
+
     public class FindImage : FindObject<Image>
     {
 

@@ -64,8 +64,8 @@ namespace Assets
         public Image IntroImage
         {
             get { return _introImage; }
+            set { _introImage = value; }
         }
-
 
 
         public override string ToString()
