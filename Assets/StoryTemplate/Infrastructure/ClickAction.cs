@@ -57,10 +57,21 @@ namespace Assets.StoryTemplate.Infrastructure
             backButton.gameObject.GetComponentInChildren<Text>().text = "Back";
             
             //move button a bit to the left
-            backButton.transform.Translate(-400f,0,0);
+            backButton.transform.Translate(-200f,0,0);
             
             //apply the game controller action to the back button
             backButton.onClick.AddListener(gc.BackToMainMenu);
+            ///////////////////////////Save Button
+            var saveButton = Instantiate(panel.GetComponentInChildren<Button>(), panel.transform, true);
+            saveButton.name = "SaveButton";
+            saveButton.transform.SetParent(panel.transform);
+            saveButton.gameObject.GetComponentInChildren<Text>().text = "Save";
+            
+            //move button a bit to the left
+            saveButton.transform.Translate(-350f,0,0);
+            
+            //apply the game controller action to the back button
+            saveButton.onClick.AddListener(gc.SaveGame);
 
             if (gc.CurrentStory.SnakeCase() == "cabin_in_the_woods")
             {

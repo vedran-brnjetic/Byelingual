@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Assets.StoryTemplate;
+using SimpleJSON;
+using SimpleJson.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -271,6 +273,12 @@ namespace Assets
         public IEnumerator DelayLoad(int i)
         {
             yield return new WaitForSeconds(i);
+        }
+
+        public void SaveGame()
+        {
+            var savegame = JsonUtility.ToJson(CabinInTheWoods);
+            TextSave.WriteString(savegame);
         }
     }
 }

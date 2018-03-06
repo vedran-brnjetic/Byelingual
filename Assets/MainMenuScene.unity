@@ -882,6 +882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 672459168}
   - component: {fileID: 672459167}
+  - component: {fileID: 672459169}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -900,6 +901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f5a5ab6716af84da52a0c901a45cee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ElementsToCrossfade: []
 --- !u!4 &672459168
 Transform:
   m_ObjectHideFlags: 0
@@ -913,6 +915,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &672459169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 672459166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dff5fa5bdb0e80347ad9862ef573b4dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &908703616
 GameObject:
   m_ObjectHideFlags: 0

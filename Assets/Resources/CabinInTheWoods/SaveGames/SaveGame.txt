@@ -1,0 +1,1 @@
+{"choices":["Hands","Fire","Fire","Hands","Hands","Fire"]}

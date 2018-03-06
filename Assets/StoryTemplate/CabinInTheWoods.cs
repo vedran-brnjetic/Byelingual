@@ -16,6 +16,7 @@ namespace Assets
 
         public CabinInTheWoods(string name, string description, string imageUrl) : base(name, description, imageUrl)
         {
+            choices = new List<string>();
             _gc = FindGameController.Named("GameController");
             _handsSprite = FindSprite.InResources("placeholder_hands");
             _fireSprite = FindSprite.InResources("placeholder_wood-burning_stove");
@@ -27,6 +28,7 @@ namespace Assets
         public void ProcessChoice(string choice)
         {
             choices.Add(choice);
+            _gc.SaveGame();
             
         }
 
