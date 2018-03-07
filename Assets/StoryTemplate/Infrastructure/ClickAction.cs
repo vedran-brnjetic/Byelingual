@@ -14,6 +14,20 @@ namespace Assets.StoryTemplate.Infrastructure
         }
     }
 
+    public class SomeAction : ClickAction
+    {
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            //#CODE EXAMPLE
+            //write your code here
+            
+            //this allows you to control the active game controller by accessing its public methods and properties
+            var GameController = FindGameController.Named("GameController");
+
+
+        }
+    }
+
     public class LaunchGame : ClickAction
     {
         public override void OnPointerClick(PointerEventData eventData)
@@ -88,7 +102,7 @@ namespace Assets.StoryTemplate.Infrastructure
 
             if (gc.CurrentStory.SnakeCase() == "cabin_in_the_woods")
             {
-                gc.CabinInTheWoods.PlayIntro();
+                gc.CabinInTheWoods.PlayIntro(0);
             }
             
         }
@@ -105,6 +119,7 @@ namespace Assets.StoryTemplate.Infrastructure
             
 
         }
+
     }
    
 

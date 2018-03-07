@@ -1,1 +1,1 @@
-{"choices":["Hands","Fire","Fire","Hands","Fire"]}
+{"choices":["IntroChoice_1","Fire","IntroChoice_1"]}

@@ -3,6 +3,19 @@ using UnityEngine.UI;
 
 namespace Assets.StoryTemplate.Infrastructure
 {
+    public static class Impress
+    {
+        public static void WithImage(Image image)
+        {
+
+        }
+
+        public static void WithText(Text text)
+        {
+
+        }
+    }
+
     public static class VisualEffects
     {
         public static Color Blush(Color color, float targetAlpha, float fadeRate)
@@ -26,7 +39,7 @@ namespace Assets.StoryTemplate.Infrastructure
             
         }
 
-        public static void TextFadeIn(Text text, float targetAlpha=1f, float fadeRate=2f)
+        public static void TextFadeIn(Text text, float targetAlpha=1f, float fadeRate=3f)
         {
             //SetTextTransparent(text);
             text.color = Blush(text.color, targetAlpha, fadeRate);
