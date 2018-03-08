@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Assets
 {
-    public static class Resources
+    public static class BLResources
     {
         private const string GameUri = "http://api.byelingual.me:8000/";
 

@@ -85,13 +85,6 @@
       <FileName>Assets\StoryTemplate\Infrastructure\SceneBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ButtonBuilder">
-    <Position X="7.5" Y="0.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Assets\StoryTemplate\Infrastructure\ButtonBuilder.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="GameObjectBuilder">
     <Position X="12.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
@@ -151,7 +144,7 @@
   <Class Name="Assets.CabinInTheWoods">
     <Position X="15.25" Y="6.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAEAIACAAAAgBAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <HashCode>AAgAAICAAAAEAIACAAAAgBCAAAAAAAAAAAAAAAAABBA=</HashCode>
       <FileName>Assets\StoryTemplate\CabinInTheWoods.cs</FileName>
     </TypeIdentifier>
   </Class>

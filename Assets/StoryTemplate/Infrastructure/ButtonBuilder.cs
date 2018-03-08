@@ -1,19 +1,21 @@
-﻿using Assets.StoryTemplate.Infrastructure;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonBuilder : ComponentBuilder<Button>
+namespace Assets.StoryTemplate.Infrastructure
 {
+    public class ButtonBuilder : ComponentBuilder<Button>
+    {
     
 
    
-    public override Button Build()
-    {
+        public override Button Build()
+        {
 
-        var button = new GameObject().AddComponent<Button>();
+            var button = new GameObject().AddComponent<Button>();
         
-        button.name = _name;
-        return button;
+            button.name = _name;
+            return button;
 
+        }
     }
 }

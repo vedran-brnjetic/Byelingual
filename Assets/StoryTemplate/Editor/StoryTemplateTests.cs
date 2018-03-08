@@ -126,7 +126,7 @@ namespace Assets.StoryTemplate.Editor
             [Test]
             public void Can_Download_Story_List_From_Game_URI()
             {
-                var jsonString = Resources.GetStringResponse("stories");
+                var jsonString = BLResources.GetStringResponse("stories");
                 var stories = new List<Story>();
                 var jsonStories = JSON.Parse(jsonString);
 

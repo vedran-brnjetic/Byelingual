@@ -58,7 +58,7 @@ namespace Assets
             ShowPanel(FindPanel.GO("ControlBar"));
 
             //get stories from internet
-            _stories = Resources.GetStoriesFromInternet();
+            _stories = BLResources.GetStoriesFromInternet();
 
             // add ExitGame callback to ExitButton listener
             FindButton.Named("ExitButton").onClick.AddListener(ExitGame);
