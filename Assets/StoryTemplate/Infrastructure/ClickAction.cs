@@ -102,9 +102,22 @@ namespace Assets.StoryTemplate.Infrastructure
 
             if (gc.CurrentStory.SnakeCase() == "cabin_in_the_woods")
             {
-                gc.CabinInTheWoods.PlayIntro(0);
+                gc.CabinInTheWoods.PlayPhase(0);
             }
             
+        }
+    }
+
+    public class AdvancePhase : ClickAction
+    {
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            var gc = FindGameController.Named("GameController");
+
+            //game controller / cabininthewoods / List<string> choices
+            gc.CabinInTheWoods.AdvancePhase();
+
+
         }
     }
 

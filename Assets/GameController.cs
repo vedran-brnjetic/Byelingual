@@ -52,7 +52,9 @@ namespace Assets
             _stories = new Dictionary<string, Story>();
             _panels = new List<GameObject>();
             ElementsToCrossfade = new Dictionary<string,List<GameObject>>();
-
+            ElementsToCrossfade["in"] = new List<GameObject>();
+            ElementsToCrossfade["out"] = new List<GameObject>();
+            ElementsToCrossfade["cross"] = new List<GameObject>();
             //add panels to the list
             FillPanels();
 
@@ -184,7 +186,10 @@ namespace Assets
         private void CrossFadeElements()
         {
             //container of items to remove from crossfade list once the item completes the transition
-            var itemsToRemove = new List<GameObject>();
+            var itemsToRemove = new Dictionary<string, List<GameObject>>();
+            itemsToRemove["in"] = new List<GameObject>();
+            itemsToRemove["out"] = new List<GameObject>();
+            itemsToRemove["cross"] = new List<GameObject>();
 
             //go through the crossfade list
             foreach (var element in ElementsToCrossfade["in"])
@@ -200,7 +205,7 @@ namespace Assets
                     VisualEffects.ImageFadeIn(image);
                     if (Math.Abs(image.color.a - 1.0f) < 0.0001)
                     {
-                        itemsToRemove.Add(element);
+                        itemsToRemove["in"].Add(element);
                     }
                 } //test if the element is text
                 else if (text)
@@ -208,7 +213,69 @@ namespace Assets
                     VisualEffects.TextFadeIn(text);
                     if (Math.Abs(text.color.a - 1.0f) < 0.0001)
                     {
-                        itemsToRemove.Add(element);
+                        itemsToRemove["in"].Add(element);
+
+                    }
+                }
+
+
+            }
+
+            foreach (var element in ElementsToCrossfade["out"])
+            {
+                //try to get an image from the gameObject element
+                var image = element.GetComponent<Image>();
+                //try to get a text from the gameObject element
+                var text = element.GetComponent<Text>();
+
+                //test if the element is image
+                if (image)
+                {
+                    VisualEffects.ImageFadeOut(image);
+                    if (Math.Abs(image.color.a - 0.0f) < 0.0001)
+                    {
+                        itemsToRemove["out"].Add(element);
+                    }
+                } //test if the element is text
+                else if (text)
+                {
+                    VisualEffects.TextFadeOut(text);
+                    if (Math.Abs(text.color.a - 0.0f) < 0.0001)
+                    {
+                        itemsToRemove["out"].Add(element);
+
+                    }
+                }
+
+
+            }
+
+            foreach (var element in ElementsToCrossfade["cross"])
+            {
+                //try to get an image from the gameObject element
+                var image = element.GetComponent<Image>();
+                //try to get a text from the gameObject element
+                var text = element.GetComponent<Text>();
+
+                //test if the element is image
+                if (image)
+                {
+                    VisualEffects.ImageFadeOut(image);
+                    if (Math.Abs(image.color.a - 0.0f) < 0.0001)
+                    {
+                        ElementsToCrossfade["in"].Add(element);
+                        itemsToRemove["cross"].Add(element);
+                        _cabinInTheWoods.AdvancePhase();
+                    }
+                } //test if the element is text
+                else if (text)
+                {
+                    VisualEffects.TextFadeOut(text);
+                    if (Math.Abs(text.color.a - 0.0f) < 0.0001)
+                    {
+                        ElementsToCrossfade["in"].Add(element);
+                        itemsToRemove["cross"].Add(element);
+                        _cabinInTheWoods.AdvancePhase();
 
                     }
                 }
@@ -217,9 +284,17 @@ namespace Assets
             }
 
             //cleanup the elements which completed transition
-            foreach (var item in itemsToRemove)
+            foreach (var item in itemsToRemove["in"])
             {
-                ElementsToCrossfade["in"].Remove(item);
+                ElementsToCrossfade["in"].Remove(item); 
+            }
+            foreach (var item in itemsToRemove["out"])
+            {
+                ElementsToCrossfade["out"].Remove(item);
+            }
+            foreach (var item in itemsToRemove["cross"])
+            {
+                ElementsToCrossfade["cross"].Remove(item);
             }
 
 

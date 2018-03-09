@@ -15,6 +15,7 @@ namespace Assets
         private Dictionary<string, string> _storyPrompts;
         public List<string> choices;
         public Dictionary<string, int> choiceToPhase;
+        private int _currentPhase;
 
         public CabinInTheWoods(string name, string description, string imageUrl) : base(name, description, imageUrl)
         {
@@ -31,13 +32,14 @@ namespace Assets
                 ["Intro02"] = "...now it doesn't.",
                 ["Intro03"] = "In the beginning, there was no light source...",
                 ["Intro04"] = "...except for our cellphones.",
-                ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah!There are no search parties yet.They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What ?”",
+                ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What ?”",
             };
 
             choiceToPhase = new Dictionary<string, int>
             {
                 ["IntroChoice_1"] = 1,
                 ["IntroChoice_2"] = 1,
+                ["IntroChoice_3"] = 1,
             };
         }
 
@@ -45,7 +47,7 @@ namespace Assets
         {
             choices.Add(choice);
             _gc.SaveGame();
-            PlayIntro(choiceToPhase[choice]);
+            PlayPhase(choiceToPhase[choice]);
 
         }
 
@@ -65,93 +67,115 @@ namespace Assets
             return textPanel;
         }
 
-        public void PlayIntro(int stage)
+        public void AdvancePhase()
         {
-            switch (stage)
+            PlayPhase(_currentPhase + 1);
+        }
+
+        public void PlayPhase(int phase, int resume=0)
+        {
+            _currentPhase = phase;
+
+            switch (phase)
             {
+                case -1:
+                    {
+                        _gc.DelayLoad(2);
+                        PlayPhase(resume);
+                        break;
+                    }
                 case 0:
-                {
-                    var textPanel = GetTextPanel();
-                    //Find the Text component in the panel
-                    var text1 = textPanel.GetComponentInChildren<Text>();
+                    {
+                        var textPanel = GetTextPanel();
+                        //Find the Text component in the panel
+                        var text1 = textPanel.GetComponentInChildren<Text>();
 
-                    var text2 = Object.Instantiate(text1, textPanel.transform, true);
-                    text2.transform.Translate(0f, -text1.preferredHeight, 0f);
+                        var text2 = Object.Instantiate(text1, textPanel.transform, true);
+                        text2.transform.Translate(0f, -text1.preferredHeight, 0f);
                     
-                    var text3 = Object.Instantiate(text2, textPanel.transform, true);
-                    text3.transform.Translate(0f, -(text2.preferredHeight*1.66f), 0f);
+                        var text3 = Object.Instantiate(text2, textPanel.transform, true);
+                        text3.transform.Translate(0f, -(text2.preferredHeight*1.666f), 0f);
                     
-                    var text4 = Object.Instantiate(text3, textPanel.transform, true);
-                    text4.transform.Translate(0f, -text3.preferredHeight, 0f);
-                    
+                        var text4 = Object.Instantiate(text3, textPanel.transform, true);
+                        text4.transform.Translate(0f, -text3.preferredHeight, 0f);
 
-                    DisplayTextualChoiceOption(text1, "Intro01", "IntroChoice_1");
-                    DisplayTextualChoiceOption(text2, "Intro02", "IntroChoice_1");
-                    DisplayTextualChoiceOption(text3, "Intro03", "IntroChoice_2");
-                    DisplayTextualChoiceOption(text4, "Intro04", "IntroChoice_2");
+                        
+                        DisplayText(text1, "Intro01");
+                        DisplayText(text2, "Intro02");
+                        DisplayText(text3, "Intro03");
+                        DisplayText(text4, "Intro04");
+                        
 
-                    text2.alignment = TextAnchor.UpperRight;
-                    text4.alignment = TextAnchor.UpperRight;
+                        _gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
+
+                        text2.alignment = TextAnchor.MiddleRight;
+                        text4.alignment = TextAnchor.MiddleRight;
 
 
-                    break;
-                }
+                        break;
+                    }
                 case 1:
-                {
-                    _gc.HideAllPanels();
-                    var text = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
-                    VisualEffects.TextFadeOut(text);
-                    
-                    _gc.ElementsToCrossfade["out"].Add(text.gameObject);
-                    //_gc.DelayLoad(5);
+                    {
+                        _gc.HideAllPanels();
+                        var text = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
 
-                    //text.color = Color.white;
-                    //text.text = _storyPrompts["Intro05"];
-                    //text.gameObject.GetComponent<RectTransform>().s.y *= 2f;
+                        _gc.ElementsToCrossfade["cross"].Add(text.gameObject);
+                        //PlayIntro(-1, 2);
+                        break;
+                    }
+                case 2:
+                    {
+                        var text = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
+                        
+                        text.color = Color.white;
+                        text.text = _storyPrompts["Intro05"];
+                        //text.gameObject.GetComponent<RectTransform>().rect.y *= 2f;
                         
                     
-                    //VisualEffects.TextFadeIn(text);
-                    //_gc.ElementsToCrossfade.Add(text.gameObject);
 
 
-                    /*
-                    var image1 = FindImage.Named("Image1");
-                    var image2 = FindImage.Named("Image2");
+                        /*
+                        var image1 = FindImage.Named("Image1");
+                        var image2 = FindImage.Named("Image2");
 
 
-                    image1.sprite = _handsSprite;
-                    image2.sprite = _fireSprite;
+                        image1.sprite = _handsSprite;
+                        image2.sprite = _fireSprite;
 
-                    image1.name = "Hands";
-                    image2.name = "Fire";
+                        image1.name = "Hands";
+                        image2.name = "Fire";
 
-                    image1.gameObject.AddComponent<SaveChoice>();
-                    image2.gameObject.AddComponent<SaveChoice>();
+                        image1.gameObject.AddComponent<SaveChoice>();
+                        image2.gameObject.AddComponent<SaveChoice>();
 
-                    VisualEffects.SetImageTransparent(image1);
-                    VisualEffects.SetImageTransparent(image2);
+                        VisualEffects.SetImageTransparent(image1);
+                        VisualEffects.SetImageTransparent(image2);
 
-                    _gc.ElementsToCrossfade.Add(image1.gameObject);
-                    _gc.ElementsToCrossfade.Add(image2.gameObject);
+                        _gc.ElementsToCrossfade.Add(image1.gameObject);
+                        _gc.ElementsToCrossfade.Add(image2.gameObject);
 
                     
 
-                    var canvasBg = FindCanvas.Named(_gc.CurrentStory.SnakeCase() + "_canvas").GetComponent<Image>();
-                    canvasBg.sprite = FindSprite.InResources("CabinInterior1");
+                        var canvasBg = FindCanvas.Named(_gc.CurrentStory.SnakeCase() + "_canvas").GetComponent<Image>();
+                        canvasBg.sprite = FindSprite.InResources("CabinInterior1");
 
-                    //VisualEffects.SetImageTransparent(canvasBg);
-                    VisualEffects.ImageFadeIn(canvasBg);
+                        //VisualEffects.SetImageTransparent(canvasBg);
+                        VisualEffects.ImageFadeIn(canvasBg);
 
-                    _gc.ElementsToCrossfade.Add(canvasBg.gameObject);
-                    */
+                        _gc.ElementsToCrossfade.Add(canvasBg.gameObject);
+                        */
+                        break;
+
+                    }
+                default:
+                    var s = "Phase " + phase + " not implemented yet.";
+                    Debug.Log(s);
                     break;
-
                 }
-            }
             
         }
 
-        private void DisplayTextualChoiceOption(Text text1, string prompt, string choice)
+        private void DisplayText(Text text1, string prompt, string choice="")
         {
             //Add visual effects - set transparent and fade in
             VisualEffects.SetTextTransparent(text1);
@@ -161,8 +185,11 @@ namespace Assets
             //change text and set up the choice click actions
             text1.text = _storyPrompts[prompt];
 
-            text1.name = choice;
-            text1.gameObject.AddComponent<SaveChoice>();
+            if (choice.Length > 0)
+            {
+                text1.name = choice;
+                text1.gameObject.AddComponent<SaveChoice>();
+            }
         }
     }
 }
