@@ -5,14 +5,23 @@ namespace Assets.StoryTemplate.Infrastructure
 {
     public static class Impress
     {
-        public static void WithImage(Image image)
+        
+        public static void FadeIn(GameObject ob)
         {
-
+            var gc = FindGameController.Named("GameController");
+            gc.ElementsToCrossfade["in"].Add(ob);
         }
 
-        public static void WithText(Text text)
+        public static void FadeOut(GameObject ob)
         {
+            var gc = FindGameController.Named("GameController");
+            gc.ElementsToCrossfade["out"].Add(ob);
+        }
 
+        public static void FadeOutAndAdvanceGame(GameObject ob)
+        {
+            var gc = FindGameController.Named("GameController");
+            gc.ElementsToCrossfade["cross"].Add(ob);
         }
     }
 

@@ -16,6 +16,8 @@ namespace Assets
         public List<string> choices;
         public Dictionary<string, int> choiceToPhase;
         private int _currentPhase;
+        private Text _mainText;
+        private Image _impressionImage;
 
         public CabinInTheWoods(string name, string description, string imageUrl) : base(name, description, imageUrl)
         {
@@ -32,7 +34,7 @@ namespace Assets
                 ["Intro02"] = "...now it doesn't.",
                 ["Intro03"] = "In the beginning, there was no light source...",
                 ["Intro04"] = "...except for our cellphones.",
-                ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What ?”",
+                ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What?”",
             };
 
             choiceToPhase = new Dictionary<string, int>
@@ -78,14 +80,14 @@ namespace Assets
 
             switch (phase)
             {
-                case -1:
+                case -1://delay execution for 2 seconds, resume to the next phase
                     {
                         _gc.DelayLoad(2);
                         PlayPhase(resume);
                         break;
                     }
                 case 0:
-                    {
+                    {//Intro start
                         var textPanel = GetTextPanel();
                         //Find the Text component in the panel
                         var text1 = textPanel.GetComponentInChildren<Text>();
@@ -115,20 +117,20 @@ namespace Assets
                         break;
                     }
                 case 1:
-                    {
+                    {//hide panels and fade out the game title (reusing the same text box for the main text)
                         _gc.HideAllPanels();
-                        var text = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
+                        _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
 
-                        _gc.ElementsToCrossfade["cross"].Add(text.gameObject);
+                        Impress.FadeOutAndAdvanceGame(_mainText.gameObject);
                         //PlayIntro(-1, 2);
                         break;
                     }
                 case 2:
-                    {
-                        var text = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
+                    {//this phase starts automatically during crossfade script once the title fades out completely
                         
-                        text.color = Color.white;
-                        text.text = _storyPrompts["Intro05"];
+                        
+                        _mainText.color = Color.white;
+                        _mainText.text = _storyPrompts["Intro05"];
                         //text.gameObject.GetComponent<RectTransform>().rect.y *= 2f;
                         
                     
@@ -167,10 +169,31 @@ namespace Assets
                         break;
 
                     }
+                case 3:
+                    {//phase 3 fade out the main text
+                        Impress.FadeOutAndAdvanceGame(_mainText.gameObject);
+                        break;
+                    }
+                case 4:
+                    {//clear the text from the textbox
+                        _mainText.text = "";
+                        //_gc.ElementsToCrossfade["cross"].Add(_mainText.gameObject);
+                        AdvancePhase();
+                        break;
+                    }
+                case 5:
+                    {
+                        var _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject.GetComponent<Image>();
+                        _impressionImage.sprite = _handsSprite;
+                        Impress.FadeIn(_impressionImage.gameObject);
+                        break;
+                    }
                 default:
-                    var s = "Phase " + phase + " not implemented yet.";
-                    Debug.Log(s);
-                    break;
+                    {
+                        var s = "Phase " + phase + " not implemented yet.";
+                        Debug.Log(s);
+                        break;
+                    }
                 }
             
         }
