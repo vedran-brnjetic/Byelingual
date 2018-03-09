@@ -220,7 +220,6 @@ namespace Assets
             foreach (var item in itemsToRemove)
             {
                 ElementsToCrossfade.Remove(item);
-                Debug.Log("object removed from fade list");
             }
 
 
