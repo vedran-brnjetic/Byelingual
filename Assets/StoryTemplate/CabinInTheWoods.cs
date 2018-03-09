@@ -111,21 +111,21 @@ namespace Assets
                         DisplayText(text4, "Intro04");
                         
 
-                        _gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
+                        
 
                         text2.alignment = TextAnchor.MiddleRight;
                         text4.alignment = TextAnchor.MiddleRight;
 
-
+                        _gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
                         break;
                     }
                 case 1:
                     {//hide panels and fade out the game title (reusing the same text box for the main text)
+
                         _gc.HideAllPanels();
                         _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
 
                         Impress.Crossfade(_mainText.gameObject);
-                        //PlayIntro(-1, 2);
                         break;
                     }
                 case 2:
@@ -134,41 +134,7 @@ namespace Assets
                         
                         _mainText.color = Color.white;
                         _mainText.text = _storyPrompts["Intro05"];
-                        //text.gameObject.GetComponent<RectTransform>().rect.y *= 2f;
-                        
-                    
-
-
-                        /*
-                        var image1 = FindImage.Named("Image1");
-                        var image2 = FindImage.Named("Image2");
-
-
-                        image1.sprite = _handsSprite;
-                        image2.sprite = _fireSprite;
-
-                        image1.name = "Hands";
-                        image2.name = "Fire";
-
-                        image1.gameObject.AddComponent<SaveChoice>();
-                        image2.gameObject.AddComponent<SaveChoice>();
-
-                        VisualEffects.SetImageTransparent(image1);
-                        VisualEffects.SetImageTransparent(image2);
-
-                        _gc.ElementsToCrossfade.Add(image1.gameObject);
-                        _gc.ElementsToCrossfade.Add(image2.gameObject);
-
-                    
-
-                        var canvasBg = FindCanvas.Named(_gc.CurrentStory.SnakeCase() + "_canvas").GetComponent<Image>();
-                        canvasBg.sprite = FindSprite.InResources("CabinInterior1");
-
-                        //VisualEffects.SetImageTransparent(canvasBg);
-                        VisualEffects.ImageFadeIn(canvasBg);
-
-                        _gc.ElementsToCrossfade.Add(canvasBg.gameObject);
-                        */
+                       
                         break;
 
                     }
@@ -181,22 +147,28 @@ namespace Assets
                     {//clear the text from the textbox
                         _mainText.text = "";
                         
-                        //AdvancePhase();
+                        AdvancePhase();
                         break;
                     }
                 case 5:
                     {//show the hands
-                        var _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject.GetComponent<Image>();
+                        _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject.GetComponent<Image>();
                         _impressionImage.sprite = _handsSprite;
-                        //Impress.FadeIn(_impressionImage.gameObject);
-                        Impress.FadeOutAndAdvanceGame(_mainText.gameObject);
+                        Impress.FadeIn(_impressionImage.gameObject, true);
+
+                        //AdvancePhase();
                         break;
                     }
                 case 6:
                     {//show the text with hands
-                        _mainText.text = _storyPrompts["Intro06"];
+                        
+                        Impress.Crossfade(_mainText.gameObject);
                         _mainText.alignment = TextAnchor.UpperRight;
-                        //AdvancePhase();
+                        break;
+                    }
+                case 7:
+                    {
+                        _mainText.text = _storyPrompts["Intro06"];
                         break;
                     }
                 default:

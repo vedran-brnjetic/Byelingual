@@ -266,9 +266,10 @@ namespace Assets
                     VisualEffects.ImageFadeOut(image);
                     if (Math.Abs(image.color.a - 0.0f) < 0.0001)
                     {
-                        ElementsToCrossfade["in"].Add(element);
+                        
                         itemsToRemove["cross"].Add(element);
                         Advance();
+                        Impress.FadeIn(element);
                     }
                 } //test if the element is text
                 else if (text)
@@ -276,9 +277,10 @@ namespace Assets
                     VisualEffects.TextFadeOut(text);
                     if (Math.Abs(text.color.a - 0.0f) < 0.0001)
                     {
-                        ElementsToCrossfade["in"].Add(element);
+                        
                         itemsToRemove["cross"].Add(element);
                         Advance();
+                        Impress.FadeIn(element);
 
                     }
                 }
@@ -307,10 +309,13 @@ namespace Assets
         {
             if (_advance)
             {
+                
                 _cabinInTheWoods.AdvancePhase();
                 _advance = false;
                 var ap = ActiveCanvas.GetComponent<AdvancePhase>();
-                if(!ap) ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
+                if (!ap) ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
+
+                       
             }
         }
 

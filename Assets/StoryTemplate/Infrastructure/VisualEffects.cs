@@ -6,9 +6,17 @@ namespace Assets.StoryTemplate.Infrastructure
     public static class Impress
     {
         
-        public static void FadeIn(GameObject ob)
+        public static void FadeIn(GameObject ob, bool advance=false)
         {
             var gc = FindGameController.Named("GameController");
+            //Debug.Log(advance);
+            if (advance)
+            {
+                gc._advance = true;
+                var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
+                if (x) Object.Destroy(x);
+            }
+
             gc.ElementsToCrossfade["in"].Add(ob);
         }
 
