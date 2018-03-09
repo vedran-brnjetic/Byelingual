@@ -14,10 +14,13 @@ namespace Assets
         private Canvas _canvas;
         private Dictionary<string, string> _storyPrompts;
         public List<string> choices;
+        public Dictionary<string, int> choiceToPhase;
 
         public CabinInTheWoods(string name, string description, string imageUrl) : base(name, description, imageUrl)
         {
             choices = new List<string>();
+            
+
             _gc = FindGameController.Named("GameController");
             _handsSprite = FindSprite.InResources("placeholder_hands");
             _fireSprite = FindSprite.InResources("placeholder_wood-burning_stove");
@@ -30,32 +33,22 @@ namespace Assets
                 ["Intro04"] = "...except for our cellphones.",
             };
 
+            choiceToPhase = new Dictionary<string, int>
+            {
+                ["IntroChoice_1"] = 1,
+                ["IntroChoice_2"] = 1,
+            };
         }
 
         public void ProcessChoice(string choice)
         {
             choices.Add(choice);
             _gc.SaveGame();
-            AdvanceStory(choice);
+            PlayIntro(choiceToPhase[choice]);
 
         }
 
-        private void AdvanceStory(string choice)
-        {
-            switch (choice)
-            {
-                case "IntroChoice_1":
-                {
-                    PlayIntro(1);
-                    break;
-                }
-                case "IntroChoice_2":
-                {
-                    PlayIntro(1);
-                    break;
-                }
-            }
-        }
+        
 
         private GameObject GetTextPanel()
         {
@@ -85,7 +78,7 @@ namespace Assets
                     text2.transform.Translate(0f, -text1.preferredHeight, 0f);
                     
                     var text3 = Object.Instantiate(text2, textPanel.transform, true);
-                    text3.transform.Translate(0f, -text2.preferredHeight, 0f);
+                    text3.transform.Translate(0f, -(text2.preferredHeight*1.66f), 0f);
                     
                     var text4 = Object.Instantiate(text3, textPanel.transform, true);
                     text4.transform.Translate(0f, -text3.preferredHeight, 0f);
