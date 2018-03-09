@@ -71,7 +71,7 @@ namespace Assets.StoryTemplate.Infrastructure
             backButton.gameObject.GetComponentInChildren<Text>().text = "Back";
             
             //move button a bit to the left
-            backButton.transform.Translate(-200f,0,0);
+            backButton.transform.Translate(-1.5f * VisualEffects.GetDimension('x', backButton.gameObject), 0f, 0f);
             
             //apply the game controller action to the back button
             backButton.onClick.AddListener(gc.BackToMainMenu);
@@ -82,7 +82,7 @@ namespace Assets.StoryTemplate.Infrastructure
             saveButton.gameObject.GetComponentInChildren<Text>().text = "Save";
             
             //move button a bit to the left
-            saveButton.transform.Translate(-350f,0,0);
+            saveButton.transform.Translate(-3f * VisualEffects.GetDimension('x',saveButton.gameObject),0f,0f);
             
             //apply the game controller action to the back button
             saveButton.onClick.AddListener(gc.SaveGame);
@@ -95,7 +95,7 @@ namespace Assets.StoryTemplate.Infrastructure
             loadButton.gameObject.GetComponentInChildren<Text>().text = "Load";
 
             //move button a bit to the left
-            loadButton.transform.Translate(50f, 0, 0);
+            loadButton.transform.Translate(-4.5f * VisualEffects.GetDimension('x', loadButton.gameObject), 0f, 0f);
 
             //apply the game controller action to the back button
             loadButton.onClick.AddListener(gc.LoadGame);

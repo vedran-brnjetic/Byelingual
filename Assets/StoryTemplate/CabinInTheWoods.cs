@@ -31,6 +31,7 @@ namespace Assets
                 ["Intro02"] = "...now it doesn't.",
                 ["Intro03"] = "In the beginning, there was no light source...",
                 ["Intro04"] = "...except for our cellphones.",
+                ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah!There are no search parties yet.They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What ?”",
             };
 
             choiceToPhase = new Dictionary<string, int>
@@ -97,14 +98,14 @@ namespace Assets
                 }
                 case 1:
                 {
-                    var imagePanel = FindPanel.GO("ControlBarImage");
-                    imagePanel.transform.SetParent(_canvas.transform);
-                    _gc.ShowPanel(imagePanel);
-
+                        _gc.HideAllPanels();
+                    
+                    
+                    /*
                     var image1 = FindImage.Named("Image1");
                     var image2 = FindImage.Named("Image2");
 
-
+                    
                     image1.sprite = _handsSprite;
                     image2.sprite = _fireSprite;
 
@@ -129,6 +130,7 @@ namespace Assets
                     VisualEffects.ImageFadeIn(canvasBg);
 
                     _gc.ElementsToCrossfade.Add(canvasBg.gameObject);
+                    */
                     break;
 
                 }

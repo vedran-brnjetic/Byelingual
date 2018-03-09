@@ -18,6 +18,20 @@ namespace Assets.StoryTemplate.Infrastructure
 
     public static class VisualEffects
     {
+        public static float GetDimension(char dimension, GameObject gameObject)
+        {
+            var rect = gameObject.GetComponent<RectTransform>().rect;
+            switch (dimension)
+            {
+                case 'x':
+                    return rect.width;
+                case 'y':
+                    return rect.height;
+                default:
+                    return rect.width;
+            }
+        }
+
         public static Color Blush(Color color, float targetAlpha, float fadeRate)
         {
             Color curColor = color;

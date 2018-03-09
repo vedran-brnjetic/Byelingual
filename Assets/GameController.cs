@@ -20,6 +20,8 @@ namespace Assets
         private Dictionary<string, Canvas> _canvases; //list of canvases to loop through when disabling them
         private List<GameObject> _panels; //list of game panels
         public List<GameObject> ElementsToCrossfade; //list of elements for visual transition
+        public GameObject ActivePanel; //currently active control panel
+        public Canvas ActiveCanvas;
 
         private CabinInTheWoods _cabinInTheWoods;
 
@@ -246,19 +248,25 @@ namespace Assets
             foreach (var panel in _panels)
             {
                 panel.transform.SetAsFirstSibling();
+                //Debug.Log(panel.name + " " + panel.transform.position );
+                if(panel.transform.position.y > 0)
+                    panel.transform.Translate(0f, -panel.GetComponentInChildren<RectTransform>().rect.height*2, 0f);
             }
         }
 
         public void ShowPanel(GameObject panel)
         {
             ShowPanel(panel, Color.black);
+            
         }
 
         public void ShowPanel(GameObject panel, Color color)
         {
             HideAllPanels();
+            ActivePanel = panel;
             panel.transform.SetAsLastSibling();
             panel.transform.GetComponent<Image>().color = color;
+            panel.transform.Translate(0f, panel.GetComponentInChildren<RectTransform>().rect.height*2, 0f);
         }
 
         public void EnableCanvasByName(string name)
@@ -270,6 +278,7 @@ namespace Assets
         {
             DisableAllCanvases();
             canvas.enabled = true;
+            ActiveCanvas = canvas;
         }
 
         public IEnumerator DelayLoad(int i)
