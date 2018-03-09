@@ -35,6 +35,7 @@ namespace Assets
                 ["Intro03"] = "In the beginning, there was no light source...",
                 ["Intro04"] = "...except for our cellphones.",
                 ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What?”",
+                ["Intro06"] = "...whereas you never even had a phone.",
             };
 
             choiceToPhase = new Dictionary<string, int>
@@ -77,6 +78,8 @@ namespace Assets
         public void PlayPhase(int phase, int resume=0)
         {
             _currentPhase = phase;
+
+            Debug.Log("phase " + phase);
 
             switch (phase)
             {
@@ -121,7 +124,7 @@ namespace Assets
                         _gc.HideAllPanels();
                         _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
 
-                        Impress.FadeOutAndAdvanceGame(_mainText.gameObject);
+                        Impress.Crossfade(_mainText.gameObject);
                         //PlayIntro(-1, 2);
                         break;
                     }
@@ -177,15 +180,23 @@ namespace Assets
                 case 4:
                     {//clear the text from the textbox
                         _mainText.text = "";
-                        //_gc.ElementsToCrossfade["cross"].Add(_mainText.gameObject);
-                        AdvancePhase();
+                        
+                        //AdvancePhase();
                         break;
                     }
                 case 5:
-                    {
+                    {//show the hands
                         var _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject.GetComponent<Image>();
                         _impressionImage.sprite = _handsSprite;
-                        Impress.FadeIn(_impressionImage.gameObject);
+                        //Impress.FadeIn(_impressionImage.gameObject);
+                        Impress.FadeOutAndAdvanceGame(_mainText.gameObject);
+                        break;
+                    }
+                case 6:
+                    {//show the text with hands
+                        _mainText.text = _storyPrompts["Intro06"];
+                        _mainText.alignment = TextAnchor.UpperRight;
+                        //AdvancePhase();
                         break;
                     }
                 default:
@@ -202,8 +213,8 @@ namespace Assets
         {
             //Add visual effects - set transparent and fade in
             VisualEffects.SetTextTransparent(text1);
-            VisualEffects.TextFadeIn(text1);
-            _gc.ElementsToCrossfade["in"].Add(text1.gameObject);
+            //VisualEffects.TextFadeIn(text1);
+            Impress.FadeIn(text1.gameObject);
 
             //change text and set up the choice click actions
             text1.text = _storyPrompts[prompt];

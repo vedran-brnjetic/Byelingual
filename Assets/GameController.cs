@@ -24,6 +24,7 @@ namespace Assets
         public Canvas ActiveCanvas;
 
         private CabinInTheWoods _cabinInTheWoods;
+        public bool _advance=false;
 
         //Current story property
         public Story CurrentStory
@@ -206,6 +207,7 @@ namespace Assets
                     if (Math.Abs(image.color.a - 1.0f) < 0.0001)
                     {
                         itemsToRemove["in"].Add(element);
+                        Advance();
                     }
                 } //test if the element is text
                 else if (text)
@@ -214,7 +216,7 @@ namespace Assets
                     if (Math.Abs(text.color.a - 1.0f) < 0.0001)
                     {
                         itemsToRemove["in"].Add(element);
-
+                        Advance();
                     }
                 }
 
@@ -235,6 +237,7 @@ namespace Assets
                     if (Math.Abs(image.color.a - 0.0f) < 0.0001)
                     {
                         itemsToRemove["out"].Add(element);
+                        Advance();
                     }
                 } //test if the element is text
                 else if (text)
@@ -243,7 +246,7 @@ namespace Assets
                     if (Math.Abs(text.color.a - 0.0f) < 0.0001)
                     {
                         itemsToRemove["out"].Add(element);
-
+                        Advance();
                     }
                 }
 
@@ -265,7 +268,7 @@ namespace Assets
                     {
                         ElementsToCrossfade["in"].Add(element);
                         itemsToRemove["cross"].Add(element);
-                        _cabinInTheWoods.AdvancePhase();
+                        Advance();
                     }
                 } //test if the element is text
                 else if (text)
@@ -275,7 +278,7 @@ namespace Assets
                     {
                         ElementsToCrossfade["in"].Add(element);
                         itemsToRemove["cross"].Add(element);
-                        _cabinInTheWoods.AdvancePhase();
+                        Advance();
 
                     }
                 }
@@ -300,6 +303,16 @@ namespace Assets
 
         }
 
+        private void Advance()
+        {
+            if (_advance)
+            {
+                _cabinInTheWoods.AdvancePhase();
+                _advance = false;
+                var ap = ActiveCanvas.GetComponent<AdvancePhase>();
+                if(!ap) ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
+            }
+        }
 
         private static void ExitGame()
         {

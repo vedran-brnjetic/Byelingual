@@ -21,6 +21,19 @@ namespace Assets.StoryTemplate.Infrastructure
         public static void FadeOutAndAdvanceGame(GameObject ob)
         {
             var gc = FindGameController.Named("GameController");
+            gc._advance = true;
+            var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
+            if (x) Object.Destroy(x);
+            gc.ElementsToCrossfade["out"].Add(ob);
+        }
+        public static void Crossfade(GameObject ob)
+        {
+            var gc = FindGameController.Named("GameController");
+            //disable click-advance
+            var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
+            if (x) Object.Destroy(x);
+
+            gc._advance = true;
             gc.ElementsToCrossfade["cross"].Add(ob);
         }
     }
