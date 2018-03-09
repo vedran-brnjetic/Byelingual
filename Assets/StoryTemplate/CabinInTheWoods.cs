@@ -94,18 +94,31 @@ namespace Assets
                     text4.alignment = TextAnchor.UpperRight;
 
 
-                        break;
+                    break;
                 }
                 case 1:
                 {
-                        _gc.HideAllPanels();
+                    _gc.HideAllPanels();
+                    var text = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
+                    VisualEffects.TextFadeOut(text);
                     
+                    _gc.ElementsToCrossfade["out"].Add(text.gameObject);
+                    //_gc.DelayLoad(5);
+
+                    //text.color = Color.white;
+                    //text.text = _storyPrompts["Intro05"];
+                    //text.gameObject.GetComponent<RectTransform>().s.y *= 2f;
+                        
                     
+                    //VisualEffects.TextFadeIn(text);
+                    //_gc.ElementsToCrossfade.Add(text.gameObject);
+
+
                     /*
                     var image1 = FindImage.Named("Image1");
                     var image2 = FindImage.Named("Image2");
 
-                    
+
                     image1.sprite = _handsSprite;
                     image2.sprite = _fireSprite;
 
@@ -121,7 +134,7 @@ namespace Assets
                     _gc.ElementsToCrossfade.Add(image1.gameObject);
                     _gc.ElementsToCrossfade.Add(image2.gameObject);
 
-                    _gc.DelayLoad(3);
+                    
 
                     var canvasBg = FindCanvas.Named(_gc.CurrentStory.SnakeCase() + "_canvas").GetComponent<Image>();
                     canvasBg.sprite = FindSprite.InResources("CabinInterior1");
@@ -143,7 +156,7 @@ namespace Assets
             //Add visual effects - set transparent and fade in
             VisualEffects.SetTextTransparent(text1);
             VisualEffects.TextFadeIn(text1);
-            _gc.ElementsToCrossfade.Add(text1.gameObject);
+            _gc.ElementsToCrossfade["in"].Add(text1.gameObject);
 
             //change text and set up the choice click actions
             text1.text = _storyPrompts[prompt];

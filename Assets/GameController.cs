@@ -19,7 +19,7 @@ namespace Assets
         private Story _currentStory; //currently active story
         private Dictionary<string, Canvas> _canvases; //list of canvases to loop through when disabling them
         private List<GameObject> _panels; //list of game panels
-        public List<GameObject> ElementsToCrossfade; //list of elements for visual transition
+        public Dictionary<string, List<GameObject>> ElementsToCrossfade; //list of elements for visual transition
         public GameObject ActivePanel; //currently active control panel
         public Canvas ActiveCanvas;
 
@@ -51,7 +51,7 @@ namespace Assets
             _canvases = new Dictionary<string, Canvas>();
             _stories = new Dictionary<string, Story>();
             _panels = new List<GameObject>();
-            ElementsToCrossfade = new List<GameObject>();
+            ElementsToCrossfade = new Dictionary<string,List<GameObject>>();
 
             //add panels to the list
             FillPanels();
@@ -68,7 +68,7 @@ namespace Assets
             //Testing text transition (fade in)
             var text = FindText.Named("TextGameTitle");
             VisualEffects.SetTextTransparent(text);
-            ElementsToCrossfade.Add(text.gameObject);
+            ElementsToCrossfade["in"].Add(text.gameObject);
 
 
 
@@ -138,7 +138,7 @@ namespace Assets
                 ImageStory1.sprite = await a.LoadNewSprite(Stories.Values.ElementAt(0).ImageUrl);
                 ImageStory1.name = Stories.Values.ElementAt(0).SnakeCase();
                 VisualEffects.SetImageTransparent(ImageStory1);
-                ElementsToCrossfade.Add(ImageStory1.gameObject);
+                ElementsToCrossfade["in"].Add(ImageStory1.gameObject);
 
 
 
@@ -146,7 +146,7 @@ namespace Assets
                 ImageStory2.sprite = await b.LoadNewSprite(Stories.Values.ElementAt(1).ImageUrl);
                 ImageStory2.name = Stories.Values.ElementAt(1).SnakeCase();
                 VisualEffects.SetImageTransparent(ImageStory2);
-                ElementsToCrossfade.Add(ImageStory2.gameObject);
+                ElementsToCrossfade["in"].Add(ImageStory2.gameObject);
 
                 var x = true;
                 foreach (var story in Stories.Values)
@@ -187,7 +187,7 @@ namespace Assets
             var itemsToRemove = new List<GameObject>();
 
             //go through the crossfade list
-            foreach (var element in ElementsToCrossfade)
+            foreach (var element in ElementsToCrossfade["in"])
             {
                 //try to get an image from the gameObject element
                 var image = element.GetComponent<Image>();
@@ -197,7 +197,7 @@ namespace Assets
                 //test if the element is image
                 if (image)
                 {
-                    VisualEffects.ImageFadeIn(image, 1.0f, 0.8f);
+                    VisualEffects.ImageFadeIn(image);
                     if (Math.Abs(image.color.a - 1.0f) < 0.0001)
                     {
                         itemsToRemove.Add(element);
@@ -205,7 +205,7 @@ namespace Assets
                 } //test if the element is text
                 else if (text)
                 {
-                    VisualEffects.TextFadeIn(text, 1.0f, 0.8f);
+                    VisualEffects.TextFadeIn(text);
                     if (Math.Abs(text.color.a - 1.0f) < 0.0001)
                     {
                         itemsToRemove.Add(element);
@@ -219,7 +219,7 @@ namespace Assets
             //cleanup the elements which completed transition
             foreach (var item in itemsToRemove)
             {
-                ElementsToCrossfade.Remove(item);
+                ElementsToCrossfade["in"].Remove(item);
             }
 
 
@@ -280,9 +280,9 @@ namespace Assets
             ActiveCanvas = canvas;
         }
 
-        public IEnumerator DelayLoad(int i)
+        public void DelayLoad(int i)
         {
-            yield return new WaitForSeconds(i);
+            System.Threading.Thread.Sleep(i * 1000);
         }
 
         public void SaveGame()
