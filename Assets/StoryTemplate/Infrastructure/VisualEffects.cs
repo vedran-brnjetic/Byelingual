@@ -6,11 +6,11 @@ namespace Assets.StoryTemplate.Infrastructure
     public static class Impress
     {
         
-        public static void FadeIn(GameObject ob, bool advance=false)
+        public static void FadeIn(GameObject ob, bool advanceGame=false)
         {
             var gc = FindGameController.Named("GameController");
-            //Debug.Log(advance);
-            if (advance)
+            //Debug.Log(advanceGame);
+            if (advanceGame)
             {
                 gc._advance = true;
                 var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
@@ -20,20 +20,19 @@ namespace Assets.StoryTemplate.Infrastructure
             gc.ElementsToCrossfade["in"].Add(ob);
         }
 
-        public static void FadeOut(GameObject ob)
+        public static void FadeOut(GameObject ob, bool advance=false)
         {
             var gc = FindGameController.Named("GameController");
+            if (advance)
+            {
+                gc._advance = true;
+                var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
+                if (x) Object.Destroy(x);
+            }
             gc.ElementsToCrossfade["out"].Add(ob);
         }
 
-        public static void FadeOutAndAdvanceGame(GameObject ob)
-        {
-            var gc = FindGameController.Named("GameController");
-            gc._advance = true;
-            var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
-            if (x) Object.Destroy(x);
-            gc.ElementsToCrossfade["out"].Add(ob);
-        }
+        
         public static void Crossfade(GameObject ob)
         {
             var gc = FindGameController.Named("GameController");

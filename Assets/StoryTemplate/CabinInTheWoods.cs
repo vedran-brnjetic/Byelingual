@@ -36,6 +36,7 @@ namespace Assets
                 ["Intro04"] = "...except for our cellphones.",
                 ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What?”",
                 ["Intro06"] = "...whereas you never even had a phone.",
+                ["Intro07"] = "There is a fire in the wood burner. Looking at the fire, you feel...",
             };
 
             choiceToPhase = new Dictionary<string, int>
@@ -140,7 +141,7 @@ namespace Assets
                     }
                 case 3:
                     {//phase 3 fade out the main text
-                        Impress.FadeOutAndAdvanceGame(_mainText.gameObject);
+                        Impress.FadeOut(_mainText.gameObject, true);
                         break;
                     }
                 case 4:
@@ -154,23 +155,48 @@ namespace Assets
                     {//show the hands
                         _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject.GetComponent<Image>();
                         _impressionImage.sprite = _handsSprite;
-                        Impress.FadeIn(_impressionImage.gameObject, true);
+                        Impress.FadeIn(_impressionImage.gameObject, advanceGame:true);
 
-                        //AdvancePhase();
+                        
                         break;
                     }
                 case 6:
                     {//show the text with hands
                         
-                        Impress.Crossfade(_mainText.gameObject);
+                        Impress.FadeIn(_mainText.gameObject, advanceGame:true);
+                        _mainText.text = _storyPrompts["Intro06"];
                         _mainText.alignment = TextAnchor.UpperRight;
                         break;
                     }
                 case 7:
                     {
-                        _mainText.text = _storyPrompts["Intro06"];
+                        Impress.FadeOut(_mainText.gameObject);
+                        Impress.FadeOut(_impressionImage.gameObject, advance:true);
+                       
                         break;
                     }
+                case 8:
+                {//show the hands
+                    _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject.GetComponent<Image>();
+                    _impressionImage.sprite = _fireSprite;
+                    Impress.FadeIn(_impressionImage.gameObject, advanceGame:true);
+
+
+                    break;
+                }
+                case 9:
+                {//show the text with hands
+
+                    Impress.FadeIn(_mainText.gameObject, advanceGame:true);
+                    _mainText.text = _storyPrompts["Intro07"];
+                    _mainText.alignment = TextAnchor.UpperLeft;
+                    break;
+                }
+                case 10:
+                {
+                       
+                    break;
+                }
                 default:
                     {
                         var s = "Phase " + phase + " not implemented yet.";

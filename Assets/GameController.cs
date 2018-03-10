@@ -52,10 +52,12 @@ namespace Assets
             _canvases = new Dictionary<string, Canvas>();
             _stories = new Dictionary<string, Story>();
             _panels = new List<GameObject>();
-            ElementsToCrossfade = new Dictionary<string,List<GameObject>>();
-            ElementsToCrossfade["in"] = new List<GameObject>();
-            ElementsToCrossfade["out"] = new List<GameObject>();
-            ElementsToCrossfade["cross"] = new List<GameObject>();
+            ElementsToCrossfade = new Dictionary<string, List<GameObject>>
+            {
+                ["in"] = new List<GameObject>(),
+                ["out"] = new List<GameObject>(),
+                ["cross"] = new List<GameObject>()
+            };
             //add panels to the list
             FillPanels();
 
@@ -187,121 +189,90 @@ namespace Assets
         private void CrossFadeElements()
         {
             //container of items to remove from crossfade list once the item completes the transition
-            var itemsToRemove = new Dictionary<string, List<GameObject>>();
-            itemsToRemove["in"] = new List<GameObject>();
-            itemsToRemove["out"] = new List<GameObject>();
-            itemsToRemove["cross"] = new List<GameObject>();
-
-            //go through the crossfade list
-            foreach (var element in ElementsToCrossfade["in"])
+            var itemsToRemove = new Dictionary<string, List<GameObject>>
             {
-                //try to get an image from the gameObject element
-                var image = element.GetComponent<Image>();
-                //try to get a text from the gameObject element
-                var text = element.GetComponent<Text>();
+                ["in"] = new List<GameObject>(),
+                ["out"] = new List<GameObject>(),
+                ["cross"] = new List<GameObject>()
+            };
 
-                //test if the element is image
-                if (image)
-                {
-                    VisualEffects.ImageFadeIn(image);
-                    if (Math.Abs(image.color.a - 1.0f) < 0.0001)
-                    {
-                        itemsToRemove["in"].Add(element);
-                        Advance();
-                    }
-                } //test if the element is text
-                else if (text)
-                {
-                    VisualEffects.TextFadeIn(text);
-                    if (Math.Abs(text.color.a - 1.0f) < 0.0001)
-                    {
-                        itemsToRemove["in"].Add(element);
-                        Advance();
-                    }
-                }
+            var modes = new List<string>{"cross","out","in"};
 
-
-            }
-
-            foreach (var element in ElementsToCrossfade["out"])
+            //go through the crossfade lists
+            var transitionComplete = false;
+            foreach (var mode in modes)
             {
-                //try to get an image from the gameObject element
-                var image = element.GetComponent<Image>();
-                //try to get a text from the gameObject element
-                var text = element.GetComponent<Text>();
-
-                //test if the element is image
-                if (image)
+                var targetAlpha = 0.0f;
+                if (mode == "in") targetAlpha = 1.0f;
+                foreach (var element in ElementsToCrossfade[mode])
                 {
-                    VisualEffects.ImageFadeOut(image);
-                    if (Math.Abs(image.color.a - 0.0f) < 0.0001)
+                    //try to get an image from the gameObject element
+                    //if there is no image, it will be null, therefore false in the if statement
+                    var image = element.GetComponent<Image>();
+                    //try to get a text from the gameObject element
+                    var text = element.GetComponent<Text>();
+
+                    //test if the element is image
+                    if (image)
                     {
-                        itemsToRemove["out"].Add(element);
-                        Advance();
-                    }
-                } //test if the element is text
-                else if (text)
-                {
-                    VisualEffects.TextFadeOut(text);
-                    if (Math.Abs(text.color.a - 0.0f) < 0.0001)
-                    {
-                        itemsToRemove["out"].Add(element);
-                        Advance();
-                    }
-                }
-
-
-            }
-
-            foreach (var element in ElementsToCrossfade["cross"])
-            {
-                //try to get an image from the gameObject element
-                var image = element.GetComponent<Image>();
-                //try to get a text from the gameObject element
-                var text = element.GetComponent<Text>();
-
-                //test if the element is image
-                if (image)
-                {
-                    VisualEffects.ImageFadeOut(image);
-                    if (Math.Abs(image.color.a - 0.0f) < 0.0001)
-                    {
+                        switch (mode)
+                        {
+                                case "in":
+                                    VisualEffects.ImageFadeIn(image);
+                                    break;
+                                case "out":
+                                    VisualEffects.ImageFadeOut(image);
+                                    break;
+                                case "cross":
+                                    VisualEffects.ImageFadeOut(image);
+                                    break;
+                        }
                         
-                        itemsToRemove["cross"].Add(element);
-                        Advance();
-                        Impress.FadeIn(element);
-                    }
-                } //test if the element is text
-                else if (text)
-                {
-                    VisualEffects.TextFadeOut(text);
-                    if (Math.Abs(text.color.a - 0.0f) < 0.0001)
+                        if (Math.Abs(image.color.a - targetAlpha) < 0.0001)
+                        {
+                            itemsToRemove[mode].Add(element);
+                            transitionComplete = true;
+                        }
+                    } //test if the element is text
+                    else if (text)
                     {
+                        switch (mode)
+                        {
+                            case "in":
+                                VisualEffects.TextFadeIn(text);
+                                break;
+                            case "out":
+                                VisualEffects.TextFadeOut(text);
+                                break;
+                            case "cross":
+                                VisualEffects.TextFadeOut(text);
+                                break;
+                        }
                         
-                        itemsToRemove["cross"].Add(element);
-                        Advance();
-                        Impress.FadeIn(element);
-
+                        if (Math.Abs(text.color.a - targetAlpha) < 0.0001)
+                        {
+                            itemsToRemove[mode].Add(element);
+                            transitionComplete = true;
+                        }
                     }
-                }
 
 
+                }    
             }
+
+            if (transitionComplete) Advance();
 
             //cleanup the elements which completed transition
-            foreach (var item in itemsToRemove["in"])
+            foreach (var mode in modes)
             {
-                ElementsToCrossfade["in"].Remove(item); 
-            }
-            foreach (var item in itemsToRemove["out"])
-            {
-                ElementsToCrossfade["out"].Remove(item);
-            }
-            foreach (var item in itemsToRemove["cross"])
-            {
-                ElementsToCrossfade["cross"].Remove(item);
+                foreach (var item in itemsToRemove[mode])
+                {
+                    ElementsToCrossfade[mode].Remove(item);
+                    
+                }    
             }
 
+            
 
         }
 
@@ -309,9 +280,9 @@ namespace Assets
         {
             if (_advance)
             {
-                
-                _cabinInTheWoods.AdvancePhase();
                 _advance = false;
+                _cabinInTheWoods.AdvancePhase();
+                
                 var ap = ActiveCanvas.GetComponent<AdvancePhase>();
                 if (!ap) ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
 
