@@ -1,11 +1,9 @@
-﻿using Assets.StoryTemplate.Infrastructure;
+﻿using Assets.StoryTemplate;
+using Assets.StoryTemplate.Infrastructure;
+using SimpleJSON;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.StoryTemplate;
-using SimpleJSON;
-using SimpleJson.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +21,7 @@ namespace Assets
         public GameObject ActivePanel; //currently active control panel
         public Canvas ActiveCanvas;
 
-        private CabinInTheWoods _cabinInTheWoods;
+        private StoryTemplate.CabinInTheWoods _cabinInTheWoods;
         public bool _advance=false;
 
         //Current story property
@@ -39,7 +37,7 @@ namespace Assets
             get { return _stories; }
         }
 
-        public CabinInTheWoods CabinInTheWoods
+        public StoryTemplate.CabinInTheWoods CabinInTheWoods
         {
             get { return _cabinInTheWoods; }
         }
@@ -159,7 +157,7 @@ namespace Assets
                     if (x)
                     {
 
-                        _cabinInTheWoods = new CabinInTheWoods(story.ToString(), story.Description, story.ImageUrl);
+                        _cabinInTheWoods = new StoryTemplate.CabinInTheWoods(story.ToString(), story.Description, story.ImageUrl);
                         x = false;
                     }
 
@@ -359,14 +357,14 @@ namespace Assets
         {
             var savegame = TextSave.ReadString();
             var json = JSON.Parse(savegame);
-            var count = json["choices"].Count;
-            if (count > 0)
-                for (var i = 0; i < count; i++)
-                {
-                    CabinInTheWoods.choices.Add(json["choices"][i]);
-                    Debug.Log(json["choices"][i]);
-                }
-            
+            var count = json["Choices"].Count;
+            if (count <= 0) return;
+            for (var i = 0; i < count; i++)
+            {
+                CabinInTheWoods.Choices.Add(json["Choices"][i]);
+                Debug.Log(json["Choices"][i]);
+            }
+
         }
     }
 }
