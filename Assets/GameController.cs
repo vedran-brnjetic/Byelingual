@@ -278,7 +278,7 @@ namespace Assets
                         }
 
                         if (!(Math.Abs(image.color.a - targetAlpha) < 0.0001)) continue;
-                        if (mode == "cross") Impress.FadeIn(element, true);
+                        if (mode == "cross") Impress.FadeIn(element);
                         itemsToRemove[mode].Add(element);
                         transitionComplete = true;
                     } //test if the element is text
@@ -310,9 +310,9 @@ namespace Assets
                         }
 
                         itemsToRemove[mode].Add(element);
-                        if(mode=="cross") Impress.FadeIn(element, true);
+                        if(mode=="cross") Impress.FadeIn(element);
                         transitionComplete = true;
-                        Debug.Log("text full");
+                        
                     }
 
 
