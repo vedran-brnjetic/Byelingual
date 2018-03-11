@@ -19,7 +19,7 @@ namespace Assets.StoryTemplate.Infrastructure
                 if (x) Object.Destroy(x);
             }
 
-            gc.ElementsToCrossfade["in"].Add(ob);
+            gc.UIElementEffects["in"].Add(ob);
         }
 
         public static void FadeOut(GameObject ob, bool advance=false)
@@ -31,7 +31,7 @@ namespace Assets.StoryTemplate.Infrastructure
                 var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
                 if (x) Object.Destroy(x);
             }
-            gc.ElementsToCrossfade["out"].Add(ob);
+            gc.UIElementEffects["out"].Add(ob);
         }
 
         
@@ -43,7 +43,7 @@ namespace Assets.StoryTemplate.Infrastructure
             if (x) Object.Destroy(x);
 
             gc._advance = true;
-            gc.ElementsToCrossfade["cross"].Add(ob);
+            gc.UIElementEffects["cross"].Add(ob);
         }
     }
 

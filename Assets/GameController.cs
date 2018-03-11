@@ -17,7 +17,7 @@ namespace Assets
         private Story _currentStory; //currently active story
         private Dictionary<string, Canvas> _canvases; //list of canvases to loop through when disabling them
         private List<GameObject> _panels; //list of game panels
-        public Dictionary<string, List<GameObject>> ElementsToCrossfade; //list of elements for visual transition
+        public Dictionary<string, List<GameObject>> UIElementEffects; //list of elements for visual transition
         public GameObject ActivePanel; //currently active control panel
         public Canvas ActiveCanvas;
 
@@ -50,13 +50,13 @@ namespace Assets
             _canvases = new Dictionary<string, Canvas>();
             _stories = new Dictionary<string, Story>();
             _panels = new List<GameObject>();
-            ElementsToCrossfade = new Dictionary<string, List<GameObject>>
+            UIElementEffects = new Dictionary<string, List<GameObject>>
             {
                 ["in"] = new List<GameObject>(),
                 ["out"] = new List<GameObject>(),
                 ["cross"] = new List<GameObject>()
             };
-            //add panels to the list
+            //add panels to the Panels list
             FillPanels();
 
             //show the main menu control bar
@@ -73,7 +73,7 @@ namespace Assets
             text.gameObject.AddComponent<TextPartial>();
             text.GetComponent<TextPartial>().FinalText = "Byelingual";
             //VisualEffects.SetTextTransparent(text);
-            ElementsToCrossfade["in"].Add(text.gameObject);
+            UIElementEffects["in"].Add(text.gameObject);
 
 
 
@@ -143,7 +143,7 @@ namespace Assets
                 ImageStory1.sprite = await a.LoadNewSprite(Stories.Values.ElementAt(0).ImageUrl);
                 ImageStory1.name = Stories.Values.ElementAt(0).SnakeCase();
                 VisualEffects.SetImageTransparent(ImageStory1);
-                ElementsToCrossfade["in"].Add(ImageStory1.gameObject);
+                UIElementEffects["in"].Add(ImageStory1.gameObject);
 
 
 
@@ -151,7 +151,7 @@ namespace Assets
                 ImageStory2.sprite = await b.LoadNewSprite(Stories.Values.ElementAt(1).ImageUrl);
                 ImageStory2.name = Stories.Values.ElementAt(1).SnakeCase();
                 VisualEffects.SetImageTransparent(ImageStory2);
-                ElementsToCrossfade["in"].Add(ImageStory2.gameObject);
+                UIElementEffects["in"].Add(ImageStory2.gameObject);
 
                 var x = true;
                 foreach (var story in Stories.Values)
@@ -204,7 +204,7 @@ namespace Assets
             {
                 var targetAlpha = 0.0f;
                 if (mode == "in") targetAlpha = 1.0f;
-                foreach (var element in ElementsToCrossfade[mode])
+                foreach (var element in UIElementEffects[mode])
                 {
                     //try to get an image from the gameObject element
                     //if there is no image, it will be null, therefore false in the if statement
@@ -267,7 +267,7 @@ namespace Assets
             {
                 foreach (var item in itemsToRemove[mode])
                 {
-                    ElementsToCrossfade[mode].Remove(item);
+                    UIElementEffects[mode].Remove(item);
                     
                 }    
             }
