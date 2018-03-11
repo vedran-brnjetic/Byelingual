@@ -92,7 +92,7 @@ namespace Assets.StoryTemplate
         public void AdvancePhase()
         {
             var test = (Convert.ToDouble(_currentPhase) + 0.1).ToString("N" + 1);
-            Debug.Log("Attempted phase: " + test);
+            
             if (_phases.ContainsKey(test))
             {
                 PlayPhase(test);

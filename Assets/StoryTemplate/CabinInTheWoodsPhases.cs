@@ -27,10 +27,10 @@ namespace Assets.StoryTemplate
               ["Intro04"] = "...except for our cellphones.",
 
               //intro conversation
-              ["Intro05.0"] = "“They can track our phones through GPS!”\n",
-              ["Intro05.1"] = "“Turn it off!”\n",
-              ["Intro05.2"] = "“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n",
-              ["Intro05.3"] = "“I’ve already thrown mine in the lake.”\n",
+              ["Intro05.0"] = "“They can track our phones through GPS!”\n\n",
+              ["Intro05.1"] = "“Turn it off!”\n\n",
+              ["Intro05.2"] = "“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n\n",
+              ["Intro05.3"] = "“I’ve already thrown mine in the lake.”\n\n",
               ["Intro05.4"] = "“What!?”",
 
               //hands
@@ -64,7 +64,7 @@ namespace Assets.StoryTemplate
              *1. Dialog in the dark
              *2. Hands
              *3. Fireplace+choice
-             *4. Act1 start
+             *4. First Room - ACT1
              */
             _phases = new Dictionary<string, Action>
             {
@@ -78,8 +78,9 @@ namespace Assets.StoryTemplate
                     var panelImage = textPanel.GetComponent<Image>();
                     panelImage.sprite = FindSprite.InResources("ui_draft2");
                     var canvasBg = _gc.ActiveCanvas.GetComponent<Image>();
-                    canvasBg.sprite = FindSprite.InResources("placeholder_hands");
-                    canvasBg.color= Color.white;
+
+                    //canvasBg.sprite = FindSprite.InResources("placeholder_hands");
+                    canvasBg.color= Color.black;
 
 
                     var text2 = Object.Instantiate<Text>(text1, textPanel.transform, true);
@@ -131,7 +132,8 @@ namespace Assets.StoryTemplate
                         _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro05.0"];
                         _mainText.resizeTextForBestFit = false;
                         _mainText.color = Color.white;
-                        Impress.FadeOut(_mainText.gameObject);
+                        _mainText.fontSize = 20;
+                        Impress.FadeIn(_mainText.gameObject);
                         _gc.HideAllPanels();
                     },
                 ["1.1"] = () =>
@@ -151,7 +153,8 @@ namespace Assets.StoryTemplate
                 },
                 ["1.4"] = () =>
                 {//this phase starts automatically during crossfade script once the title fades out completely
-                    _mainText.color = Color.white;
+                  _mainText.GetComponent<TextPartial>().FinalText += _storyPrompts["Intro05.4"];
+                  Impress.FadeIn(_mainText.gameObject);
 
 
                 },
@@ -167,8 +170,7 @@ namespace Assets.StoryTemplate
                 },
                 ["2"] = () =>
                 {//show the hands
-                    _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject
-                        .GetComponent<Image>();
+                    _impressionImage = _gc.ActiveCanvas.gameObject.GetComponent<Image>();
                     _impressionImage.sprite = _handsSprite;
                     Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
                 },
