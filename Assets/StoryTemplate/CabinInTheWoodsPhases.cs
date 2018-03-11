@@ -26,8 +26,12 @@ namespace Assets.StoryTemplate
               ["Intro03"] = "In the beginning, there was no light source...",
               ["Intro04"] = "...except for our cellphones.",
 
-              //intro main text
-              ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What?”",
+              //intro conversation
+              ["Intro05.0"] = "“They can track our phones through GPS!”\n",
+              ["Intro05.1"] = "“Turn it off!”\n",
+              ["Intro05.2"] = "“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n",
+              ["Intro05.3"] = "“I’ve already thrown mine in the lake.”\n",
+              ["Intro05.4"] = "“What!?”",
 
               //hands
               ["Intro06"] = "...whereas you never even had a phone.",
@@ -36,9 +40,14 @@ namespace Assets.StoryTemplate
               ["Intro07"] = "There is a fire in the wood burner. Looking at the fire, you feel...",
 
               //options
-              ["Intro08"] = "...excited. You worked for this fire. You earned its warmth and comfort. You created a place for yourself where there was none.You could not be prouder of yourself in this moment. Finally, it’s all up to you.",
-              ["Intro09"] = "...relieved. This is a place where it does not matter that you have less than others.Here everyone has little.Maybe even too little.We are going to need everyone’s effort and cooperation to make it, which means that you are needed. At last there exists common ground where you stand as one among equals.",
-              ["Intro10"] = "...skeptical. That fire is not going to last long, and neither is the spirit of all these hopefuls basking in its short-lived heat. They dream big but are only now getting their first taste of true deprivation. The hunger, the cold, the lack of privacy, illness... the last of which will be a guaranteed breaking point for this unlikely uprising.",
+              ["Intro08"] = "...excited.",
+              ["Intro08.1"] = "You worked for this fire. You earned its warmth and comfort. You created a place for yourself where there was none.You could not be prouder of yourself in this moment. Finally, it’s all up to you.",
+
+              ["Intro09"] = "...relieved.",
+              ["Intro09.1"] = "This is a place where it does not matter that you have less than others.Here everyone has little.Maybe even too little.We are going to need everyone’s effort and cooperation to make it, which means that you are needed. At last there exists common ground where you stand as one among equals.",
+
+              ["Intro10"] = "...skeptical.",
+              ["Intro10.1"] = "That fire is not going to last long, and neither is the spirit of all these hopefuls basking in its short-lived heat. They dream big but are only now getting their first taste of true deprivation. The hunger, the cold, the lack of privacy, illness... the last of which will be a guaranteed breaking point for this unlikely uprising.",
 
               //intro end
               ["Intro11"] = "...it was a good dream",
