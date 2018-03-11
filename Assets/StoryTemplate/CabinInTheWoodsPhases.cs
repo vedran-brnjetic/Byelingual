@@ -9,7 +9,7 @@ namespace Assets.StoryTemplate
 {
     public partial class CabinInTheWoods : Story
     {
-        private Dictionary<int, Action> _phases;
+        private Dictionary<double, Action> _phases;
         private Dictionary<string, string> _storyPrompts;
 
         private void InitializeStoryPrompts(){
@@ -60,7 +60,13 @@ namespace Assets.StoryTemplate
 
         private void InitializePhases()
         {
-            _phases = new Dictionary<int, Action>
+            /*0. First screen
+             *1. Dialog in the dark
+             *2. Hands
+             *3. Fireplace+choice
+             *4. Act1 start
+             */
+            _phases = new Dictionary<double, Action>
             {
                 [0] = () =>
                 {
@@ -96,10 +102,10 @@ namespace Assets.StoryTemplate
 
                     text2.alignment = TextAnchor.MiddleRight;
                     text4.alignment = TextAnchor.MiddleRight;
-                    _gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
+                    //_gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
 
                 },
-                [1] = () =>
+                [0.1] = () =>
                 {//hide panels and fade out the game title (reusing the same text box for the main text)
                     var text2 = GetTextPanel().transform.Find("Intro02").GetComponent<Text>();
                     DisplayText(text2);
@@ -108,73 +114,90 @@ namespace Assets.StoryTemplate
 
 
                 },
-                [2] = () =>
+                [0.2] = () =>
                     {
                         var text3 = GetTextPanel().transform.Find("Intro03").GetComponent<Text>();
                         DisplayText(text3);
                     },
-                [3] = () =>
+                [0.3] = () =>
                 {
                     var text4 = GetTextPanel().transform.Find("Intro04").GetComponent<Text>();
                     DisplayText(text4);
                 },
-                [4] = () =>
+                [1] = () =>
                     {
                         _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
                         _mainText.gameObject.AddComponent<TextPartial>();
-                        _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro05"];
-                        Impress.Crossfade(_mainText.gameObject);
+                        _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro05.0"];
+                        _mainText.resizeTextForBestFit = false;
+                        _mainText.color = Color.white;
+                        Impress.FadeOut(_mainText.gameObject);
                         _gc.HideAllPanels();
                     },
-                [5] = () =>
+                [1.1] = () =>
+                {
+                    _mainText.GetComponent<TextPartial>().FinalText += _storyPrompts["Intro05.1"];
+                    Impress.FadeIn(_mainText.gameObject);
+                },
+                [1.2] = () =>
+                {
+                    _mainText.GetComponent<TextPartial>().FinalText += _storyPrompts["Intro05.2"];
+                    Impress.FadeIn(_mainText.gameObject);
+                },
+                [1.3] = () =>
+                {
+                    _mainText.GetComponent<TextPartial>().FinalText += _storyPrompts["Intro05.3"];
+                    Impress.FadeIn(_mainText.gameObject);
+                },
+                [1.4] = () =>
                 {//this phase starts automatically during crossfade script once the title fades out completely
                     _mainText.color = Color.white;
 
 
                 },
-                [6] = () =>
+                [1.5] = () =>
                 {//phase 3 fade out the main text
                     Impress.FadeOut(_mainText.gameObject, true);
                 },
-                [7] = () =>
+                [1.6] = () =>
                 {//clear the text from the textbox
                     _mainText.text = "";
 
                     AdvancePhase();
                 },
-                [8] = () =>
+                [2] = () =>
                 {//show the hands
                     _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject
                         .GetComponent<Image>();
                     _impressionImage.sprite = _handsSprite;
                     Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
                 },
-                [9] = () =>
+                [2.1] = () =>
                 {//show the text with hands
                     Impress.FadeIn(_mainText.gameObject, advanceGame: true);
                     _mainText.resizeTextMaxSize = 20;
                     _mainText.text = _storyPrompts["Intro06"];
                     _mainText.alignment = TextAnchor.UpperRight;
                 },
-                [10] = () =>
+                [2.2] = () =>
                 {//fade out hands and text
                     Impress.FadeOut(_mainText.gameObject);
-                    Impress.FadeOut(_impressionImage.gameObject, advance: true);
+                    Impress.FadeOut(_impressionImage.gameObject, advanceGame: true);
                 },
-                [11] = () =>
+                [2.3] = () =>
                 {//show the fire
                     _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject
                         .GetComponent<Image>();
                     _impressionImage.sprite = _fireSprite;
                     Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
                 },
-                [12] = () =>
+                [2.4] = () =>
                 {//show the text with fire
                     Impress.FadeIn(_mainText.gameObject, advanceGame: true);
                     _mainText.text = _storyPrompts["Intro07"];
                     _mainText.alignment = TextAnchor.UpperLeft;
                 },
-                [13] = () =>
+                [2.5] = () =>
                 {// display the text choices
                     var textPanel = GetTextPanel(true);
                     //Find the Text component in the panel
@@ -198,13 +221,13 @@ namespace Assets.StoryTemplate
 
                     _gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
                 },
-                [14] = () =>
+                [2.6] = () =>
                 {
                     _gc.HideAllPanels();
                     Impress.FadeOut(_mainText.gameObject);
                     Impress.FadeOut(_impressionImage.gameObject, true);
                 },
-                [15] = () =>
+                [3] = () =>
                 {
                     var textPanel = GetTextPanel(true);
                     //Find the Text component in the panel
@@ -229,12 +252,12 @@ namespace Assets.StoryTemplate
 
                     _gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
                 },
-                [16] = () =>
+                [3.1] = () =>
                 {
                     _gc.HideAllPanels();
                     AdvancePhase();
                 },
-                [17] = () =>
+                [4] = () =>
                     {
                         //Impress.Crossfade(_gc.ActiveCanvas.gameObject);
 
@@ -242,7 +265,7 @@ namespace Assets.StoryTemplate
                         _gc.ActiveCanvas.GetComponent<Image>().color = Color.white;
 
                     },
-                [18] = () =>
+                [4.1] = () =>
                 {
                     var textPanel = GetTextPanel(true);
                     textPanel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.66f);
@@ -267,7 +290,7 @@ namespace Assets.StoryTemplate
                     DisplayText(text2, "AfterIntroLocation2");
                     DisplayText(text3, "AfterIntroLocation3");
                 },
-                [19] = () =>
+                [3.4] = () =>
                 {
 
                 }

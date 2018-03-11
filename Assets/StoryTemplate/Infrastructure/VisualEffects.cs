@@ -7,42 +7,46 @@ namespace Assets.StoryTemplate.Infrastructure
 {
     public static class Impress
     {
-        
+
+        public static void AdvanceGame(GameController gc, bool advanceGame){
+          var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
+          if (advanceGame)
+          {
+              gc._advance = true;
+
+              if (x) Object.Destroy(x);
+          }
+          else
+          {
+
+              if (!x) gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
+          }
+        }
+
         public static void FadeIn(GameObject ob, bool advanceGame=false)
         {
             var gc = FindGameController.Named("GameController");
             //Debug.Log(advanceGame);
-            if (advanceGame)
-            {
-                gc._advance = true;
-                var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
-                if (x) Object.Destroy(x);
-            }
+            AdvanceGame(gc, advanceGame);
 
             gc.UIElementEffects["in"].Add(ob);
         }
 
-        public static void FadeOut(GameObject ob, bool advance=false)
+        public static void FadeOut(GameObject ob, bool advanceGame=false)
         {
             var gc = FindGameController.Named("GameController");
-            if (advance)
-            {
-                gc._advance = true;
-                var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
-                if (x) Object.Destroy(x);
-            }
+            AdvanceGame(gc, advanceGame);
+
             gc.UIElementEffects["out"].Add(ob);
         }
 
-        
-        public static void Crossfade(GameObject ob)
+
+        public static void Crossfade(GameObject ob, bool advanceGame=true)
         {
             var gc = FindGameController.Named("GameController");
             //disable click-advance
-            var x = gc.ActiveCanvas.GetComponent<AdvancePhase>();
-            if (x) Object.Destroy(x);
+            AdvanceGame(gc, advanceGame);
 
-            gc._advance = true;
             gc.UIElementEffects["cross"].Add(ob);
         }
     }
@@ -71,7 +75,7 @@ namespace Assets.StoryTemplate.Infrastructure
             {
                 //Lerp linear interpolation
                 curColor.a = Mathf.Lerp(curColor.a, targetAlpha, fadeRate * Time.deltaTime);
-                
+
             }
 
             return curColor;
@@ -81,7 +85,7 @@ namespace Assets.StoryTemplate.Infrastructure
         {
             //SetImageTransparent(image);
             image.color = Blush(image.color, targetAlpha, fadeRate);
-            
+
         }
 
         public static void TextFadeIn(Text text, float fadeRate=0.03f)
@@ -95,13 +99,13 @@ namespace Assets.StoryTemplate.Infrastructure
         private static string TextRoll(string text, string fullText, float fadeRate)
         {
             var textRoll = text;
-            
+
             var currentDiff = Mathf.Abs(text.Length - fullText.Length);
             if (currentDiff > 1)
             {
                 var startIndex =  Mathf.CeilToInt(Mathf.Lerp(textRoll.Length, fullText.Length, fadeRate * Time.deltaTime));
                 if(startIndex<fullText.Length) textRoll = fullText.Remove(startIndex);
-               
+
             }
             else textRoll = fullText;
 
@@ -112,14 +116,14 @@ namespace Assets.StoryTemplate.Infrastructure
 
         public static void ImageFadeOut(Image image, float targetAlpha = 0f, float fadeRate = 2.5f)
         {
-            
+
             image.color = Blush(image.color, targetAlpha, fadeRate);
 
         }
 
         public static void TextFadeOut(Text text, float targetAlpha = 0f, float fadeRate = 2.5f)
         {
-            
+
             text.color = Blush(text.color, targetAlpha, fadeRate);
 
         }

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.StoryTemplate.Infrastructure;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Assets.StoryTemplate
 {
@@ -14,7 +16,7 @@ namespace Assets.StoryTemplate
         private readonly Canvas _canvas;
         public List<string> Choices;
         private readonly Dictionary<string, int> _choiceToPhase;
-        private int _currentPhase;
+        private double _currentPhase;
         private Text _mainText;
         private Image _impressionImage;
 
@@ -89,10 +91,23 @@ namespace Assets.StoryTemplate
 
         public void AdvancePhase()
         {
-            PlayPhase(_currentPhase + 1);
+            var test = _currentPhase + 0.1;
+            Debug.Log("Attempted phase: " + test);
+            if (_phases.ContainsKey(test))
+            {
+                PlayPhase(_currentPhase + 0.1);
+            }
+            else
+            {
+                PlayPhase(
+                    Convert.ToDouble(
+                        Math.Floor(
+                            _currentPhase + 1
+                )));
+            }
         }
 
-        public void PlayPhase(int phase)
+        public void PlayPhase(double phase)
         {
             _currentPhase = phase;
             _phases[phase]();
