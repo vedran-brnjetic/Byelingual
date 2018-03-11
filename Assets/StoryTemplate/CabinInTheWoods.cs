@@ -15,8 +15,8 @@ namespace Assets.StoryTemplate
         private readonly GameController _gc;
         private readonly Canvas _canvas;
         public List<string> Choices;
-        private readonly Dictionary<string, int> _choiceToPhase;
-        private double _currentPhase;
+        private readonly Dictionary<string, string> _choiceToPhase;
+        private string _currentPhase;
         private Text _mainText;
         private Image _impressionImage;
 
@@ -34,11 +34,11 @@ namespace Assets.StoryTemplate
 
             InitializeStoryPrompts();
 
-            _choiceToPhase = new Dictionary<string, int>
+            _choiceToPhase = new Dictionary<string, string>
             {
-                ["IntroChoice_1"] = 11,
-                ["IntroChoice_2"] = 11,
-                ["IntroChoice_3"] = 11,
+                ["IntroChoice_1"] = "11",
+                ["IntroChoice_2"] = "11",
+                ["IntroChoice_3"] = "11",
             };
             InitializePhases();
         }
@@ -91,23 +91,23 @@ namespace Assets.StoryTemplate
 
         public void AdvancePhase()
         {
-            var test = _currentPhase + 0.1;
+            var test = (Convert.ToDouble(_currentPhase) + 0.1).ToString("N" + 1);
             Debug.Log("Attempted phase: " + test);
             if (_phases.ContainsKey(test))
             {
-                PlayPhase(_currentPhase + 0.1);
+                PlayPhase(test);
             }
             else
             {
                 PlayPhase(
                     Convert.ToDouble(
                         Math.Floor(
-                            _currentPhase + 1
-                )));
+                            Double.Parse(_currentPhase) + 1
+                )).ToString("N" + 0));
             }
         }
 
-        public void PlayPhase(double phase)
+        public void PlayPhase(string phase)
         {
             _currentPhase = phase;
             _phases[phase]();

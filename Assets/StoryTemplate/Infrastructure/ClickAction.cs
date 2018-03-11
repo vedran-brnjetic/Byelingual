@@ -102,7 +102,7 @@ namespace Assets.StoryTemplate.Infrastructure
 
             if (gc.CurrentStory.SnakeCase() == "cabin_in_the_woods")
             {
-                gc.CabinInTheWoods.PlayPhase(0);
+                gc.CabinInTheWoods.PlayPhase("0");
             }
             
         }
