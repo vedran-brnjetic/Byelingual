@@ -172,7 +172,7 @@ namespace Assets.StoryTemplate
                 {//show the hands
                     _impressionImage = _gc.ActiveCanvas.gameObject.GetComponent<Image>();
                     _impressionImage.sprite = _handsSprite;
-                    Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
+                    //Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
                 },
                 ["2.1"] = () =>
                 {//show the text with hands

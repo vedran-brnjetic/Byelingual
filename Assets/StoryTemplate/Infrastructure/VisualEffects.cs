@@ -92,12 +92,17 @@ namespace Assets.StoryTemplate.Infrastructure
         {
             //SetTextTransparent(text);
             //text.color = Blush(text.color, targetAlpha, fadeRate);
-            text.text = TextRoll(text.text, text.GetComponent<TextPartial>().FinalText, fadeRate);
+            
+
+            text.text = TextRoll(text.text.Trim(), text.GetComponent<TextPartial>(), fadeRate);
 
         }
 
-        private static string TextRoll(string text, string fullText, float fadeRate)
+        private static string TextRoll(string text, TextPartial tp, float fadeRate)
         {
+            var fullText = tp.FinalText;
+            if (tp.CurrentText==null) tp.CurrentText = "";
+            if(tp.CurrentText.Length != text.Length) text = tp.CurrentText;
             var textRoll = text;
 
             var currentDiff = Mathf.Abs(text.Length - fullText.Length);
@@ -105,11 +110,14 @@ namespace Assets.StoryTemplate.Infrastructure
             {
                 var startIndex =  Mathf.CeilToInt(Mathf.Lerp(textRoll.Length, fullText.Length, fadeRate * Time.deltaTime));
                 if(startIndex<fullText.Length) textRoll = fullText.Remove(startIndex);
+                
 
             }
             else textRoll = fullText;
 
-            return textRoll;
+            tp.CurrentText = textRoll;
+            
+            return textRoll.PadRight(currentDiff);
 
         }
 

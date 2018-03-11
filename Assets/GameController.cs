@@ -300,7 +300,7 @@ namespace Assets
                         if (mode == "in")
                         { 
 
-                            if (Math.Abs(text.text.Length - text.GetComponent<TextPartial>().FinalText.Length) != 0)
+                            if (Math.Abs(text.text.Trim().Length - text.GetComponent<TextPartial>().FinalText.Length) != 0)
                                 continue;
                         }
                         else
