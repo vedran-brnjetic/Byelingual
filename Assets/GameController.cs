@@ -11,6 +11,8 @@ namespace Assets
 {
     public class GameController : MonoBehaviour
     {
+        private bool _internetWorking = false;
+
 
         private Dictionary<string, Story> _stories; //list of stories available in the platform
         private bool _init = true; //flag for async methods that run on first update frame
@@ -63,10 +65,15 @@ namespace Assets
             ShowPanel(FindPanel.GO("ControlBar"));
 
             //get stories from internet - needed when online
-            //_stories = BLResources.GetStoriesFromInternet();
-            _stories.Add("cabin_in_the_woods",new Story("Cabin In The Woods","A story by Sontra Samela", ""));
-            _stories.Add("yojijukugo:_a_play_in_four_characters", new Story("Yojijukugo:A Play in Four Characters","A story by Sontra Samela", ""));
-
+            _stories = BLResources.GetStoriesFromInternet();
+            if (_stories.Count < 2) { 
+                _stories.Add("cabin_in_the_woods",new Story("Cabin In The Woods","A story by Sontra Samela", ""));
+                _stories.Add("yojijukugo:_a_play_in_four_characters", new Story("Yojijukugo:A Play in Four Characters","A story by Sontra Samela", ""));
+            }
+            else
+            {
+                _internetWorking = true;
+            }
             // add ExitGame callback to ExitButton listener
             FindButton.Named("ExitButton").onClick.AddListener(ExitGame);
 
@@ -143,7 +150,9 @@ namespace Assets
             if (_init)
             {
                 EnableCanvas(FindCanvas.Named("MainMenuCanvas"));
-                LoadButtons();
+                if(_internetWorking) LoadButtons(_internetWorking);
+                else LoadButtons();
+
                 _init = false;
             }
 
@@ -184,8 +193,8 @@ namespace Assets
             }
         }
 
-        /* LoadButtons() async from internet.
-        private async void LoadButtons()
+        /*// LoadButtons() async from internet.*/
+        private async void LoadButtons(object s)
         {
 
             if (Stories.Count > 0) //a hack, have to refactor at some point
@@ -224,7 +233,7 @@ namespace Assets
 
 
         }
-        */
+        //*/
 
         private void CrossFadeElements()
         {
