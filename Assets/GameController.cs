@@ -153,9 +153,36 @@ namespace Assets
 
         private void LoadButtons()
         {
-            
-        }
+            if (Stories.Count > 0) //a hack, have to refactor at some point
+            {
+                var a = FindSprite.InResources("Byelingual1");
+                var b = FindSprite.InResources("YojijukugoTitleScreen");
 
+                var ImageStory1 = FindImage.Named("ImageStory1");
+                ImageStory1.name = Stories.Values.ElementAt(0).SnakeCase();
+                ImageStory1.sprite = a;
+                var ImageStory2 = FindImage.Named("ImageStory2");
+                ImageStory2.name = Stories.Values.ElementAt(1).SnakeCase();
+                ImageStory2.sprite = b;
+
+                Impress.FadeIn(ImageStory1.gameObject);
+                Impress.FadeIn(ImageStory2.gameObject);
+
+                var x = true;
+                foreach (var story in Stories.Values)
+                {
+                    if (x)
+                    {
+
+                        _cabinInTheWoods = new StoryTemplate.CabinInTheWoods(story.ToString(), story.Description, story.ImageUrl);
+                        x = false;
+                    }
+
+                    FindImage.Named(story.SnakeCase()).gameObject.AddComponent<LaunchGame>();
+                }
+
+            }
+        }
 
         /* LoadButtons() async from internet.
         private async void LoadButtons()
