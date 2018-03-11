@@ -81,7 +81,7 @@ namespace Assets.StoryTemplate.Infrastructure
             return curColor;
         }
 
-        public static void ImageFadeIn(Image image, float targetAlpha=1f, float fadeRate=2f)
+        public static void ImageFadeIn(Image image, float targetAlpha=1f, float fadeRate=0.7f)
         {
             //SetImageTransparent(image);
             image.color = Blush(image.color, targetAlpha, fadeRate);

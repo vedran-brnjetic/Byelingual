@@ -162,24 +162,20 @@ namespace Assets.StoryTemplate
                 {//phase 3 fade out the main text
                     Impress.FadeOut(_mainText.gameObject, true);
                 },
-                ["1.6"] = () =>
-                {//clear the text from the textbox
-                    _mainText.text = "";
-
-                    AdvancePhase();
-                },
                 ["2"] = () =>
                 {//show the hands
-                    _impressionImage = _gc.ActiveCanvas.gameObject.GetComponent<Image>();
+                    _impressionImage = _gc.ActiveCanvas.gameObject.transform.Find("ImpressionImage").GetComponent<Image>();
                     _impressionImage.sprite = _handsSprite;
-                    //Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
+                    Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
                 },
                 ["2.1"] = () =>
                 {//show the text with hands
-                    Impress.FadeIn(_mainText.gameObject, advanceGame: true);
                     _mainText.resizeTextMaxSize = 20;
-                    _mainText.text = _storyPrompts["Intro06"];
-                    _mainText.alignment = TextAnchor.UpperRight;
+                    _mainText.text = "";
+                    _mainText.GetComponent<TextPartial>().CurrentText = "";
+                    _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro06"];
+                    _mainText.alignment = TextAnchor.LowerRight;
+                    Impress.FadeIn(_mainText.gameObject, advanceGame: true);
                 },
                 ["2.2"] = () =>
                 {//fade out hands and text
