@@ -83,7 +83,7 @@ namespace Assets.StoryTemplate
 
         
 
-        private GameObject GetTextPanel()
+        private GameObject GetTextPanel(bool clean=false)
         {
             //GET THE TEXT PANEL
             //Cleanup from previous stage
@@ -92,24 +92,25 @@ namespace Assets.StoryTemplate
             var textPanel = FindPanel.GO("ControlBarText");
             var textfields = textPanel.GetComponentsInChildren<Text>();
 
-            var kill = false;
-            foreach (var textfield in textfields)
-            {
-
-                if (kill)
+            if (clean) { 
+                var kill = false;
+                foreach (var textfield in textfields)
                 {
-                    Object.Destroy(textfield);
+
+                    if (kill)
+                    {
+                        Object.Destroy(textfield);
+                    }
+                    else { 
+                        kill = true;
+                        textfield.text = "";
+                        textfield.resizeTextForBestFit = true;
+                        var choice = textfield.GetComponentInChildren<SaveChoice>();
+                        if (choice) Object.Destroy(choice);
+                    }
                 }
-                else { 
-                    kill = true;
-                    textfield.text = "";
-                    textfield.resizeTextForBestFit = true;
-                    var choice = textfield.GetComponentInChildren<SaveChoice>();
-                    if (choice) Object.Destroy(choice);
-                }
+                    // find the text panel
             }
-            // find the text panel
-            
             //move it to the game canvas
             textPanel.transform.SetParent(_canvas.transform);
             //push it to front
@@ -129,15 +130,18 @@ namespace Assets.StoryTemplate
             _phases[phase]();
         }
 
-        private void DisplayText(Text text1, string prompt, string choice="")
+        private void DisplayText(Text text1, string choice="")
         {
             //Add visual effects - set transparent and fade in
-            VisualEffects.SetTextTransparent(text1);
+            //VisualEffects.SetTextTransparent(text1);
             //VisualEffects.TextFadeIn(text1);
+            
             Impress.FadeIn(text1.gameObject);
+            text1.gameObject.AddComponent<TextPartial>();
+            text1.GetComponent<TextPartial>().FinalText = _storyPrompts[text1.name];
 
             //change text and set up the choice click actions
-            text1.text = _storyPrompts[prompt];
+            text1.text = "";
 
             if (choice.Length > 0)
             {

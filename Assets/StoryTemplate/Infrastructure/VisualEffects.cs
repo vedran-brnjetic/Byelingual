@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 namespace Assets.StoryTemplate.Infrastructure
 {
@@ -75,17 +77,35 @@ namespace Assets.StoryTemplate.Infrastructure
             return curColor;
         }
 
-        public static void ImageFadeIn(Image image, float targetAlpha=1f, float fadeRate=2.5f)
+        public static void ImageFadeIn(Image image, float targetAlpha=1f, float fadeRate=2f)
         {
             //SetImageTransparent(image);
             image.color = Blush(image.color, targetAlpha, fadeRate);
             
         }
 
-        public static void TextFadeIn(Text text, float targetAlpha=1f, float fadeRate=2.5f)
+        public static void TextFadeIn(Text text, float fadeRate=0.03f)
         {
             //SetTextTransparent(text);
-            text.color = Blush(text.color, targetAlpha, fadeRate);
+            //text.color = Blush(text.color, targetAlpha, fadeRate);
+            text.text = TextRoll(text.text, text.GetComponent<TextPartial>().FinalText, fadeRate);
+
+        }
+
+        private static string TextRoll(string text, string fullText, float fadeRate)
+        {
+            var Text = text;
+            
+            var currentDiff = Mathf.Abs(text.Length - fullText.Length);
+            if (currentDiff > 1)
+            {
+                var startIndex =  Mathf.CeilToInt(Mathf.Lerp(Text.Length, fullText.Length, fadeRate * Time.deltaTime));
+                if(startIndex<fullText.Length) Text = fullText.Remove(startIndex);
+                Debug.Log(startIndex);
+            }
+            else Text = fullText;
+
+            return Text;
 
         }
 

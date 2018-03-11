@@ -70,7 +70,9 @@ namespace Assets
 
             //Testing text transition (fade in)
             var text = FindText.Named("TextGameTitle");
-            VisualEffects.SetTextTransparent(text);
+            text.gameObject.AddComponent<TextPartial>();
+            text.GetComponent<TextPartial>().FinalText = "Byelingual";
+            //VisualEffects.SetTextTransparent(text);
             ElementsToCrossfade["in"].Add(text.gameObject);
 
 
@@ -247,10 +249,11 @@ namespace Assets
                                 break;
                         }
                         
-                        if (Math.Abs(text.color.a - targetAlpha) < 0.0001)
+                        if (Math.Abs(text.text.Length - text.GetComponent<TextPartial>().FinalText.Length) == 0)
                         {
                             itemsToRemove[mode].Add(element);
                             transitionComplete = true;
+                            Debug.Log("text full");
                         }
                     }
 
