@@ -62,8 +62,10 @@ namespace Assets
             //show the main menu control bar
             ShowPanel(FindPanel.GO("ControlBar"));
 
-            //get stories from internet
-            _stories = BLResources.GetStoriesFromInternet();
+            //get stories from internet - needed when online
+            //_stories = BLResources.GetStoriesFromInternet();
+            _stories.Add("cabin_in_the_woods",new Story("Cabin In The Woods","A story by Sontra Samela", ""));
+            _stories.Add("yojijukugo:_a_play_in_four_characters", new Story("Yojijukugo:A Play in Four Characters","A story by Sontra Samela", ""));
 
             // add ExitGame callback to ExitButton listener
             FindButton.Named("ExitButton").onClick.AddListener(ExitGame);
@@ -131,6 +133,31 @@ namespace Assets
             Destroy(FindButton.Named("BackButton").gameObject);
         }
 
+        
+
+
+        // Update is called once per frame
+        private void Update()
+        {
+
+            if (_init)
+            {
+                EnableCanvas(FindCanvas.Named("MainMenuCanvas"));
+                LoadButtons();
+                _init = false;
+            }
+
+            CrossFadeElements();
+
+        }
+
+        private void LoadButtons()
+        {
+            
+        }
+
+
+        /* LoadButtons() async from internet.
         private async void LoadButtons()
         {
 
@@ -170,21 +197,7 @@ namespace Assets
 
 
         }
-
-        // Update is called once per frame
-        private void Update()
-        {
-
-            if (_init)
-            {
-                EnableCanvas(FindCanvas.Named("MainMenuCanvas"));
-                LoadButtons();
-                _init = false;
-            }
-
-            CrossFadeElements();
-
-        }
+        */
 
         private void CrossFadeElements()
         {
