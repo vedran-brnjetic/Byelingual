@@ -10,6 +10,44 @@ namespace Assets.StoryTemplate
     public partial class CabinInTheWoods : Story
     {
         private Dictionary<int, Action> _phases;
+        private Dictionary<string, string> _storyPrompts;
+
+        private void InitializeStoryPrompts(){
+          _storyPrompts = new Dictionary<string, string>
+          {
+              //locations
+              ["Location1"] = "Go to common room",
+              ["Location2"] = "Go outside",
+              ["Location3"] = "Go to Pond",
+
+              //first intro text
+              ["Intro01"] = "In the beginning, the place looked abandoned...",
+              ["Intro02"] = "...now it doesn't.",
+              ["Intro03"] = "In the beginning, there was no light source...",
+              ["Intro04"] = "...except for our cellphones.",
+
+              //intro main text
+              ["Intro05"] = "“They can track our phones through GPS!”\n“Turn it off.”\n“Bah! There are no search parties yet. They’re going to wait for us to come back, then deny us dessert as punishment – maybe eat it loudly in front of us to drive the message across.”\n“I’ve already thrown mine in the lake.”\n“What?”",
+
+              //hands
+              ["Intro06"] = "...whereas you never even had a phone.",
+
+              //fire
+              ["Intro07"] = "There is a fire in the wood burner. Looking at the fire, you feel...",
+
+              //options
+              ["Intro08"] = "...excited. You worked for this fire. You earned its warmth and comfort. You created a place for yourself where there was none.You could not be prouder of yourself in this moment. Finally, it’s all up to you.",
+              ["Intro09"] = "...relieved. This is a place where it does not matter that you have less than others.Here everyone has little.Maybe even too little.We are going to need everyone’s effort and cooperation to make it, which means that you are needed. At last there exists common ground where you stand as one among equals.",
+              ["Intro10"] = "...skeptical. That fire is not going to last long, and neither is the spirit of all these hopefuls basking in its short-lived heat. They dream big but are only now getting their first taste of true deprivation. The hunger, the cold, the lack of privacy, illness... the last of which will be a guaranteed breaking point for this unlikely uprising.",
+
+              //intro end
+              ["Intro11"] = "...it was a good dream",
+              ["Intro12"] = "You dreamt of flying. From tree to tree you leapt, and a gust of wind swept you up beyond the canopy, from where you were gliding down gracefully, admiring the views, until your descent ended in a dip in ice-cold, dark, murky water. The shock woke you up.",
+              ["Intro13"] = "...the fire has gone out.",
+
+          };
+
+        }
 
         private void InitializePhases()
         {
@@ -27,7 +65,7 @@ namespace Assets.StoryTemplate
                     var canvasBg = _gc.ActiveCanvas.GetComponent<Image>();
                     canvasBg.sprite = FindSprite.InResources("placeholder_hands");
                     canvasBg.color= Color.white;
-                    
+
 
                     var text2 = Object.Instantiate<Text>(text1, textPanel.transform, true);
                     text2.transform.Translate(0f, -text1.preferredHeight * 1.05f, 0f);
@@ -45,7 +83,7 @@ namespace Assets.StoryTemplate
 
 
                     DisplayText(text1);
-                    
+
 
                     text2.alignment = TextAnchor.MiddleRight;
                     text4.alignment = TextAnchor.MiddleRight;
@@ -56,10 +94,10 @@ namespace Assets.StoryTemplate
                 {//hide panels and fade out the game title (reusing the same text box for the main text)
                     var text2 = GetTextPanel().transform.Find("Intro02").GetComponent<Text>();
                     DisplayText(text2);
-                    
+
                     //
 
-                    
+
                 },
                 [2] = () =>
                     {
@@ -82,8 +120,8 @@ namespace Assets.StoryTemplate
                 [5] = () =>
                 {//this phase starts automatically during crossfade script once the title fades out completely
                     _mainText.color = Color.white;
-                    
-                    
+
+
                 },
                 [6] = () =>
                 {//phase 3 fade out the main text
@@ -133,10 +171,10 @@ namespace Assets.StoryTemplate
                     //Find the Text component in the panel
                     var text1 = textPanel.GetComponentInChildren<Text>();
                     text1.resizeTextForBestFit = true;
-                    
+
                     var text2 = Object.Instantiate(text1, textPanel.transform, true);
                     text2.transform.Translate(0f, -text1.preferredHeight * 1.66f, 0f);
-                    
+
                     var text3 = Object.Instantiate(text2, textPanel.transform, true);
                     text3.transform.Translate(0f, -text2.preferredHeight * 1.66f, 0f);
 
@@ -147,7 +185,7 @@ namespace Assets.StoryTemplate
                     DisplayText(text1, "IntroChoice_1");
                     DisplayText(text2, "IntroChoice_2");
                     DisplayText(text3, "IntroChoice_3");
-                    
+
 
                     _gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
                 },
@@ -175,7 +213,7 @@ namespace Assets.StoryTemplate
                     DisplayText(text3, "Intro13");
 
                     text1.resizeTextForBestFit = false;
-                    
+
                     text3.resizeTextForBestFit = false;
                     text1.alignment = TextAnchor.UpperRight;
                     text3.alignment = TextAnchor.UpperRight;
@@ -225,25 +263,6 @@ namespace Assets.StoryTemplate
 
                 }
             };
-
-
-            
-
-            
-
-            
-
-            
-
-            
-
-            
-
-            
-
-            
-
-            
 
         }
     }

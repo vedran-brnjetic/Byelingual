@@ -297,8 +297,18 @@ namespace Assets
                                 break;
                         }
 
-                        if (Math.Abs(text.text.Length - text.GetComponent<TextPartial>().FinalText.Length) != 0)
-                            continue;
+                        if (mode == "in")
+                        { 
+
+                            if (Math.Abs(text.text.Length - text.GetComponent<TextPartial>().FinalText.Length) != 0)
+                                continue;
+                        }
+                        else
+                        {
+                            if (Math.Abs(text.color.a - targetAlpha) < 0.0001) continue;
+                            
+                        }
+
                         itemsToRemove[mode].Add(element);
                         if(mode=="cross") Impress.FadeIn(element, true);
                         transitionComplete = true;
