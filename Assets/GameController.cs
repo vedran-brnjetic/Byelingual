@@ -227,12 +227,11 @@ namespace Assets
                                     VisualEffects.ImageFadeOut(image);
                                     break;
                         }
-                        
-                        if (Math.Abs(image.color.a - targetAlpha) < 0.0001)
-                        {
-                            itemsToRemove[mode].Add(element);
-                            transitionComplete = true;
-                        }
+
+                        if (!(Math.Abs(image.color.a - targetAlpha) < 0.0001)) continue;
+                        if (mode == "cross") Impress.FadeIn(element, true);
+                        itemsToRemove[mode].Add(element);
+                        transitionComplete = true;
                     } //test if the element is text
                     else if (text)
                     {
@@ -248,13 +247,13 @@ namespace Assets
                                 VisualEffects.TextFadeOut(text);
                                 break;
                         }
-                        
-                        if (Math.Abs(text.text.Length - text.GetComponent<TextPartial>().FinalText.Length) == 0)
-                        {
-                            itemsToRemove[mode].Add(element);
-                            transitionComplete = true;
-                            Debug.Log("text full");
-                        }
+
+                        if (Math.Abs(text.text.Length - text.GetComponent<TextPartial>().FinalText.Length) != 0)
+                            continue;
+                        itemsToRemove[mode].Add(element);
+                        if(mode=="cross") Impress.FadeIn(element, true);
+                        transitionComplete = true;
+                        Debug.Log("text full");
                     }
 
 
@@ -279,16 +278,12 @@ namespace Assets
 
         private void Advance()
         {
-            if (_advance)
-            {
-                _advance = false;
-                _cabinInTheWoods.AdvancePhase();
+            if (!_advance) return;
+            _advance = false;
+            _cabinInTheWoods.AdvancePhase();
                 
-                var ap = ActiveCanvas.GetComponent<AdvancePhase>();
-                if (!ap) ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
-
-                       
-            }
+            var ap = ActiveCanvas.GetComponent<AdvancePhase>();
+            if (!ap) ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
         }
 
         private static void ExitGame()
@@ -314,13 +309,13 @@ namespace Assets
                 panel.transform.SetAsFirstSibling();
                 //Debug.Log(panel.name + " " + panel.transform.position );
                 if(panel.transform.position.y > 0)
-                    panel.transform.Translate(0f, -panel.GetComponentInChildren<RectTransform>().rect.height*2, 0f);
+                    panel.transform.Translate(0f, -panel.GetComponentInChildren<RectTransform>().rect.height*4f, 0f);
             }
         }
 
         public void ShowPanel(GameObject panel)
         {
-            ShowPanel(panel, Color.black);
+            ShowPanel(panel, Color.white);
             
         }
 
@@ -330,12 +325,12 @@ namespace Assets
             ActivePanel = panel;
             panel.transform.SetAsLastSibling();
             panel.transform.GetComponent<Image>().color = color;
-            panel.transform.Translate(0f, panel.GetComponentInChildren<RectTransform>().rect.height*2, 0f);
+            panel.transform.Translate(0f, panel.GetComponentInChildren<RectTransform>().rect.height*4f, 0f);
         }
 
-        public void EnableCanvasByName(string name)
+        public void EnableCanvasByName(string canvasName)
         {
-            EnableCanvas(FindCanvas.Named(name));
+            EnableCanvas(FindCanvas.Named(canvasName));
         }
 
         public void EnableCanvas(Canvas canvas)

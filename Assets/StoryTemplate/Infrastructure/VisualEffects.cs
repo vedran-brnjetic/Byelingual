@@ -94,18 +94,18 @@ namespace Assets.StoryTemplate.Infrastructure
 
         private static string TextRoll(string text, string fullText, float fadeRate)
         {
-            var Text = text;
+            var textRoll = text;
             
             var currentDiff = Mathf.Abs(text.Length - fullText.Length);
             if (currentDiff > 1)
             {
-                var startIndex =  Mathf.CeilToInt(Mathf.Lerp(Text.Length, fullText.Length, fadeRate * Time.deltaTime));
-                if(startIndex<fullText.Length) Text = fullText.Remove(startIndex);
-                Debug.Log(startIndex);
+                var startIndex =  Mathf.CeilToInt(Mathf.Lerp(textRoll.Length, fullText.Length, fadeRate * Time.deltaTime));
+                if(startIndex<fullText.Length) textRoll = fullText.Remove(startIndex);
+               
             }
-            else Text = fullText;
+            else textRoll = fullText;
 
-            return Text;
+            return textRoll;
 
         }
 

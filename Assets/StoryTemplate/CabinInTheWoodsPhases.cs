@@ -21,6 +21,13 @@ namespace Assets.StoryTemplate
                     var textPanel = GetTextPanel(true);
                     //Find the Text component in the panel
                     var text1 = textPanel.GetComponentInChildren<Text>();
+                    text1.color = Color.black;
+                    var panelImage = textPanel.GetComponent<Image>();
+                    panelImage.sprite = FindSprite.InResources("ui_draft2");
+                    var canvasBg = _gc.ActiveCanvas.GetComponent<Image>();
+                    canvasBg.sprite = FindSprite.InResources("placeholder_hands");
+                    canvasBg.color= Color.white;
+                    
 
                     var text2 = Object.Instantiate<Text>(text1, textPanel.transform, true);
                     text2.transform.Translate(0f, -text1.preferredHeight * 1.05f, 0f);
@@ -68,15 +75,15 @@ namespace Assets.StoryTemplate
                     {
                         _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
                         _mainText.gameObject.AddComponent<TextPartial>();
-                        
+                        _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro05"];
                         Impress.Crossfade(_mainText.gameObject);
                         _gc.HideAllPanels();
                     },
                 [5] = () =>
                 {//this phase starts automatically during crossfade script once the title fades out completely
                     _mainText.color = Color.white;
-                    _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro05"];
-                    _mainText.text = _storyPrompts["Intro05"];
+                    
+                    
                 },
                 [6] = () =>
                 {//phase 3 fade out the main text
