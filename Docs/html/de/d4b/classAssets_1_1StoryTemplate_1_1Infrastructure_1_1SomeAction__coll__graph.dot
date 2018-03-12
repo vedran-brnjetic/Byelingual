@@ -1,0 +1,12 @@
+digraph "Assets.StoryTemplate.Infrastructure.SomeAction"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="Assets.StoryTemplate.Infrastructure.\lSomeAction",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="ClickAction",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$d0/d01/classAssets_1_1StoryTemplate_1_1Infrastructure_1_1ClickAction.html"];
+  Node3 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="MonoBehaviour",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+  Node4 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="IPointerClickHandler",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled"];
+}

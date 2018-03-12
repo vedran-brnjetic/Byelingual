@@ -1,0 +1,345 @@
+\hypertarget{classSimpleJSON_1_1JSONNode}{}\section{Simple\+J\+S\+O\+N.\+J\+S\+O\+N\+Node Class Reference}
+\label{classSimpleJSON_1_1JSONNode}\index{Simple\+J\+S\+O\+N.\+J\+S\+O\+N\+Node@{Simple\+J\+S\+O\+N.\+J\+S\+O\+N\+Node}}
+
+
+Inheritance diagram for Simple\+J\+S\+O\+N.\+J\+S\+O\+N\+Node\+:
+% FIG 0
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structSimpleJSON_1_1JSONNode_1_1Enumerator}{Enumerator}
+\item 
+struct \hyperlink{structSimpleJSON_1_1JSONNode_1_1KeyEnumerator}{Key\+Enumerator}
+\item 
+class \hyperlink{classSimpleJSON_1_1JSONNode_1_1LinqEnumerator}{Linq\+Enumerator}
+\item 
+struct \hyperlink{structSimpleJSON_1_1JSONNode_1_1ValueEnumerator}{Value\+Enumerator}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void {\bfseries Add} (string a\+Key, \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Item)\hypertarget{classSimpleJSON_1_1JSONNode_ac50b24bfebca8d2d6ae3c4ac6d12afe6}{}\label{classSimpleJSON_1_1JSONNode_ac50b24bfebca8d2d6ae3c4ac6d12afe6}
+
+\item 
+virtual void {\bfseries Add} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Item)\hypertarget{classSimpleJSON_1_1JSONNode_aad53be508d347581118aefec0fea5c0e}{}\label{classSimpleJSON_1_1JSONNode_aad53be508d347581118aefec0fea5c0e}
+
+\item 
+virtual \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Remove} (string a\+Key)\hypertarget{classSimpleJSON_1_1JSONNode_a5dadbd4d866ee4cd87b2ec388e2fef19}{}\label{classSimpleJSON_1_1JSONNode_a5dadbd4d866ee4cd87b2ec388e2fef19}
+
+\item 
+virtual \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Remove} (int a\+Index)\hypertarget{classSimpleJSON_1_1JSONNode_ae3def64bf1ebeaa35a1863adeaae2bfa}{}\label{classSimpleJSON_1_1JSONNode_ae3def64bf1ebeaa35a1863adeaae2bfa}
+
+\item 
+virtual \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Remove} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Node)\hypertarget{classSimpleJSON_1_1JSONNode_a3e9d1edd18d48652e73bdd8df0916ff8}{}\label{classSimpleJSON_1_1JSONNode_a3e9d1edd18d48652e73bdd8df0916ff8}
+
+\item 
+override string {\bfseries To\+String} ()\hypertarget{classSimpleJSON_1_1JSONNode_a668c799e5973a2d9e0951d071b027f68}{}\label{classSimpleJSON_1_1JSONNode_a668c799e5973a2d9e0951d071b027f68}
+
+\item 
+virtual string {\bfseries To\+String} (int a\+Indent)\hypertarget{classSimpleJSON_1_1JSONNode_abe7b2c0faad9db388fba24531f072001}{}\label{classSimpleJSON_1_1JSONNode_abe7b2c0faad9db388fba24531f072001}
+
+\item 
+abstract \hyperlink{structSimpleJSON_1_1JSONNode_1_1Enumerator}{Enumerator} {\bfseries Get\+Enumerator} ()\hypertarget{classSimpleJSON_1_1JSONNode_aaf093073620d4f9bae652cfac32cbc15}{}\label{classSimpleJSON_1_1JSONNode_aaf093073620d4f9bae652cfac32cbc15}
+
+\item 
+override bool {\bfseries Equals} (object obj)\hypertarget{classSimpleJSON_1_1JSONNode_a6748a3e48c993f7904cfb70a047fb18b}{}\label{classSimpleJSON_1_1JSONNode_a6748a3e48c993f7904cfb70a047fb18b}
+
+\item 
+override int {\bfseries Get\+Hash\+Code} ()\hypertarget{classSimpleJSON_1_1JSONNode_a97a4e4d2618feba0493ea30e1ea7f74b}{}\label{classSimpleJSON_1_1JSONNode_a97a4e4d2618feba0493ea30e1ea7f74b}
+
+\item 
+abstract void {\bfseries Serialize\+Binary} (System.\+I\+O.\+Binary\+Writer a\+Writer)\hypertarget{classSimpleJSON_1_1JSONNode_a27b2c314ae56defbef0f0af461bd71be}{}\label{classSimpleJSON_1_1JSONNode_a27b2c314ae56defbef0f0af461bd71be}
+
+\item 
+void {\bfseries Save\+To\+Binary\+Stream} (System.\+I\+O.\+Stream a\+Data)\hypertarget{classSimpleJSON_1_1JSONNode_ad03877d6d86750e9da28e5a09d05f17e}{}\label{classSimpleJSON_1_1JSONNode_ad03877d6d86750e9da28e5a09d05f17e}
+
+\item 
+void {\bfseries Save\+To\+Compressed\+Stream} (System.\+I\+O.\+Stream a\+Data)\hypertarget{classSimpleJSON_1_1JSONNode_a695ad84343c455c9e51e829b09b6383f}{}\label{classSimpleJSON_1_1JSONNode_a695ad84343c455c9e51e829b09b6383f}
+
+\item 
+void {\bfseries Save\+To\+Compressed\+File} (string a\+File\+Name)\hypertarget{classSimpleJSON_1_1JSONNode_a758ce7b14ca3c2055f46bd47ef9ca22d}{}\label{classSimpleJSON_1_1JSONNode_a758ce7b14ca3c2055f46bd47ef9ca22d}
+
+\item 
+string {\bfseries Save\+To\+Compressed\+Base64} ()\hypertarget{classSimpleJSON_1_1JSONNode_ac045f8735648431c1209c7a25ca0beb9}{}\label{classSimpleJSON_1_1JSONNode_ac045f8735648431c1209c7a25ca0beb9}
+
+\item 
+void {\bfseries Save\+To\+Binary\+File} (string a\+File\+Name)\hypertarget{classSimpleJSON_1_1JSONNode_ade700e4dde694066e8cecc3a941b4c02}{}\label{classSimpleJSON_1_1JSONNode_ade700e4dde694066e8cecc3a941b4c02}
+
+\item 
+string {\bfseries Save\+To\+Binary\+Base64} ()\hypertarget{classSimpleJSON_1_1JSONNode_aa4555b318d8f828304a93c4a2e7d5007}{}\label{classSimpleJSON_1_1JSONNode_aa4555b318d8f828304a93c4a2e7d5007}
+
+\item 
+Vector2 {\bfseries Read\+Vector2} (Vector2 a\+Default)\hypertarget{classSimpleJSON_1_1JSONNode_aa04ef8dc9b65ed81326158e0f283bbd9}{}\label{classSimpleJSON_1_1JSONNode_aa04ef8dc9b65ed81326158e0f283bbd9}
+
+\item 
+Vector2 {\bfseries Read\+Vector2} (string a\+X\+Name, string a\+Y\+Name)\hypertarget{classSimpleJSON_1_1JSONNode_adf312ac8eca31e726111c4c4c8d120e0}{}\label{classSimpleJSON_1_1JSONNode_adf312ac8eca31e726111c4c4c8d120e0}
+
+\item 
+Vector2 {\bfseries Read\+Vector2} ()\hypertarget{classSimpleJSON_1_1JSONNode_a8f4a63ba7416bb8316e4da7fec586634}{}\label{classSimpleJSON_1_1JSONNode_a8f4a63ba7416bb8316e4da7fec586634}
+
+\item 
+\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Write\+Vector2} (Vector2 a\+Vec, string a\+X\+Name=\char`\"{}x\char`\"{}, string a\+Y\+Name=\char`\"{}y\char`\"{})\hypertarget{classSimpleJSON_1_1JSONNode_a78bc8849e2ab34d607bd13cd960f0cd0}{}\label{classSimpleJSON_1_1JSONNode_a78bc8849e2ab34d607bd13cd960f0cd0}
+
+\item 
+Vector3 {\bfseries Read\+Vector3} (Vector3 a\+Default)\hypertarget{classSimpleJSON_1_1JSONNode_a6fee508df8f57593e7209ecba9b0e352}{}\label{classSimpleJSON_1_1JSONNode_a6fee508df8f57593e7209ecba9b0e352}
+
+\item 
+Vector3 {\bfseries Read\+Vector3} (string a\+X\+Name, string a\+Y\+Name, string a\+Z\+Name)\hypertarget{classSimpleJSON_1_1JSONNode_a2c6675fc3ae93d9e1e914fece30b789a}{}\label{classSimpleJSON_1_1JSONNode_a2c6675fc3ae93d9e1e914fece30b789a}
+
+\item 
+Vector3 {\bfseries Read\+Vector3} ()\hypertarget{classSimpleJSON_1_1JSONNode_a1e100e39b1dafb5fbe25e47d4c3a49b1}{}\label{classSimpleJSON_1_1JSONNode_a1e100e39b1dafb5fbe25e47d4c3a49b1}
+
+\item 
+\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Write\+Vector3} (Vector3 a\+Vec, string a\+X\+Name=\char`\"{}x\char`\"{}, string a\+Y\+Name=\char`\"{}y\char`\"{}, string a\+Z\+Name=\char`\"{}z\char`\"{})\hypertarget{classSimpleJSON_1_1JSONNode_a43ab7432b4152a68817f070c1d263b61}{}\label{classSimpleJSON_1_1JSONNode_a43ab7432b4152a68817f070c1d263b61}
+
+\item 
+Vector4 {\bfseries Read\+Vector4} (Vector4 a\+Default)\hypertarget{classSimpleJSON_1_1JSONNode_a154201773e3c3cf9da4ec914da0b3db8}{}\label{classSimpleJSON_1_1JSONNode_a154201773e3c3cf9da4ec914da0b3db8}
+
+\item 
+Vector4 {\bfseries Read\+Vector4} ()\hypertarget{classSimpleJSON_1_1JSONNode_a04cca4ce607b3918943db0b1db9c7e8b}{}\label{classSimpleJSON_1_1JSONNode_a04cca4ce607b3918943db0b1db9c7e8b}
+
+\item 
+\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Write\+Vector4} (Vector4 a\+Vec)\hypertarget{classSimpleJSON_1_1JSONNode_a84f338447d0ed628de1c1c2d58248432}{}\label{classSimpleJSON_1_1JSONNode_a84f338447d0ed628de1c1c2d58248432}
+
+\item 
+Quaternion {\bfseries Read\+Quaternion} (Quaternion a\+Default)\hypertarget{classSimpleJSON_1_1JSONNode_ad115ed5a9de9ace0f3b3a4e65ea54b3a}{}\label{classSimpleJSON_1_1JSONNode_ad115ed5a9de9ace0f3b3a4e65ea54b3a}
+
+\item 
+Quaternion {\bfseries Read\+Quaternion} ()\hypertarget{classSimpleJSON_1_1JSONNode_a41b64fb1d7f8f6ff8738d9648710639d}{}\label{classSimpleJSON_1_1JSONNode_a41b64fb1d7f8f6ff8738d9648710639d}
+
+\item 
+\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Write\+Quaternion} (Quaternion a\+Rot)\hypertarget{classSimpleJSON_1_1JSONNode_a45fe5f395e6c83645e1cb39aa3af4563}{}\label{classSimpleJSON_1_1JSONNode_a45fe5f395e6c83645e1cb39aa3af4563}
+
+\item 
+Rect {\bfseries Read\+Rect} (Rect a\+Default)\hypertarget{classSimpleJSON_1_1JSONNode_a4aae1151a3e4fbb1891ff3deb5a27c7d}{}\label{classSimpleJSON_1_1JSONNode_a4aae1151a3e4fbb1891ff3deb5a27c7d}
+
+\item 
+Rect {\bfseries Read\+Rect} ()\hypertarget{classSimpleJSON_1_1JSONNode_a9cd9934fe268446563a4c08c050bbfa1}{}\label{classSimpleJSON_1_1JSONNode_a9cd9934fe268446563a4c08c050bbfa1}
+
+\item 
+\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Write\+Rect} (Rect a\+Rect)\hypertarget{classSimpleJSON_1_1JSONNode_a1bcc18f132246d261c611b4b55cc41b5}{}\label{classSimpleJSON_1_1JSONNode_a1bcc18f132246d261c611b4b55cc41b5}
+
+\item 
+Rect\+Offset {\bfseries Read\+Rect\+Offset} (Rect\+Offset a\+Default)\hypertarget{classSimpleJSON_1_1JSONNode_a7e4d9b11bafc21f374cd1ca19d4e7ea7}{}\label{classSimpleJSON_1_1JSONNode_a7e4d9b11bafc21f374cd1ca19d4e7ea7}
+
+\item 
+Rect\+Offset {\bfseries Read\+Rect\+Offset} ()\hypertarget{classSimpleJSON_1_1JSONNode_a9a59b8a7e58665eeb008ed5d7510707b}{}\label{classSimpleJSON_1_1JSONNode_a9a59b8a7e58665eeb008ed5d7510707b}
+
+\item 
+\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Write\+Rect\+Offset} (Rect\+Offset a\+Rect)\hypertarget{classSimpleJSON_1_1JSONNode_ac93b5a598ff19941aedd04311bded488}{}\label{classSimpleJSON_1_1JSONNode_ac93b5a598ff19941aedd04311bded488}
+
+\item 
+Matrix4x4 {\bfseries Read\+Matrix} ()\hypertarget{classSimpleJSON_1_1JSONNode_a74dcf0fe82714d534f0a89482e1a93c1}{}\label{classSimpleJSON_1_1JSONNode_a74dcf0fe82714d534f0a89482e1a93c1}
+
+\item 
+\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Write\+Matrix} (Matrix4x4 a\+Matrix)\hypertarget{classSimpleJSON_1_1JSONNode_a56f37ea303109e3d47c4b02a724b06ce}{}\label{classSimpleJSON_1_1JSONNode_a56f37ea303109e3d47c4b02a724b06ce}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (string s)\hypertarget{classSimpleJSON_1_1JSONNode_aeaf495a0bd9632ceca7375934d24b541}{}\label{classSimpleJSON_1_1JSONNode_aeaf495a0bd9632ceca7375934d24b541}
+
+\item 
+static implicit {\bfseries operator string} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} d)\hypertarget{classSimpleJSON_1_1JSONNode_a498348138d87b84eaacb795cc9727ac2}{}\label{classSimpleJSON_1_1JSONNode_a498348138d87b84eaacb795cc9727ac2}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (double n)\hypertarget{classSimpleJSON_1_1JSONNode_a2481f6b35d7f8f0917aa8c9f383aef0b}{}\label{classSimpleJSON_1_1JSONNode_a2481f6b35d7f8f0917aa8c9f383aef0b}
+
+\item 
+static implicit {\bfseries operator double} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} d)\hypertarget{classSimpleJSON_1_1JSONNode_acaf63acc9313f877308fbb80ce50fa1c}{}\label{classSimpleJSON_1_1JSONNode_acaf63acc9313f877308fbb80ce50fa1c}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (float n)\hypertarget{classSimpleJSON_1_1JSONNode_a15b45a287745b0070bdf40d8d66ecee8}{}\label{classSimpleJSON_1_1JSONNode_a15b45a287745b0070bdf40d8d66ecee8}
+
+\item 
+static implicit {\bfseries operator float} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} d)\hypertarget{classSimpleJSON_1_1JSONNode_ad96f121c11522f6869cb49e5453c9c87}{}\label{classSimpleJSON_1_1JSONNode_ad96f121c11522f6869cb49e5453c9c87}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (int n)\hypertarget{classSimpleJSON_1_1JSONNode_a558af594a87bbea3f57bba65b14ff131}{}\label{classSimpleJSON_1_1JSONNode_a558af594a87bbea3f57bba65b14ff131}
+
+\item 
+static implicit {\bfseries operator int} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} d)\hypertarget{classSimpleJSON_1_1JSONNode_a1aa8c58e9230ad56005bdb9176b109f8}{}\label{classSimpleJSON_1_1JSONNode_a1aa8c58e9230ad56005bdb9176b109f8}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (long n)\hypertarget{classSimpleJSON_1_1JSONNode_a0ef89c941874052a05afbf5453136eb2}{}\label{classSimpleJSON_1_1JSONNode_a0ef89c941874052a05afbf5453136eb2}
+
+\item 
+static implicit {\bfseries operator long} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} d)\hypertarget{classSimpleJSON_1_1JSONNode_ad4276cbe207ea51e47fd77cdb0dbf72b}{}\label{classSimpleJSON_1_1JSONNode_ad4276cbe207ea51e47fd77cdb0dbf72b}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (bool b)\hypertarget{classSimpleJSON_1_1JSONNode_a9484661cba83e1b8ea8a1b97d8006496}{}\label{classSimpleJSON_1_1JSONNode_a9484661cba83e1b8ea8a1b97d8006496}
+
+\item 
+static implicit {\bfseries operator bool} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} d)\hypertarget{classSimpleJSON_1_1JSONNode_a8c1adc2153f3bfc6158f823e50ab3c4d}{}\label{classSimpleJSON_1_1JSONNode_a8c1adc2153f3bfc6158f823e50ab3c4d}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (Key\+Value\+Pair$<$ string, \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} $>$ a\+Key\+Value)\hypertarget{classSimpleJSON_1_1JSONNode_a1e4d1b859f923aa72d95a52788e09419}{}\label{classSimpleJSON_1_1JSONNode_a1e4d1b859f923aa72d95a52788e09419}
+
+\item 
+static bool {\bfseries operator==} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a, object b)\hypertarget{classSimpleJSON_1_1JSONNode_a6103dd81602c40f06a33895b669d2195}{}\label{classSimpleJSON_1_1JSONNode_a6103dd81602c40f06a33895b669d2195}
+
+\item 
+static bool {\bfseries operator!=} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a, object b)\hypertarget{classSimpleJSON_1_1JSONNode_a804be147249a3e8689fd84842708fb48}{}\label{classSimpleJSON_1_1JSONNode_a804be147249a3e8689fd84842708fb48}
+
+\item 
+static \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Parse} (string a\+J\+S\+ON)\hypertarget{classSimpleJSON_1_1JSONNode_af4f82de403afd2df381137972ded5981}{}\label{classSimpleJSON_1_1JSONNode_af4f82de403afd2df381137972ded5981}
+
+\item 
+static \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Deserialize\+Binary} (System.\+I\+O.\+Binary\+Reader a\+Reader)\hypertarget{classSimpleJSON_1_1JSONNode_a7c9e725b2100acd69495ed8fa5599cb1}{}\label{classSimpleJSON_1_1JSONNode_a7c9e725b2100acd69495ed8fa5599cb1}
+
+\item 
+static \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Load\+From\+Compressed\+File} (string a\+File\+Name)\hypertarget{classSimpleJSON_1_1JSONNode_abac001a8fcab3142c75bbff0067281e7}{}\label{classSimpleJSON_1_1JSONNode_abac001a8fcab3142c75bbff0067281e7}
+
+\item 
+static \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Load\+From\+Compressed\+Stream} (System.\+I\+O.\+Stream a\+Data)\hypertarget{classSimpleJSON_1_1JSONNode_a446c6f9eda1a568172a20265c6f1c9c9}{}\label{classSimpleJSON_1_1JSONNode_a446c6f9eda1a568172a20265c6f1c9c9}
+
+\item 
+static \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Load\+From\+Compressed\+Base64} (string a\+Base64)\hypertarget{classSimpleJSON_1_1JSONNode_a85b31d1f8da0eff4993671fb8538dcfb}{}\label{classSimpleJSON_1_1JSONNode_a85b31d1f8da0eff4993671fb8538dcfb}
+
+\item 
+static \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Load\+From\+Binary\+Stream} (System.\+I\+O.\+Stream a\+Data)\hypertarget{classSimpleJSON_1_1JSONNode_a140f2c85a1aaf00384e2a973f4e988f3}{}\label{classSimpleJSON_1_1JSONNode_a140f2c85a1aaf00384e2a973f4e988f3}
+
+\item 
+static \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Load\+From\+Binary\+File} (string a\+File\+Name)\hypertarget{classSimpleJSON_1_1JSONNode_a412c3bc9e3fffd06b2844241c88cbf8a}{}\label{classSimpleJSON_1_1JSONNode_a412c3bc9e3fffd06b2844241c88cbf8a}
+
+\item 
+static \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries Load\+From\+Binary\+Base64} (string a\+Base64)\hypertarget{classSimpleJSON_1_1JSONNode_acbecd916ba2ae5434a2e903a41a4de38}{}\label{classSimpleJSON_1_1JSONNode_acbecd916ba2ae5434a2e903a41a4de38}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (Vector2 a\+Vec)\hypertarget{classSimpleJSON_1_1JSONNode_aa06789dde1433c018670449820162076}{}\label{classSimpleJSON_1_1JSONNode_aa06789dde1433c018670449820162076}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (Vector3 a\+Vec)\hypertarget{classSimpleJSON_1_1JSONNode_aac71d50eda9f5d6b9fabb370b0f4fade}{}\label{classSimpleJSON_1_1JSONNode_aac71d50eda9f5d6b9fabb370b0f4fade}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (Vector4 a\+Vec)\hypertarget{classSimpleJSON_1_1JSONNode_a12d265260a4b761da401d44550fc7ee2}{}\label{classSimpleJSON_1_1JSONNode_a12d265260a4b761da401d44550fc7ee2}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (Quaternion a\+Rot)\hypertarget{classSimpleJSON_1_1JSONNode_a46ce162dfc22475f2ffb04a0ad82da4d}{}\label{classSimpleJSON_1_1JSONNode_a46ce162dfc22475f2ffb04a0ad82da4d}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (Rect a\+Rect)\hypertarget{classSimpleJSON_1_1JSONNode_a3fc3323ba59997869612a6519fb5d554}{}\label{classSimpleJSON_1_1JSONNode_a3fc3323ba59997869612a6519fb5d554}
+
+\item 
+static implicit {\bfseries operator J\+S\+O\+N\+Node} (Rect\+Offset a\+Rect)\hypertarget{classSimpleJSON_1_1JSONNode_a1f899c379c7f86c8ae9d28308a2c3150}{}\label{classSimpleJSON_1_1JSONNode_a1f899c379c7f86c8ae9d28308a2c3150}
+
+\item 
+static implicit {\bfseries operator Vector2} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Node)\hypertarget{classSimpleJSON_1_1JSONNode_a456404724a88a1d6827221bc616dfa92}{}\label{classSimpleJSON_1_1JSONNode_a456404724a88a1d6827221bc616dfa92}
+
+\item 
+static implicit {\bfseries operator Vector3} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Node)\hypertarget{classSimpleJSON_1_1JSONNode_ad56017691cff9840d3a6f1de12f40320}{}\label{classSimpleJSON_1_1JSONNode_ad56017691cff9840d3a6f1de12f40320}
+
+\item 
+static implicit {\bfseries operator Vector4} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Node)\hypertarget{classSimpleJSON_1_1JSONNode_a42fe046ca59bd2661adbab51fde60697}{}\label{classSimpleJSON_1_1JSONNode_a42fe046ca59bd2661adbab51fde60697}
+
+\item 
+static implicit {\bfseries operator Quaternion} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Node)\hypertarget{classSimpleJSON_1_1JSONNode_abc3f0ce5bcd6e7db3f6c5ccc63654679}{}\label{classSimpleJSON_1_1JSONNode_abc3f0ce5bcd6e7db3f6c5ccc63654679}
+
+\item 
+static implicit {\bfseries operator Rect} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Node)\hypertarget{classSimpleJSON_1_1JSONNode_a99983de59581b3e3fc352cc66eba8e04}{}\label{classSimpleJSON_1_1JSONNode_a99983de59581b3e3fc352cc66eba8e04}
+
+\item 
+static implicit {\bfseries operator Rect\+Offset} (\hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} a\+Node)\hypertarget{classSimpleJSON_1_1JSONNode_a64f8924cb6c0b0230169ec65a9fa9e58}{}\label{classSimpleJSON_1_1JSONNode_a64f8924cb6c0b0230169ec65a9fa9e58}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool {\bfseries force\+A\+S\+C\+II} = false\hypertarget{classSimpleJSON_1_1JSONNode_afdf2a8b0f6ad66ab7ff9d23dfe22d9cd}{}\label{classSimpleJSON_1_1JSONNode_afdf2a8b0f6ad66ab7ff9d23dfe22d9cd}
+
+\item 
+static bool {\bfseries long\+As\+String} = false\hypertarget{classSimpleJSON_1_1JSONNode_abc564a3ae24df06181cbb8d2b7cf5b45}{}\label{classSimpleJSON_1_1JSONNode_abc564a3ae24df06181cbb8d2b7cf5b45}
+
+\item 
+static J\+S\+O\+N\+Container\+Type {\bfseries Vector\+Container\+Type} = J\+S\+O\+N\+Container\+Type.\+Array\hypertarget{classSimpleJSON_1_1JSONNode_a3d8a98aa5bf7ffdeae7ac24456e789e8}{}\label{classSimpleJSON_1_1JSONNode_a3d8a98aa5bf7ffdeae7ac24456e789e8}
+
+\item 
+static J\+S\+O\+N\+Container\+Type {\bfseries Quaternion\+Container\+Type} = J\+S\+O\+N\+Container\+Type.\+Array\hypertarget{classSimpleJSON_1_1JSONNode_a56f455b4bd6b3ee1bf313c7eefe8c13f}{}\label{classSimpleJSON_1_1JSONNode_a56f455b4bd6b3ee1bf313c7eefe8c13f}
+
+\item 
+static J\+S\+O\+N\+Container\+Type {\bfseries Rect\+Container\+Type} = J\+S\+O\+N\+Container\+Type.\+Array\hypertarget{classSimpleJSON_1_1JSONNode_a1bfd1254c640246d1d85ce90bdb76a81}{}\label{classSimpleJSON_1_1JSONNode_a1bfd1254c640246d1d85ce90bdb76a81}
+
+\end{DoxyCompactItemize}
+\subsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+abstract J\+S\+O\+N\+Node\+Type {\bfseries Tag}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_ab35ec1bd3010ff781a62db66d7104a74}{}\label{classSimpleJSON_1_1JSONNode_ab35ec1bd3010ff781a62db66d7104a74}
+
+\item 
+virtual \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries this\mbox{[}int a\+Index\mbox{]}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a324dc650c3ee295d4dd4612a6ce4aa5c}{}\label{classSimpleJSON_1_1JSONNode_a324dc650c3ee295d4dd4612a6ce4aa5c}
+
+\item 
+virtual \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} {\bfseries this\mbox{[}string a\+Key\mbox{]}}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_aac9ed3d645601272f968ece96a5ff605}{}\label{classSimpleJSON_1_1JSONNode_aac9ed3d645601272f968ece96a5ff605}
+
+\item 
+virtual string {\bfseries Value}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a20d19b7f45ad936d7f8a40e3c6852fe2}{}\label{classSimpleJSON_1_1JSONNode_a20d19b7f45ad936d7f8a40e3c6852fe2}
+
+\item 
+virtual int {\bfseries Count}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a4d2bd5645578fcb66e5d0d78df8efc8c}{}\label{classSimpleJSON_1_1JSONNode_a4d2bd5645578fcb66e5d0d78df8efc8c}
+
+\item 
+virtual bool {\bfseries Is\+Number}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_ae828903f697940332193f01bf5b4f5a0}{}\label{classSimpleJSON_1_1JSONNode_ae828903f697940332193f01bf5b4f5a0}
+
+\item 
+virtual bool {\bfseries Is\+String}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a69574bf41a66d52106cd34007d4efb7a}{}\label{classSimpleJSON_1_1JSONNode_a69574bf41a66d52106cd34007d4efb7a}
+
+\item 
+virtual bool {\bfseries Is\+Boolean}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a0b07e43cd23a0f8994209fec0b6a4ba1}{}\label{classSimpleJSON_1_1JSONNode_a0b07e43cd23a0f8994209fec0b6a4ba1}
+
+\item 
+virtual bool {\bfseries Is\+Null}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a9a7b8c9b11af3ad9a15e79c5d6c9d3cd}{}\label{classSimpleJSON_1_1JSONNode_a9a7b8c9b11af3ad9a15e79c5d6c9d3cd}
+
+\item 
+virtual bool {\bfseries Is\+Array}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_ac70c413f178bd98e48b320494db49334}{}\label{classSimpleJSON_1_1JSONNode_ac70c413f178bd98e48b320494db49334}
+
+\item 
+virtual bool {\bfseries Is\+Object}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a4d23f8cb3b4c7af0429910e69d114cd0}{}\label{classSimpleJSON_1_1JSONNode_a4d23f8cb3b4c7af0429910e69d114cd0}
+
+\item 
+virtual bool {\bfseries Inline}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a5c26469b760151a6b01064b5e181908e}{}\label{classSimpleJSON_1_1JSONNode_a5c26469b760151a6b01064b5e181908e}
+
+\item 
+virtual I\+Enumerable$<$ \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} $>$ {\bfseries Children}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a657bbed677af18a80069c0b00cdfa175}{}\label{classSimpleJSON_1_1JSONNode_a657bbed677af18a80069c0b00cdfa175}
+
+\item 
+I\+Enumerable$<$ \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} $>$ {\bfseries Deep\+Children}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_aa07d818a3cd25ec46e60b3ec29b8ddb8}{}\label{classSimpleJSON_1_1JSONNode_aa07d818a3cd25ec46e60b3ec29b8ddb8}
+
+\item 
+I\+Enumerable$<$ Key\+Value\+Pair$<$ string, \hyperlink{classSimpleJSON_1_1JSONNode}{J\+S\+O\+N\+Node} $>$ $>$ {\bfseries Linq}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a48a8098eef6d86fce5520ec16f49c934}{}\label{classSimpleJSON_1_1JSONNode_a48a8098eef6d86fce5520ec16f49c934}
+
+\item 
+\hyperlink{structSimpleJSON_1_1JSONNode_1_1KeyEnumerator}{Key\+Enumerator} {\bfseries Keys}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a81eba64175e309a73930e4cbef5c0415}{}\label{classSimpleJSON_1_1JSONNode_a81eba64175e309a73930e4cbef5c0415}
+
+\item 
+\hyperlink{structSimpleJSON_1_1JSONNode_1_1ValueEnumerator}{Value\+Enumerator} {\bfseries Values}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a2aa2fd8fe02cf6a0ba83a34210a31f04}{}\label{classSimpleJSON_1_1JSONNode_a2aa2fd8fe02cf6a0ba83a34210a31f04}
+
+\item 
+virtual double {\bfseries As\+Double}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_ad9364dff62c04c6fc46cc50981c44941}{}\label{classSimpleJSON_1_1JSONNode_ad9364dff62c04c6fc46cc50981c44941}
+
+\item 
+virtual int {\bfseries As\+Int}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a1e771cb19c2928bcea2ad18f96021610}{}\label{classSimpleJSON_1_1JSONNode_a1e771cb19c2928bcea2ad18f96021610}
+
+\item 
+virtual float {\bfseries As\+Float}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a78fd9e2a7fb6a99a4f9b106f793e7686}{}\label{classSimpleJSON_1_1JSONNode_a78fd9e2a7fb6a99a4f9b106f793e7686}
+
+\item 
+virtual bool {\bfseries As\+Bool}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a6bf6982e6220db3f9360a2fc3b53aa14}{}\label{classSimpleJSON_1_1JSONNode_a6bf6982e6220db3f9360a2fc3b53aa14}
+
+\item 
+virtual long {\bfseries As\+Long}\hspace{0.3cm}{\ttfamily  \mbox{[}get, set\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_adadf4534e86b46029690b715a2e2ae2f}{}\label{classSimpleJSON_1_1JSONNode_adadf4534e86b46029690b715a2e2ae2f}
+
+\item 
+virtual \hyperlink{classSimpleJSON_1_1JSONArray}{J\+S\+O\+N\+Array} {\bfseries As\+Array}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_a5cabad97e7187a09ea7581f1cb30cb75}{}\label{classSimpleJSON_1_1JSONNode_a5cabad97e7187a09ea7581f1cb30cb75}
+
+\item 
+virtual \hyperlink{classSimpleJSON_1_1JSONObject}{J\+S\+O\+N\+Object} {\bfseries As\+Object}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}\hypertarget{classSimpleJSON_1_1JSONNode_ae77298ed6cea74259c6d3c35479a3f0c}{}\label{classSimpleJSON_1_1JSONNode_ae77298ed6cea74259c6d3c35479a3f0c}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Assets/\+Simple\+Json/Simple\+J\+S\+O\+N.\+cs\item 
+Assets/\+Simple\+Json/Simple\+J\+S\+O\+N\+Unity.\+cs\item 
+Assets/\+Simple\+Json/Simple\+J\+S\+O\+N\+Binary.\+cs\end{DoxyCompactItemize}

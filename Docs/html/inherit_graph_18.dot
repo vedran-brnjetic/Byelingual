@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Assets.StoryTemplate.Infrastructure.\lFindObject\< T \>",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$dd/d04/classAssets_1_1StoryTemplate_1_1Infrastructure_1_1FindObject.html"];
+}
