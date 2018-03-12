@@ -197,5 +197,12 @@
       <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="PauseMenu">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAABAAACAAAAAAABAAAAAAAAAAAAAAAAABAAAAIAA=</HashCode>
+      <FileName>Assets\PauseMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

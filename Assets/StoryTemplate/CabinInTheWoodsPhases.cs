@@ -1,13 +1,17 @@
-﻿using System;
+﻿using Assets.StoryTemplate.Infrastructure;
+using System;
 using System.Collections.Generic;
-using System.Net.Configuration;
-using Assets.StoryTemplate.Infrastructure;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
 namespace Assets.StoryTemplate
 {
+    /*! \class CabinInTheWoods
+    \brief Our first story within the platform
+
+    All the scripting is done within the class
+    */
     public partial class CabinInTheWoods : Story
     {
         private Dictionary<string, Action> _phases; // dictionary of all phases (scripting)
@@ -100,7 +104,7 @@ namespace Assets.StoryTemplate
 
         private void InitializePhases()
         {
-            /* 0. First screen
+            /** 0. First screen
              * 1. Dialog in the dark
              * 2. Hands
              * 3. Fireplace+choice
