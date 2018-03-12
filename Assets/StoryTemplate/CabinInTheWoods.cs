@@ -26,7 +26,51 @@ namespace Assets.StoryTemplate
         {
             if (direction == "fwd")
             {
-                Debug.Log("Going to next room");
+                if(!string.IsNullOrEmpty(_nextRoom))
+                _currentRoom = _nextRoom;
+
+                if(Rooms.IndexOf(_currentRoom) < Rooms.Count - 1)
+                    _nextRoom = Rooms[Rooms.IndexOf(_currentRoom) + 1];
+                else
+                {
+                    _nextRoom = null;
+                }
+
+                if (Rooms.IndexOf(_currentRoom) > 1)
+                    _previousRoom = Rooms[Rooms.IndexOf(_currentRoom) - 1];
+                else
+                {
+                    _previousRoom = null;
+                }
+
+
+                Debug.Log(Rooms.IndexOf(_currentRoom));
+                Debug.Log(_currentRoom);
+                AdvancePhase();
+            }
+            if (direction == "bck")
+            {
+                if (!string.IsNullOrEmpty(_previousRoom))
+                    _currentRoom = _previousRoom;
+
+                if (Rooms.IndexOf(_currentRoom) >  1)
+                    _nextRoom = Rooms[Rooms.IndexOf(_currentRoom) + 1];
+                else
+                {
+                    _nextRoom = null;
+                }
+
+                if (Rooms.IndexOf(_currentRoom) > 0)
+                    _previousRoom = Rooms[Rooms.IndexOf(_currentRoom) - 1];
+                else
+                {
+                    _previousRoom = null;
+                }
+
+
+                Debug.Log(Rooms.IndexOf(_currentRoom));
+                Debug.Log(_currentRoom);
+                AdvancePhase();
             }
 
         }
@@ -38,11 +82,12 @@ namespace Assets.StoryTemplate
 
             
             _gc = FindGameController.Named("GameController");
-            _canvasBackground = _gc.ActiveCanvas.GetComponent<Image>();
+            
             _handsSprite = FindSprite.InResources("placeholder_hands");
             _fireSprite = FindSprite.InResources("placeholder_wood-burning_stove");
             //_canvas = _gc.ActiveCanvas;
             _canvas = FindCanvas.Named(_gc.Stories.Values.ElementAt(0).SnakeCase() + "_canvas");
+            _canvasBackground = _canvas.GetComponent<Image>();
             _nextRoomButton = FindButton.Named("RightControlButton");
             _previousRoomButton = FindButton.Named("LeftControlButton");
 

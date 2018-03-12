@@ -25,7 +25,15 @@ namespace Assets.StoryTemplate
         private Button _previousRoomButton;
 
         private void InitializeStoryPrompts(){
-            Rooms = new List<string> {"CabinInterior1", "CabinInterior2", "Outside", "Pond"};
+
+            //Room initializaton
+            Rooms = new List<string>
+            {
+                "CabinInterior2",
+                "CabinInterior1",
+                "Outside",
+                "Pond"
+            };
 
           _storyPrompts = new Dictionary<string, string>
           {
@@ -319,53 +327,49 @@ namespace Assets.StoryTemplate
                         _gc.ActiveCanvas.GetComponent<Image>().sprite = FindSprite.InResources("CabinInterior1");
                         //_gc.ActiveCanvas.GetComponent<Image>().color = Color.white;
 
-                        Impress.FadeToWhite(_gc.ActiveCanvas.gameObject, true);
-                        _currentRoom = "CabinInterior1";
-                        
+                        Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
+                        _nextRoom = "CabinInterior1";
+                        GoToRoom("fwd");
+                        _previousRoomButton.onClick.AddListener(() =>
+                        {
+                            GoToRoom("bck");
+                        });
+
+                       
+                        _nextRoomButton.onClick.AddListener(() =>
+                        {
+                            GoToRoom("fwd");
+                        });
                     },
                 ["4.1"] = () =>
                 {
                     _canvasBackground.sprite = FindSprite.InResources(_currentRoom);
                     _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_arrows");
-                    bool lastRoomCurrent = false;
-                    bool firstRoomCurrent = false;
+
+                    _previousRoomButton.interactable = true;
+                    
+                    _nextRoomButton.interactable = true;
+
                     if (Rooms.IndexOf(_currentRoom) == 0)
                     {
-                        firstRoomCurrent = true;
+                        _previousRoomButton.interactable = false;
                         _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_right_arrow");
 
                     }
 
                     if (Rooms.IndexOf(_currentRoom) == Rooms.Count - 1)
                     {
-                        lastRoomCurrent = true;
+                        _nextRoomButton.interactable = false;
                         _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_left_arrow");
                     }
 
+                    
+
                     _gc.ShowControlBar(FindPanel.GO("ControlBarText"));
 
-                    if (!firstRoomCurrent)
-                        _previousRoomButton.onClick.AddListener(() =>
-                    {
-                        if(Rooms.IndexOf(_currentRoom)>1)
-                        _previousRoom = Rooms[Rooms.IndexOf(_previousRoom ) - 1];
-                        _currentRoom = Rooms[Rooms.IndexOf(_currentRoom ) - 1];
-                        if (Rooms.IndexOf(_currentRoom) < Rooms.Count-2)
-                            _nextRoom = Rooms[Rooms.IndexOf(_nextRoom ) - 1];
-                        GoToRoom("bck");
-                    });
-
-                    if(!lastRoomCurrent)
-                        _nextRoomButton.onClick.AddListener(() =>
-                    {
-                        if (Rooms.IndexOf(_currentRoom) > 1)
-                            _previousRoom = Rooms[Rooms.IndexOf(_previousRoom) + 1];
-                        _currentRoom = Rooms[Rooms.IndexOf(_currentRoom) + 1];
-                        if (Rooms.IndexOf(_currentRoom) < Rooms.Count - 2)
-                            _nextRoom = Rooms[Rooms.IndexOf(_nextRoom) + 1];
-                        GoToRoom("fwd");
-                    });
-
+                   
+                   
+                    _currentPhase = "4";
 
 
                 },
