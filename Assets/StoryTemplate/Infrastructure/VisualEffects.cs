@@ -39,6 +39,14 @@ namespace Assets.StoryTemplate.Infrastructure
             gc.UIElementEffects["out"].Add(ob);
         }
 
+        public static void FadeToBlack(GameObject ob, bool advanceGame = false)
+        {
+            var gc = FindGameController.Named("GameController");
+            AdvanceGame(gc, advanceGame);
+
+            gc.UIElementEffects["black"].Add(ob);
+
+        }
 
         public static void Crossfade(GameObject ob, bool advanceGame=true)
         {
@@ -148,6 +156,46 @@ namespace Assets.StoryTemplate.Infrastructure
             var curColour = text.color;
             curColour.a = 0f;
             text.color = curColour;
+        }
+
+        public static void ImageFadeOut(Image image, Color targetColor, float fadeRate=2.5f)
+        {
+            image.color = Blush(image.color, targetColor, fadeRate);
+        }
+
+        private static Color Blush(Color color, Color targetColor, float fadeRate)
+        {
+            Color curColor = color;
+            float alphaDiff = Mathf.Abs(curColor.a - targetColor.a);
+            if (alphaDiff > 0.0001f)
+            {
+                //Lerp linear interpolation
+                curColor.a = Mathf.Lerp(curColor.a, targetColor.a, fadeRate * Time.deltaTime);
+
+            }
+            alphaDiff = Mathf.Abs(curColor.b - targetColor.b);
+            if (alphaDiff > 0.0001f)
+            {
+                //Lerp linear interpolation
+                curColor.b = Mathf.Lerp(curColor.b, targetColor.b, fadeRate * Time.deltaTime);
+
+            }
+            alphaDiff = Mathf.Abs(curColor.r - targetColor.r);
+            if (alphaDiff > 0.0001f)
+            {
+                //Lerp linear interpolation
+                curColor.r = Mathf.Lerp(curColor.r, targetColor.r, fadeRate * Time.deltaTime);
+
+            }
+            alphaDiff = Mathf.Abs(curColor.g - targetColor.g);
+            if (alphaDiff > 0.0001f)
+            {
+                //Lerp linear interpolation
+                curColor.g = Mathf.Lerp(curColor.g, targetColor.g, fadeRate * Time.deltaTime);
+
+            }
+
+            return curColor;
         }
     }
 }

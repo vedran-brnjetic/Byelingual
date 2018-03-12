@@ -20,6 +20,7 @@ namespace Assets
         private Dictionary<string, Canvas> _canvases; //list of canvases to loop through when disabling them
         private List<GameObject> _panels; //list of game panels
         public Dictionary<string, List<GameObject>> UIElementEffects; //list of elements for visual transition
+        private List<string> _effectMode;
         public GameObject ActivePanel; //currently active control panel
         public Canvas ActiveCanvas;
 
@@ -52,12 +53,16 @@ namespace Assets
             _canvases = new Dictionary<string, Canvas>();
             _stories = new Dictionary<string, Story>();
             _panels = new List<GameObject>();
-            UIElementEffects = new Dictionary<string, List<GameObject>>
+
+            //initialize effect modes
+            _effectMode = new List<string> {"cross","in","out","black"};
+            UIElementEffects = new Dictionary<string, List<GameObject>>();
+
+            foreach (var mode in _effectMode)
             {
-                ["in"] = new List<GameObject>(),
-                ["out"] = new List<GameObject>(),
-                ["cross"] = new List<GameObject>()
-            };
+                UIElementEffects[mode] = new List<GameObject>();
+            }
+
             //add panels to the Panels list
             FillPanels();
 
@@ -238,18 +243,19 @@ namespace Assets
         private void CrossFadeElements()
         {
             //container of items to remove from crossfade list once the item completes the transition
-            var itemsToRemove = new Dictionary<string, List<GameObject>>
-            {
-                ["in"] = new List<GameObject>(),
-                ["out"] = new List<GameObject>(),
-                ["cross"] = new List<GameObject>()
-            };
 
-            var modes = new List<string>{"cross","out","in"};
+
+            var itemsToRemove = new Dictionary<string, List<GameObject>>();
+            foreach (var mode in _effectMode)
+            {
+                itemsToRemove[mode] = new List<GameObject>();
+            }
+
+
 
             //go through the crossfade lists
             var transitionComplete = false;
-            foreach (var mode in modes)
+            foreach (var mode in _effectMode)
             {
                 var targetAlpha = 0.0f;
                 if (mode == "in") targetAlpha = 1.0f;
@@ -275,14 +281,30 @@ namespace Assets
                                 case "cross":
                                     VisualEffects.ImageFadeOut(image);
                                     break;
+                                case "black":
+                                    VisualEffects.ImageFadeOut(image, Color.black);
+                                    break;
                         }
 
+                        if (mode == "black")
+                        {
+                            if (Math.Abs(image.color.a - 1) > 0.0001 ||
+                                Math.Abs(image.color.r - 0) > 0.0001 ||
+                                Math.Abs(image.color.g - 0) > 0.0001 ||
+                                Math.Abs(image.color.b - 0) > 0.0001)
+                            {
+                                continue;
+                                
+                            }
+                        }
                         if (Math.Abs(image.color.a - targetAlpha) > 0.0001)
                         {
                             transitionComplete = false;
                             continue;
                         }
+
                         if (mode == "cross") Impress.FadeIn(element);
+                        
                         itemsToRemove[mode].Add(element);
                         transitionComplete = true;
                     } //test if the element is text
@@ -336,7 +358,7 @@ namespace Assets
             
 
             //cleanup the elements which completed transition
-            foreach (var mode in modes)
+            foreach (var mode in _effectMode)
             {
                 foreach (var item in itemsToRemove[mode])
                 {
@@ -345,8 +367,9 @@ namespace Assets
                 }    
             }
 
-            if(UIElementEffects["out"].Count < 1)
-            if (transitionComplete) Advance();
+            if (transitionComplete)
+                Advance();
+
         }
 
         private void Advance()

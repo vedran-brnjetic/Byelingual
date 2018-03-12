@@ -91,11 +91,26 @@ namespace Assets.StoryTemplate
 
         public void AdvancePhase()
         {
-            var test = (Convert.ToDouble(_currentPhase) + 0.1).ToString("N" + 1);
-            
-            if (_phases.ContainsKey(test))
+            if (_phaseTransition)
             {
-                PlayPhase(test);
+                Debug.Log("Phase -1");
+                _phaseTransition = false;
+                PlayPhase("-1");
+                return;
+            }
+            if (!string.IsNullOrEmpty(_nextPhase))
+            {
+                
+
+                PlayPhase(_nextPhase);
+                return;
+            }
+
+            var phase = (Convert.ToDouble(_currentPhase) + 0.1).ToString("N" + 1);
+            
+            if (_phases.ContainsKey(phase))
+            {
+                PlayPhase(phase);
             }
             else
             {

@@ -116,7 +116,7 @@
   <Class Name="Assets.GameController">
     <Position X="20.5" Y="1.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>ACQAAACAADAQkAhAAQhAAEAAAQCIEAAAAESAAgABgAE=</HashCode>
+      <HashCode>ACQAAACICjAQkAhAAAhAAEAAAQCIEAAAAGSAAgABkAE=</HashCode>
       <FileName>Assets\GameController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -130,7 +130,7 @@
   <Class Name="Assets.StoryTemplate.Infrastructure.VisualEffects">
     <Position X="3.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAgEAgAAAAAAQAAAJAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAgEAgAAAAAAQCAAJAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\VisualEffects.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -141,18 +141,18 @@
       <FileName>Assets\TextSave.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Assets.CabinInTheWoods">
-    <Position X="15.25" Y="6.25" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAABAICAACAEAIACAAABgBAAAAEAEEAAAAAAAAIAABA=</HashCode>
-      <FileName>Assets\StoryTemplate\CabinInTheWoods.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="Assets.StoryTemplate.Infrastructure.Impress">
     <Position X="3.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AECAAEAAAACAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\VisualEffects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.CabinInTheWoods">
+    <Position X="15.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgABBMCAICAAAIACJAABgRAAAAEAEAAAAAAAAAIAABA=</HashCode>
+      <FileName>Assets\StoryTemplate\CabinInTheWoods.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

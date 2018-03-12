@@ -11,6 +11,9 @@ namespace Assets.StoryTemplate
     {
         private Dictionary<string, Action> _phases;
         private Dictionary<string, string> _storyPrompts;
+        private string _previousPhase;
+        private string _nextPhase;
+        private bool _phaseTransition;
 
         private void InitializeStoryPrompts(){
           _storyPrompts = new Dictionary<string, string>
@@ -68,10 +71,26 @@ namespace Assets.StoryTemplate
              */
             _phases = new Dictionary<string, Action>
             {
+                ["-1"] = () =>
+                {
+                    _phaseTransition = false;
+                    GetTextPanel(true);
+                    _gc.HideAllPanels();
+                    
+                    Impress.FadeToBlack(_gc.ActiveCanvas.GetComponent<Image>().gameObject);
+                    AdvancePhase();
+
+                },
                 ["0"] = () =>
                 {
+                    //initialization
+                    _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
+                    _mainText.gameObject.AddComponent<TextPartial>();
+                    _impressionImage = _gc.ActiveCanvas.gameObject.transform.Find("ImpressionImage").GetComponent<Image>();
+
                     //Intro start
                     var textPanel = GetTextPanel(true);
+
                     //Find the Text component in the panel
                     var text1 = textPanel.GetComponentInChildren<Text>();
                     text1.color = Color.black;
@@ -127,12 +146,14 @@ namespace Assets.StoryTemplate
                 },
                 ["0.4"] = () => 
                 {
+                    _phaseTransition = true;
+                    _nextPhase = "2";
                     Impress.FadeOut(GetTextPanel(), true);
+
                 },
                 ["1"] = () =>
                     {
-                        _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
-                        _mainText.gameObject.AddComponent<TextPartial>();
+                        
                         _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro05.0"];
                         _mainText.resizeTextForBestFit = false;
                         _mainText.color = Color.white;
@@ -168,7 +189,7 @@ namespace Assets.StoryTemplate
                 },
                 ["2"] = () =>
                 {//show the hands
-                    _impressionImage = _gc.ActiveCanvas.gameObject.transform.Find("ImpressionImage").GetComponent<Image>();
+                    
                     _impressionImage.sprite = _handsSprite;
                     _mainText.text = "";
                     _mainText.color = Color.white;
