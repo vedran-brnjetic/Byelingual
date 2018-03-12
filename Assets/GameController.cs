@@ -55,7 +55,7 @@ namespace Assets
             _panels = new List<GameObject>();
 
             //initialize effect modes
-            _effectMode = new List<string> {"cross","in","out","black"};
+            _effectMode = new List<string> {"cross","in","out","black", "white"};
             UIElementEffects = new Dictionary<string, List<GameObject>>();
 
             foreach (var mode in _effectMode)
@@ -67,7 +67,7 @@ namespace Assets
             FillPanels();
 
             //show the main menu control bar
-            ShowPanel(FindPanel.GO("ControlBar"));
+            ShowControlBar(FindPanel.GO("ControlBar"));
 
             //get stories from internet - needed when online
             _stories = BLResources.GetStoriesFromInternet();
@@ -141,7 +141,7 @@ namespace Assets
             EnableCanvas(canvas);
             var panel = FindPanel.GO("ControlBar");
             panel.transform.SetParent(canvas.transform);
-            ShowPanel(panel, Color.grey);
+            ShowControlBar(panel, Color.grey);
             Destroy(FindButton.Named("BackButton").gameObject);
         }
 
@@ -255,10 +255,13 @@ namespace Assets
 
             //go through the crossfade lists
             var transitionComplete = false;
+            var transtionsDirty = "";
             foreach (var mode in _effectMode)
             {
                 var targetAlpha = 0.0f;
-                if (mode == "in") targetAlpha = 1.0f;
+                if (mode == "in" || mode == "black" || mode == "white") targetAlpha = 1.0f;
+
+
                 foreach (var element in UIElementEffects[mode])
                 {
                     //try to get an image from the gameObject element
@@ -284,8 +287,23 @@ namespace Assets
                                 case "black":
                                     VisualEffects.ImageFadeOut(image, Color.black);
                                     break;
+                                case "white":
+                                    VisualEffects.ImageFadeOut(image, Color.white);
+                                    break;
                         }
 
+                        if (mode == "white")
+                        {
+                            if (Math.Abs(image.color.a - 1) > 0.0001 ||
+                                Math.Abs(image.color.r - 1) > 0.0001 ||
+                                Math.Abs(image.color.g - 1) > 0.0001 ||
+                                Math.Abs(image.color.b - 1) > 0.0001)
+                            {
+                                transtionsDirty += " white ";
+                                continue;
+
+                            }
+                        }
                         if (mode == "black")
                         {
                             if (Math.Abs(image.color.a - 1) > 0.0001 ||
@@ -293,20 +311,21 @@ namespace Assets
                                 Math.Abs(image.color.g - 0) > 0.0001 ||
                                 Math.Abs(image.color.b - 0) > 0.0001)
                             {
+                                transtionsDirty += " black ";
                                 continue;
                                 
                             }
                         }
                         if (Math.Abs(image.color.a - targetAlpha) > 0.0001)
                         {
-                            transitionComplete = false;
+                            transtionsDirty += " alpha ";
                             continue;
                         }
 
                         if (mode == "cross") Impress.FadeIn(element);
                         
                         itemsToRemove[mode].Add(element);
-                        transitionComplete = true;
+                        //transitionComplete = true;
                     } //test if the element is text
                     else if (text)
                     {
@@ -330,7 +349,7 @@ namespace Assets
                                         text.text.Trim().Length - text.GetComponent<TextPartial>().FinalText.Length) !=
                                     0)
                                 {
-                                    transitionComplete = false;
+                                    transtionsDirty += " txt_length ";
                                     continue;
                                 }
                         }
@@ -338,7 +357,8 @@ namespace Assets
                         {
                             if (Math.Abs(text.color.a - targetAlpha) > 0.0001)
                             {
-                                transitionComplete = false;
+                                transtionsDirty += " txt_alpha ";
+
                                 continue;
                             }
                             
@@ -347,7 +367,7 @@ namespace Assets
                         itemsToRemove[mode].Add(element);
                         if(mode=="cross") Impress.FadeIn(element);
                         
-                        transitionComplete = true;
+                        //transitionComplete = true;
                         
                     }
 
@@ -355,7 +375,10 @@ namespace Assets
                 }    
             }
 
-            
+            if (string.IsNullOrEmpty(transtionsDirty))
+            {
+                transitionComplete = true;
+            }
 
             //cleanup the elements which completed transition
             foreach (var mode in _effectMode)
@@ -409,13 +432,13 @@ namespace Assets
             }
         }
 
-        public void ShowPanel(GameObject panel)
+        public void ShowControlBar(GameObject panel)
         {
-            ShowPanel(panel, Color.white);
+            ShowControlBar(panel, Color.white);
             
         }
 
-        public void ShowPanel(GameObject panel, Color color)
+        public void ShowControlBar(GameObject panel, Color color)
         {
             HideAllPanels();
             ActivePanel = panel;

@@ -84,7 +84,7 @@ namespace Assets.StoryTemplate
             //move it to the game canvas
             textPanel.transform.SetParent(_canvas.transform);
             //push it to front
-            _gc.ShowPanel(textPanel);
+            _gc.ShowControlBar(textPanel);
 
             return textPanel;
         }

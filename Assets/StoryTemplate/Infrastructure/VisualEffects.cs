@@ -48,6 +48,15 @@ namespace Assets.StoryTemplate.Infrastructure
 
         }
 
+        public static void FadeToWhite(GameObject ob, bool advanceGame = false)
+        {
+            var gc = FindGameController.Named("GameController");
+            AdvanceGame(gc, advanceGame);
+
+            gc.UIElementEffects["white"].Add(ob);
+
+        }
+
         public static void Crossfade(GameObject ob, bool advanceGame=true)
         {
             var gc = FindGameController.Named("GameController");

@@ -76,9 +76,11 @@ namespace Assets.StoryTemplate
                     _phaseTransition = false;
                     GetTextPanel(true);
                     _gc.HideAllPanels();
+                    _gc.ActiveCanvas.GetComponent<Image>().color = Color.gray;
+                    Impress.FadeOut(_mainText.gameObject);
+                    Impress.FadeToBlack(_gc.ActiveCanvas.GetComponent<Image>().gameObject, true);
                     
-                    Impress.FadeToBlack(_gc.ActiveCanvas.GetComponent<Image>().gameObject);
-                    AdvancePhase();
+                    
 
                 },
                 ["0"] = () =>
@@ -87,8 +89,11 @@ namespace Assets.StoryTemplate
                     _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
                     _mainText.gameObject.AddComponent<TextPartial>();
                     _impressionImage = _gc.ActiveCanvas.gameObject.transform.Find("ImpressionImage").GetComponent<Image>();
-
-                    //Intro start
+                    _nextPhase = "4";
+                    _phaseTransition = true;
+                    AdvancePhase();
+                    
+                    /*//Intro start
                     var textPanel = GetTextPanel(true);
 
                     //Find the Text component in the panel
@@ -123,7 +128,7 @@ namespace Assets.StoryTemplate
                     text2.alignment = TextAnchor.MiddleRight;
                     text4.alignment = TextAnchor.MiddleRight;
                     //_gc.ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
-
+                    //*/
                 },
                 ["0.1"] = () =>
                 {//hide panels and fade out the game title (reusing the same text box for the main text)
@@ -291,35 +296,21 @@ namespace Assets.StoryTemplate
                 ["4"] = () =>
                     {
                         //Impress.Crossfade(_gc.ActiveCanvas.gameObject);
+                        
+                        _gc.ShowControlBar(_gc.ActivePanel.gameObject);
+                        _gc.ActivePanel.GetComponent<Image>().sprite=FindSprite.InResources("UI_arrows");
 
                         _gc.ActiveCanvas.GetComponent<Image>().sprite = FindSprite.InResources("CabinInterior1");
                         _gc.ActiveCanvas.GetComponent<Image>().color = Color.white;
 
+                        
+                        
+                        
+
                     },
                 ["4.1"] = () =>
                 {
-                    var textPanel = GetTextPanel(true);
-                    textPanel.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.66f);
-                    //Find the Text component in the panel
-                    var text1 = textPanel.GetComponentInChildren<Text>();
-                    text1.color = Color.grey;
-                    //text1.resizeTextForBestFit = true;
-                    text1.alignment = TextAnchor.UpperLeft;
-                    text1.fontStyle = FontStyle.Italic;
-
-                    var text2 = Object.Instantiate(text1, textPanel.transform, true);
-                    text2.transform.Translate(0f, -text1.preferredHeight * 1.35f, 0f);
-
-                    var text3 = Object.Instantiate(text2, textPanel.transform, true);
-                    text3.transform.Translate(0f, -text2.preferredHeight * 1.35f, 0f);
-
-                    text1.name = "Location1";
-                    text2.name = "Location2";
-                    text3.name = "Location3";
-
-                    DisplayText(text1, "AfterIntroLocation1");
-                    DisplayText(text2, "AfterIntroLocation2");
-                    DisplayText(text3, "AfterIntroLocation3");
+                    Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
                 },
                 ["4.2"] = () =>
                 {
