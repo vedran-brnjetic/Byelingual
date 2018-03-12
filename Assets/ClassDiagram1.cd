@@ -114,7 +114,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.GameController">
-    <Position X="20.5" Y="1.25" Width="2" />
+    <Position X="20.25" Y="1" Width="2" />
     <TypeIdentifier>
       <HashCode>ACwAAACICjAQkAhAAAhAAEAAAQCIEAAAAGSAAAABkAE=</HashCode>
       <FileName>Assets\GameController.cs</FileName>
@@ -184,7 +184,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.StoryTemplate.Infrastructure.FindPanel" Collapsed="true">
-    <Position X="4.5" Y="13.75" Width="1.5" />
+    <Position X="4.25" Y="13.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
