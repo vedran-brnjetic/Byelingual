@@ -88,7 +88,7 @@ namespace Assets.StoryTemplate.Infrastructure
 
         }
 
-        public static void TextFadeIn(Text text, float fadeRate=0.03f)
+        public static void TextFadeIn(Text text, float fadeRate=0.7f)
         {
             //SetTextTransparent(text);
             //text.color = Blush(text.color, targetAlpha, fadeRate);

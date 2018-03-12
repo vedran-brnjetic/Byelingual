@@ -277,7 +277,11 @@ namespace Assets
                                     break;
                         }
 
-                        if (!(Math.Abs(image.color.a - targetAlpha) < 0.0001)) continue;
+                        if (Math.Abs(image.color.a - targetAlpha) > 0.0001)
+                        {
+                            transitionComplete = false;
+                            continue;
+                        }
                         if (mode == "cross") Impress.FadeIn(element);
                         itemsToRemove[mode].Add(element);
                         transitionComplete = true;
@@ -299,18 +303,28 @@ namespace Assets
 
                         if (mode == "in")
                         { 
-
-                            if (Math.Abs(text.text.Trim().Length - text.GetComponent<TextPartial>().FinalText.Length) != 0)
-                                continue;
+                            if(UIElementEffects["in"].Contains(element))
+                                if (Math.Abs(
+                                        text.text.Trim().Length - text.GetComponent<TextPartial>().FinalText.Length) !=
+                                    0)
+                                {
+                                    transitionComplete = false;
+                                    continue;
+                                }
                         }
                         else
                         {
-                            if (Math.Abs(text.color.a - targetAlpha) < 0.0001) continue;
+                            if (Math.Abs(text.color.a - targetAlpha) > 0.0001)
+                            {
+                                transitionComplete = false;
+                                continue;
+                            }
                             
                         }
 
                         itemsToRemove[mode].Add(element);
                         if(mode=="cross") Impress.FadeIn(element);
+                        
                         transitionComplete = true;
                         
                     }
@@ -319,7 +333,7 @@ namespace Assets
                 }    
             }
 
-            if (transitionComplete) Advance();
+            
 
             //cleanup the elements which completed transition
             foreach (var mode in modes)
@@ -331,8 +345,8 @@ namespace Assets
                 }    
             }
 
-            
-
+            if(UIElementEffects["out"].Count < 1)
+            if (transitionComplete) Advance();
         }
 
         private void Advance()

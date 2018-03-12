@@ -125,6 +125,10 @@ namespace Assets.StoryTemplate
                     var text4 = GetTextPanel().transform.Find("Intro04").GetComponent<Text>();
                     DisplayText(text4);
                 },
+                ["0.4"] = () => 
+                {
+                    Impress.FadeOut(GetTextPanel(), true);
+                },
                 ["1"] = () =>
                     {
                         _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
@@ -155,7 +159,7 @@ namespace Assets.StoryTemplate
                 {//this phase starts automatically during crossfade script once the title fades out completely
                   _mainText.GetComponent<TextPartial>().FinalText += _storyPrompts["Intro05.4"];
                   Impress.FadeIn(_mainText.gameObject);
-
+                  
 
                 },
                 ["1.5"] = () =>
@@ -166,34 +170,41 @@ namespace Assets.StoryTemplate
                 {//show the hands
                     _impressionImage = _gc.ActiveCanvas.gameObject.transform.Find("ImpressionImage").GetComponent<Image>();
                     _impressionImage.sprite = _handsSprite;
-                    Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
+                    _mainText.text = "";
+                    _mainText.color = Color.white;
+                    Impress.FadeIn(_impressionImage.gameObject);
                 },
                 ["2.1"] = () =>
                 {//show the text with hands
                     _mainText.resizeTextMaxSize = 20;
-                    _mainText.text = "";
+                    
                     _mainText.GetComponent<TextPartial>().CurrentText = "";
                     _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro06"];
                     _mainText.alignment = TextAnchor.LowerRight;
-                    Impress.FadeIn(_mainText.gameObject, advanceGame: true);
+                    Impress.FadeIn(_mainText.gameObject);
                 },
                 ["2.2"] = () =>
-                {//fade out hands and text
-                    Impress.FadeOut(_mainText.gameObject);
-                    Impress.FadeOut(_impressionImage.gameObject, advanceGame: true);
-                },
+                    {
+                        //Impress.FadeOut(_mainText.gameObject);
+                        _mainText.text = "";
+                        Impress.Crossfade(_impressionImage.gameObject);
+                    },
                 ["2.3"] = () =>
                 {//show the fire
-                    _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject
-                        .GetComponent<Image>();
+                    _impressionImage = _gc.ActiveCanvas.transform.Find("SingleImageLeft").gameObject.GetComponent<Image>();
                     _impressionImage.sprite = _fireSprite;
                     Impress.FadeIn(_impressionImage.gameObject, advanceGame: true);
                 },
                 ["2.4"] = () =>
                 {//show the text with fire
-                    Impress.FadeIn(_mainText.gameObject, advanceGame: true);
-                    _mainText.text = _storyPrompts["Intro07"];
+
+                    _mainText.GetComponent<TextPartial>().CurrentText = "";
+                    _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro07"];
+
+                    //_mainText.text = _storyPrompts["Intro07"];
+
                     _mainText.alignment = TextAnchor.UpperLeft;
+                    Impress.FadeIn(_mainText.gameObject, advanceGame: true);
                 },
                 ["2.5"] = () =>
                 {// display the text choices
