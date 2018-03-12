@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Configuration;
 using Assets.StoryTemplate.Infrastructure;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,8 +15,14 @@ namespace Assets.StoryTemplate
         private string _previousPhase; // not sure for what yet, but this might be useful
         private string _nextPhase; // controls where to go next
         private bool _phaseTransition; // flag to signal reinitialisation of the gameroom and fade out screen between non-linear phase jumps
+
+        //rooms
         private string _currentRoom; // current room for decision-making purposes and selecting the UI elements
+        private string _previousRoom; // current room for decision-making purposes and selecting the UI elements
+        private string _nextRoom; // current room for decision-making purposes and selecting the UI elements
         public List<string> Rooms;
+        private Button _nextRoomButton;
+        private Button _previousRoomButton;
 
         private void InitializeStoryPrompts(){
             Rooms = new List<string> {"CabinInterior1", "CabinInterior2", "Outside", "Pond"};
@@ -64,7 +71,7 @@ namespace Assets.StoryTemplate
           };
 
         }
-
+           
         private void InitializePhases()
         {
             /* 0. First screen
@@ -74,6 +81,7 @@ namespace Assets.StoryTemplate
              * 4. First Room - ACT1
              * 4.2 Control Point
              */
+           
             _phases = new Dictionary<string, Action>
             {
                 ["-1"] = () =>
@@ -306,26 +314,66 @@ namespace Assets.StoryTemplate
                         //Impress.Crossfade(_gc.ActiveCanvas.gameObject);
                         _mainText.text = "";
                         _gc.ShowControlBar(_gc.ActivePanel.gameObject);
-                        _gc.ActivePanel.GetComponent<Image>().sprite=FindSprite.InResources("UI_arrows");
+                        _canvasBackground.sprite=FindSprite.InResources("UI_arrows");
 
                         _gc.ActiveCanvas.GetComponent<Image>().sprite = FindSprite.InResources("CabinInterior1");
                         //_gc.ActiveCanvas.GetComponent<Image>().color = Color.white;
 
-                        Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
-
-
-
+                        Impress.FadeToWhite(_gc.ActiveCanvas.gameObject, true);
+                        _currentRoom = "CabinInterior1";
+                        
                     },
                 ["4.1"] = () =>
                 {
-                    //Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
+                    _canvasBackground.sprite = FindSprite.InResources(_currentRoom);
+                    _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_arrows");
+                    bool lastRoomCurrent = false;
+                    bool firstRoomCurrent = false;
+                    if (Rooms.IndexOf(_currentRoom) == 0)
+                    {
+                        firstRoomCurrent = true;
+                        _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_right_arrow");
+
+                    }
+
+                    if (Rooms.IndexOf(_currentRoom) == Rooms.Count - 1)
+                    {
+                        lastRoomCurrent = true;
+                        _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_left_arrow");
+                    }
+
+                    _gc.ShowControlBar(FindPanel.GO("ControlBarText"));
+
+                    if (!firstRoomCurrent)
+                        _previousRoomButton.onClick.AddListener(() =>
+                    {
+                        if(Rooms.IndexOf(_currentRoom)>1)
+                        _previousRoom = Rooms[Rooms.IndexOf(_previousRoom ) - 1];
+                        _currentRoom = Rooms[Rooms.IndexOf(_currentRoom ) - 1];
+                        if (Rooms.IndexOf(_currentRoom) < Rooms.Count-2)
+                            _nextRoom = Rooms[Rooms.IndexOf(_nextRoom ) - 1];
+                        GoToRoom("bck");
+                    });
+
+                    if(!lastRoomCurrent)
+                        _nextRoomButton.onClick.AddListener(() =>
+                    {
+                        if (Rooms.IndexOf(_currentRoom) > 1)
+                            _previousRoom = Rooms[Rooms.IndexOf(_previousRoom) + 1];
+                        _currentRoom = Rooms[Rooms.IndexOf(_currentRoom) + 1];
+                        if (Rooms.IndexOf(_currentRoom) < Rooms.Count - 2)
+                            _nextRoom = Rooms[Rooms.IndexOf(_nextRoom) + 1];
+                        GoToRoom("fwd");
+                    });
+
+
+
                 },
                 ["4.2"] = () =>
                 {
 
                 }
             };
-
         }
     }
 }

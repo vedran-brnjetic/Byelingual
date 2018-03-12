@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace Assets.StoryTemplate
 {
-    public partial class CabinInTheWoods : Story
+    public partial class CabinInTheWoods
     {
         private readonly Sprite _handsSprite;
         private readonly Sprite _fireSprite;
@@ -19,18 +19,32 @@ namespace Assets.StoryTemplate
         private string _currentPhase;
         private Text _mainText;
         private Image _impressionImage;
+        private readonly Image _canvasBackground;
+
+
+        private void GoToRoom(string direction)
+        {
+            if (direction == "fwd")
+            {
+                Debug.Log("Going to next room");
+            }
+
+        }
 
 
         public CabinInTheWoods(string name, string description, string imageUrl) : base(name, description, imageUrl)
         {
             Choices = new List<string>();
 
-
+            
             _gc = FindGameController.Named("GameController");
+            _canvasBackground = _gc.ActiveCanvas.GetComponent<Image>();
             _handsSprite = FindSprite.InResources("placeholder_hands");
             _fireSprite = FindSprite.InResources("placeholder_wood-burning_stove");
             //_canvas = _gc.ActiveCanvas;
             _canvas = FindCanvas.Named(_gc.Stories.Values.ElementAt(0).SnakeCase() + "_canvas");
+            _nextRoomButton = FindButton.Named("RightControlButton");
+            _previousRoomButton = FindButton.Named("LeftControlButton");
 
             InitializeStoryPrompts();
 
