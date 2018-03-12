@@ -82,7 +82,10 @@ namespace Assets.StoryTemplate
                     GetTextPanel(true);
                     _gc.HideAllPanels();
                     _gc.ActiveCanvas.GetComponent<Image>().color = Color.gray;
-                    Impress.FadeOut(_mainText.gameObject);
+                    //Impress.FadeOut(_mainText.gameObject);
+                    _mainText.text = "Loading...";
+                    _mainText.color = Color.white;
+                    _mainText.fontSize = 40;
                     Impress.FadeToBlack(_gc.ActiveCanvas.GetComponent<Image>().gameObject, true);
                     
                     
@@ -301,21 +304,21 @@ namespace Assets.StoryTemplate
                 ["4"] = () =>
                     {
                         //Impress.Crossfade(_gc.ActiveCanvas.gameObject);
-                        
+                        _mainText.text = "";
                         _gc.ShowControlBar(_gc.ActivePanel.gameObject);
                         _gc.ActivePanel.GetComponent<Image>().sprite=FindSprite.InResources("UI_arrows");
 
                         _gc.ActiveCanvas.GetComponent<Image>().sprite = FindSprite.InResources("CabinInterior1");
-                        _gc.ActiveCanvas.GetComponent<Image>().color = Color.white;
+                        //_gc.ActiveCanvas.GetComponent<Image>().color = Color.white;
 
-                        
-                        
-                        
+                        Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
+
+
 
                     },
                 ["4.1"] = () =>
                 {
-                    Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
+                    //Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
                 },
                 ["4.2"] = () =>
                 {
