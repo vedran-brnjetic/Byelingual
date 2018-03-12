@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using UnityEditor;
 using UnityEngine;
 
 namespace Assets
@@ -9,30 +8,30 @@ namespace Assets
         
         public static void WriteString(string str)
         {
-            string path = "Assets/Resources/CabinInTheWoods/SaveGames/SaveGame.txt";
+            string path = "SaveGame.txt";
 
-            //Write some text to the test.txt file
-            StreamWriter writer = new StreamWriter(path, false);
-            writer.WriteLine(str);
-            writer.Close();
 
-            //Re-import the file to update the reference in the editor
-            AssetDatabase.ImportAsset(path);
-            TextAsset asset = UnityEngine.Resources.Load("CabinInTheWoods/SaveGames/SaveGame") as TextAsset;
+            
+            var sr = File.CreateText(path);
+            sr.WriteLine(str);
+            sr.Close();
 
-            //Print the text from the file
-            Debug.Log(asset.text);
+            
+            Debug.Log(str);
         }
 
         
-        public static void ReadString()
+        public static string ReadString()
         {
-            string path = "Assets/Resources/CabinInTheWoods/SaveGames/SaveGame.txt";
+            const string path = "SaveGame.txt";
 
             //Read the text from directly from the test.txt file
-            StreamReader reader = new StreamReader(path);
-            Debug.Log(reader.ReadToEnd());
+            var reader = new StreamReader(path);
+            var str = reader.ReadToEnd();
             reader.Close();
+            
+            Debug.Log(str);
+            return str;
         }
 
     }

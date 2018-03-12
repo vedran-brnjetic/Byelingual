@@ -85,15 +85,8 @@
       <FileName>Assets\StoryTemplate\Infrastructure\SceneBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ButtonBuilder">
-    <Position X="7.5" Y="0.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Assets\StoryTemplate\Infrastructure\ButtonBuilder.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="GameObjectBuilder">
-    <Position X="14.25" Y="7" Width="1.5" />
+    <Position X="12.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\GameObjectBuilder.cs</FileName>
@@ -113,17 +106,17 @@
       <FileName>Assets\Interaction.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Assets.Resources">
+  <Class Name="Assets.BLResources">
     <Position X="3.25" Y="0.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAACAgAAAAACA=</HashCode>
-      <FileName>Assets\Resources.cs</FileName>
+      <FileName>Assets\BLResources.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.GameController">
     <Position X="20.5" Y="1.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>ACQAAACAACAAkAhAAAhAAEAAAQAoAAAAAEQAAgAAgAA=</HashCode>
+      <HashCode>ACQAAACAADAQkAhAAQhAAEAAAQCIEAAAAESAAgABgAE=</HashCode>
       <FileName>Assets\GameController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -137,7 +130,28 @@
   <Class Name="Assets.StoryTemplate.Infrastructure.VisualEffects">
     <Position X="3.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAgEAgAAAAAAQAAABAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAgEAgAAAAAAQAAAJAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\VisualEffects.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.TextSave">
+    <Position X="11.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\TextSave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.CabinInTheWoods">
+    <Position X="15.25" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAABAICAACAEAIACAAABgBAAAAEAEEAAAAAAAAIAABA=</HashCode>
+      <FileName>Assets\StoryTemplate\CabinInTheWoods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.Impress">
+    <Position X="3.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\VisualEffects.cs</FileName>
     </TypeIdentifier>
   </Class>

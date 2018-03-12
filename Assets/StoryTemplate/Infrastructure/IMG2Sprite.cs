@@ -50,7 +50,7 @@ namespace Assets.StoryTemplate.Infrastructure
 
             
             {
-                var bytes = await Resources.GetBitmapFromURL(url);
+                var bytes = await BLResources.GetBitmapFromURL(url);
                 
 
                 

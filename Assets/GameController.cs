@@ -1,11 +1,9 @@
-﻿using Assets.StoryTemplate.Infrastructure;
+﻿using Assets.StoryTemplate;
+using Assets.StoryTemplate.Infrastructure;
+using SimpleJSON;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.StoryTemplate;
-using SimpleJSON;
-using SimpleJson.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,15 +11,20 @@ namespace Assets
 {
     public class GameController : MonoBehaviour
     {
-        
+        private bool _internetWorking = false;
+
+
         private Dictionary<string, Story> _stories; //list of stories available in the platform
         private bool _init = true; //flag for async methods that run on first update frame
         private Story _currentStory; //currently active story
         private Dictionary<string, Canvas> _canvases; //list of canvases to loop through when disabling them
         private List<GameObject> _panels; //list of game panels
-        public List<GameObject> ElementsToCrossfade; //list of elements for visual transition
+        public Dictionary<string, List<GameObject>> UIElementEffects; //list of elements for visual transition
+        public GameObject ActivePanel; //currently active control panel
+        public Canvas ActiveCanvas;
 
-        private CabinInTheWoods _cabinInTheWoods;
+        private StoryTemplate.CabinInTheWoods _cabinInTheWoods;
+        public bool _advance=false;
 
         //Current story property
         public Story CurrentStory
@@ -36,7 +39,7 @@ namespace Assets
             get { return _stories; }
         }
 
-        public CabinInTheWoods CabinInTheWoods
+        public StoryTemplate.CabinInTheWoods CabinInTheWoods
         {
             get { return _cabinInTheWoods; }
         }
@@ -49,34 +52,47 @@ namespace Assets
             _canvases = new Dictionary<string, Canvas>();
             _stories = new Dictionary<string, Story>();
             _panels = new List<GameObject>();
-            ElementsToCrossfade = new List<GameObject>();
-
-            //add panels to the list
+            UIElementEffects = new Dictionary<string, List<GameObject>>
+            {
+                ["in"] = new List<GameObject>(),
+                ["out"] = new List<GameObject>(),
+                ["cross"] = new List<GameObject>()
+            };
+            //add panels to the Panels list
             FillPanels();
-            
+
             //show the main menu control bar
             ShowPanel(FindPanel.GO("ControlBar"));
 
-            //get stories from internet
-            _stories = Resources.GetStoriesFromInternet();
-
+            //get stories from internet - needed when online
+            _stories = BLResources.GetStoriesFromInternet();
+            if (_stories.Count < 2) { 
+                _stories.Add("cabin_in_the_woods",new Story("Cabin In The Woods","A story by Sontra Samela", ""));
+                _stories.Add("yojijukugo:_a_play_in_four_characters", new Story("Yojijukugo:A Play in Four Characters","A story by Sontra Samela", ""));
+            }
+            else
+            {
+                _internetWorking = true;
+            }
             // add ExitGame callback to ExitButton listener
             FindButton.Named("ExitButton").onClick.AddListener(ExitGame);
-            
+
             //Testing text transition (fade in)
             var text = FindText.Named("TextGameTitle");
-            VisualEffects.SetTextTransparent(text);
-            ElementsToCrossfade.Add(text.gameObject);
+            text.gameObject.AddComponent<TextPartial>();
+            text.GetComponent<TextPartial>().FinalText = "Byelingual";
+            //VisualEffects.SetTextTransparent(text);
+            UIElementEffects["in"].Add(text.gameObject);
 
-            
+
 
             //Canvas initialization
             var mainMenuCanvas = FindCanvas.Named("MainMenuCanvas");
-            
-            mainMenuCanvas.transform.SetAsLastSibling();
-            _canvases["mainMenuCanvas"]=mainMenuCanvas;
 
-            
+            mainMenuCanvas.transform.SetAsLastSibling();
+            _canvases["mainMenuCanvas"] = mainMenuCanvas;
+
+
 
             foreach (var story in Stories.Values)
             {
@@ -87,7 +103,7 @@ namespace Assets
             }
 
 
-            
+
 
 
 
@@ -120,13 +136,67 @@ namespace Assets
             EnableCanvas(canvas);
             var panel = FindPanel.GO("ControlBar");
             panel.transform.SetParent(canvas.transform);
-            ShowPanel(panel,Color.grey);
+            ShowPanel(panel, Color.grey);
             Destroy(FindButton.Named("BackButton").gameObject);
         }
 
-        private async void LoadButtons()
+        
+
+
+        // Update is called once per frame
+        private void Update()
         {
-            
+
+            if (_init)
+            {
+                EnableCanvas(FindCanvas.Named("MainMenuCanvas"));
+                if(_internetWorking) LoadButtons(_internetWorking);
+                else LoadButtons();
+
+                _init = false;
+            }
+
+            CrossFadeElements();
+
+        }
+
+        private void LoadButtons()
+        {
+            if (Stories.Count > 0) //a hack, have to refactor at some point
+            {
+                var a = FindSprite.InResources("Byelingual1");
+                var b = FindSprite.InResources("YojijukugoTitleScreen");
+
+                var ImageStory1 = FindImage.Named("ImageStory1");
+                ImageStory1.name = Stories.Values.ElementAt(0).SnakeCase();
+                ImageStory1.sprite = a;
+                var ImageStory2 = FindImage.Named("ImageStory2");
+                ImageStory2.name = Stories.Values.ElementAt(1).SnakeCase();
+                ImageStory2.sprite = b;
+
+                Impress.FadeIn(ImageStory1.gameObject);
+                Impress.FadeIn(ImageStory2.gameObject);
+
+                var x = true;
+                foreach (var story in Stories.Values)
+                {
+                    if (x)
+                    {
+
+                        _cabinInTheWoods = new StoryTemplate.CabinInTheWoods(story.ToString(), story.Description, story.ImageUrl);
+                        x = false;
+                    }
+
+                    FindImage.Named(story.SnakeCase()).gameObject.AddComponent<LaunchGame>();
+                }
+
+            }
+        }
+
+        /*// LoadButtons() async from internet.*/
+        private async void LoadButtons(object s)
+        {
+
             if (Stories.Count > 0) //a hack, have to refactor at some point
             {
                 var a = IMG2Sprite.Instance(Stories.Values.ElementAt(0).SnakeCase() + "spriter");
@@ -136,92 +206,158 @@ namespace Assets
                 ImageStory1.sprite = await a.LoadNewSprite(Stories.Values.ElementAt(0).ImageUrl);
                 ImageStory1.name = Stories.Values.ElementAt(0).SnakeCase();
                 VisualEffects.SetImageTransparent(ImageStory1);
-                ElementsToCrossfade.Add(ImageStory1.gameObject);
-                
+                UIElementEffects["in"].Add(ImageStory1.gameObject);
+
 
 
                 var ImageStory2 = FindImage.Named("ImageStory2");
                 ImageStory2.sprite = await b.LoadNewSprite(Stories.Values.ElementAt(1).ImageUrl);
                 ImageStory2.name = Stories.Values.ElementAt(1).SnakeCase();
                 VisualEffects.SetImageTransparent(ImageStory2);
-                ElementsToCrossfade.Add(ImageStory2.gameObject);
+                UIElementEffects["in"].Add(ImageStory2.gameObject);
 
                 var x = true;
                 foreach (var story in Stories.Values)
                 {
                     if (x)
                     {
-                        
-                        _cabinInTheWoods = new CabinInTheWoods(story.ToString(), story.Description, story.ImageUrl);
+
+                        _cabinInTheWoods = new StoryTemplate.CabinInTheWoods(story.ToString(), story.Description, story.ImageUrl);
                         x = false;
                     }
+
                     FindImage.Named(story.SnakeCase()).gameObject.AddComponent<LaunchGame>();
                 }
 
             }
 
-           
-        }
-
-        // Update is called once per frame
-        private void Update()
-        {
-
-            if (_init)
-            {
-                EnableCanvas(FindCanvas.Named("MainMenuCanvas"));
-                LoadButtons();
-                _init = false;
-            }
-
-            CrossFadeElements();
 
         }
+        //*/
 
         private void CrossFadeElements()
         {
             //container of items to remove from crossfade list once the item completes the transition
-            var itemsToRemove = new List<GameObject>();
-
-            //go through the crossfade list
-            foreach (var element in ElementsToCrossfade)
+            var itemsToRemove = new Dictionary<string, List<GameObject>>
             {
-                //try to get an image from the gameObject element
-                var image = element.GetComponent<Image>();
-                //try to get a text from the gameObject element
-                var text = element.GetComponent<Text>();
+                ["in"] = new List<GameObject>(),
+                ["out"] = new List<GameObject>(),
+                ["cross"] = new List<GameObject>()
+            };
 
-                //test if the element is image
-                if (image)
+            var modes = new List<string>{"cross","out","in"};
+
+            //go through the crossfade lists
+            var transitionComplete = false;
+            foreach (var mode in modes)
+            {
+                var targetAlpha = 0.0f;
+                if (mode == "in") targetAlpha = 1.0f;
+                foreach (var element in UIElementEffects[mode])
                 {
-                    VisualEffects.ImageFadeIn(image, 1.0f, 0.8f);
-                    if (Math.Abs(image.color.a - 1.0f) < 0.0001)
+                    //try to get an image from the gameObject element
+                    //if there is no image, it will be null, therefore false in the if statement
+                    var image = element.GetComponent<Image>();
+                    //try to get a text from the gameObject element
+                    var text = element.GetComponent<Text>();
+
+                    //test if the element is image
+                    if (image)
                     {
-                        itemsToRemove.Add(element);
-                    }
-                }//test if the element is text
-                else if (text)
-                {
-                    VisualEffects.TextFadeIn(text, 1.0f, 0.8f);
-                    if (Math.Abs(text.color.a - 1.0f) < 0.0001)
+                        switch (mode)
+                        {
+                                case "in":
+                                    VisualEffects.ImageFadeIn(image);
+                                    break;
+                                case "out":
+                                    VisualEffects.ImageFadeOut(image);
+                                    break;
+                                case "cross":
+                                    VisualEffects.ImageFadeOut(image);
+                                    break;
+                        }
+
+                        if (Math.Abs(image.color.a - targetAlpha) > 0.0001)
+                        {
+                            transitionComplete = false;
+                            continue;
+                        }
+                        if (mode == "cross") Impress.FadeIn(element);
+                        itemsToRemove[mode].Add(element);
+                        transitionComplete = true;
+                    } //test if the element is text
+                    else if (text)
                     {
-                        itemsToRemove.Add(element);
+                        switch (mode)
+                        {
+                            case "in":
+                                VisualEffects.TextFadeIn(text);
+                                break;
+                            case "out":
+                                VisualEffects.TextFadeOut(text);
+                                break;
+                            case "cross":
+                                VisualEffects.TextFadeOut(text);
+                                break;
+                        }
+
+                        if (mode == "in")
+                        { 
+                            if(UIElementEffects["in"].Contains(element))
+                                if (Math.Abs(
+                                        text.text.Trim().Length - text.GetComponent<TextPartial>().FinalText.Length) !=
+                                    0)
+                                {
+                                    transitionComplete = false;
+                                    continue;
+                                }
+                        }
+                        else
+                        {
+                            if (Math.Abs(text.color.a - targetAlpha) > 0.0001)
+                            {
+                                transitionComplete = false;
+                                continue;
+                            }
+                            
+                        }
+
+                        itemsToRemove[mode].Add(element);
+                        if(mode=="cross") Impress.FadeIn(element);
+                        
+                        transitionComplete = true;
                         
                     }
-                }
 
-                
+
+                }    
             }
+
+            
+
             //cleanup the elements which completed transition
-            foreach (var item in itemsToRemove)
+            foreach (var mode in modes)
             {
-                ElementsToCrossfade.Remove(item);
-                Debug.Log("object removed from fade list");
+                foreach (var item in itemsToRemove[mode])
+                {
+                    UIElementEffects[mode].Remove(item);
+                    
+                }    
             }
 
-
+            if(UIElementEffects["out"].Count < 1)
+            if (transitionComplete) Advance();
         }
 
+        private void Advance()
+        {
+            if (!_advance) return;
+            _advance = false;
+            _cabinInTheWoods.AdvancePhase();
+                
+            var ap = ActiveCanvas.GetComponent<AdvancePhase>();
+            if (!ap) ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
+        }
 
         private static void ExitGame()
         {
@@ -229,7 +365,7 @@ namespace Assets
             Application.Quit();
         }
 
-      
+
 
         public void DisableAllCanvases()
         {
@@ -244,41 +380,62 @@ namespace Assets
             foreach (var panel in _panels)
             {
                 panel.transform.SetAsFirstSibling();
+                //Debug.Log(panel.name + " " + panel.transform.position );
+                if(panel.transform.position.y > 0)
+                    panel.transform.Translate(0f, -panel.GetComponentInChildren<RectTransform>().rect.height*4f, 0f);
             }
         }
 
         public void ShowPanel(GameObject panel)
         {
-           ShowPanel(panel, Color.black);
+            ShowPanel(panel, Color.white);
+            
         }
 
         public void ShowPanel(GameObject panel, Color color)
         {
             HideAllPanels();
+            ActivePanel = panel;
             panel.transform.SetAsLastSibling();
             panel.transform.GetComponent<Image>().color = color;
+            panel.transform.Translate(0f, panel.GetComponentInChildren<RectTransform>().rect.height*4f, 0f);
         }
 
-        public void EnableCanvasByName(string name)
+        public void EnableCanvasByName(string canvasName)
         {
-            EnableCanvas(FindCanvas.Named(name));
+            EnableCanvas(FindCanvas.Named(canvasName));
         }
 
         public void EnableCanvas(Canvas canvas)
         {
             DisableAllCanvases();
             canvas.enabled = true;
+            ActiveCanvas = canvas;
         }
 
-        public IEnumerator DelayLoad(int i)
+        public void DelayLoad(int i)
         {
-            yield return new WaitForSeconds(i);
+            System.Threading.Thread.Sleep(i * 1000);
         }
 
         public void SaveGame()
         {
             var savegame = JsonUtility.ToJson(CabinInTheWoods);
             TextSave.WriteString(savegame);
+        }
+
+        public void LoadGame()
+        {
+            var savegame = TextSave.ReadString();
+            var json = JSON.Parse(savegame);
+            var count = json["Choices"].Count;
+            if (count <= 0) return;
+            for (var i = 0; i < count; i++)
+            {
+                CabinInTheWoods.Choices.Add(json["Choices"][i]);
+                Debug.Log(json["Choices"][i]);
+            }
+
         }
     }
 }
