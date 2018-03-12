@@ -351,7 +351,7 @@ namespace Assets.StoryTemplate
 
                         Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
                         _nextRoom = "CabinInterior1";
-                        GoToRoom("fwd");
+
                         _previousRoomButton.onClick.AddListener(() =>
                         {
                             GoToRoom("bck");
@@ -362,9 +362,11 @@ namespace Assets.StoryTemplate
                         {
                             GoToRoom("fwd");
                         });
+
+                        GoToRoom("fwd");
                     },
                 ["4.1"] = () =>
-                {
+                {   //This is the free-movement phase in Act 1 until the player arrives at the Pond
                     _canvasBackground.sprite = FindSprite.InResources(_currentRoom);
                     _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_arrows");
 
@@ -396,6 +398,27 @@ namespace Assets.StoryTemplate
                     }
                     else
                     {
+                        /*we have arrived at the pond
+                         *1. Initialize characters
+                         *2. Move the characters to their places
+                         *3. Add characters to fade in
+                         *4. Disable the movement buttons
+                         *5. AdvancePhase
+                         */
+                        var Aate = _gc.ActiveCanvas.transform.Find("StoryCharacter").GetComponent<Image>();
+                        Aate.color = Color.black;
+
+                        var Elina = Object.Instantiate(Aate, _gc.ActiveCanvas.transform, true);
+                        Elina.color = Color.magenta;
+
+                        var Juhani = Object.Instantiate(Aate, _gc.ActiveCanvas.transform, true);
+                        Juhani.color = Color.white;
+
+                        var Annika = Object.Instantiate(Aate, _gc.ActiveCanvas.transform, true);
+                        Annika.color = Color.yellow;
+
+                        var Tuomo = Object.Instantiate(Aate, _gc.ActiveCanvas.transform, true);
+                        Tuomo.color = Color.cyan;
 
                     }
 

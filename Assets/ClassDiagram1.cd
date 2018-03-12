@@ -204,5 +204,12 @@
       <FileName>Assets\PauseMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.Character">
+    <Position X="20.25" Y="8.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAIAkAAAAAEAABAgAAAAQACAAAAAQAAAAAIAAAAQA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
