@@ -19,6 +19,7 @@ namespace Assets.StoryTemplate
         private string _previousPhase; // not sure for what yet, but this might be useful
         private string _nextPhase; // controls where to go next
         private bool _phaseTransition; // flag to signal reinitialisation of the gameroom and fade out screen between non-linear phase jumps
+        private Dictionary<string, Image> _characters;
 
         //rooms
         private string _currentRoom; // current room for decision-making purposes and selecting the UI elements
@@ -28,7 +29,10 @@ namespace Assets.StoryTemplate
         private Button _nextRoomButton;
         private Button _previousRoomButton;
 
-        private void InitializeStoryPrompts(){
+        private void InitializeStoryElements()
+        {
+            _characters = new Dictionary<string, Image>();
+
 
             //Room initializaton
             Rooms = new List<string>
@@ -427,14 +431,33 @@ namespace Assets.StoryTemplate
                         Juhani.transform.Translate(-220f, 0f, 0f);
                         Annika.transform.Translate(210f, -30f, 0f);
 
+                        _characters["Aate"] = Aate;
+                        _characters["Annika"] = Annika;
+                        _characters["Elina"] = Elina;
+                        _characters["Juhani"] = Juhani;
+                        _characters["Tuomo"] = Tuomo;
+                        
                         DisableRoomMovement();
+
+                        
+                        EnableClickToContinue();
                     }
 
 
                 },
                 ["4.2"] = () =>
                 {
+                    DisableClickToContinue();
 
+                    Impress.FadeOut(_characters["Annika"]);
+                    Impress.FadeOut(_characters["Elina"]);
+                    Impress.FadeOut(_characters["Juhani"]);
+                    Impress.FadeOut(_characters["Tuomo"], true);
+
+
+                },
+                ["4.3"] = () => 
+                {
 
                 }
             };

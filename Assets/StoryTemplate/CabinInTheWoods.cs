@@ -93,7 +93,7 @@ namespace Assets.StoryTemplate
             _nextRoomButton = FindButton.Named("RightControlButton");
             _previousRoomButton = FindButton.Named("LeftControlButton");
 
-            InitializeStoryPrompts();
+            InitializeStoryElements();
 
             _choiceToPhase = new Dictionary<string, string>
             {

@@ -65,6 +65,11 @@ namespace Assets.StoryTemplate.Infrastructure
 
             gc.UIElementEffects["cross"].Add(ob);
         }
+
+        public static void FadeOut(Image image, bool advanceGame=false)
+        {
+            FadeOut(image.gameObject, advanceGame);
+        }
     }
 
     public static class VisualEffects
