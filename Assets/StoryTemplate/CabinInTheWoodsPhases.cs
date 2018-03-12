@@ -76,7 +76,7 @@ namespace Assets.StoryTemplate
                     var text1 = textPanel.GetComponentInChildren<Text>();
                     text1.color = Color.black;
                     var panelImage = textPanel.GetComponent<Image>();
-                    panelImage.sprite = FindSprite.InResources("ui_draft2");
+                    panelImage.sprite = FindSprite.InResources("UI_no_arrows");
                     var canvasBg = _gc.ActiveCanvas.GetComponent<Image>();
 
                     //canvasBg.sprite = FindSprite.InResources("placeholder_hands");
@@ -173,6 +173,7 @@ namespace Assets.StoryTemplate
                     _mainText.text = "";
                     _mainText.color = Color.white;
                     Impress.FadeIn(_impressionImage.gameObject);
+                    _currentPhase = "2.8";
                 },
                 ["2.1"] = () =>
                 {//show the text with hands
