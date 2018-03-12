@@ -9,11 +9,12 @@ namespace Assets.StoryTemplate
 {
     public partial class CabinInTheWoods : Story
     {
-        private Dictionary<string, Action> _phases;
-        private Dictionary<string, string> _storyPrompts;
-        private string _previousPhase;
-        private string _nextPhase;
-        private bool _phaseTransition;
+        private Dictionary<string, Action> _phases; // dictionary of all phases (scripting)
+        private Dictionary<string, string> _storyPrompts; // dictionary of all ingame strings
+        private string _previousPhase; // not sure for what yet, but this might be useful
+        private string _nextPhase; // controls where to go next
+        private bool _phaseTransition; // flag to signal reinitialisation of the gameroom and fade out screen between non-linear phase jumps
+        private string _currentRoom; // current room for decision-making purposes and selecting the UI elements
 
         private void InitializeStoryPrompts(){
           _storyPrompts = new Dictionary<string, string>
@@ -63,11 +64,12 @@ namespace Assets.StoryTemplate
 
         private void InitializePhases()
         {
-            /*0. First screen
-             *1. Dialog in the dark
-             *2. Hands
-             *3. Fireplace+choice
-             *4. First Room - ACT1
+            /* 0. First screen
+             * 1. Dialog in the dark
+             * 2. Hands
+             * 3. Fireplace+choice
+             * 4. First Room - ACT1
+             * 4.2 Control Point
              */
             _phases = new Dictionary<string, Action>
             {
