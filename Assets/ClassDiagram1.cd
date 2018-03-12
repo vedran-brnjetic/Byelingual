@@ -22,7 +22,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.StoryTemplate.Infrastructure.ClickAction" BaseTypeListCollapsed="true">
-    <Position X="7.25" Y="6" Width="1.5" />
+    <Position X="7.5" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\ClickAction.cs</FileName>
@@ -37,28 +37,28 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.StoryTemplate.Infrastructure.FindObject&lt;T&gt;">
-    <Position X="10.75" Y="5.25" Width="1.5" />
+    <Position X="5.5" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.StoryTemplate.Infrastructure.FindCanvas" Collapsed="true">
-    <Position X="10.5" Y="7.5" Width="1.5" />
+    <Position X="5.25" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.StoryTemplate.Infrastructure.FindImage" Collapsed="true">
-    <Position X="12.25" Y="7.5" Width="1.5" />
+    <Position X="7" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.StoryTemplate.Infrastructure.FindButton" Collapsed="true">
-    <Position X="8.75" Y="7.5" Width="1.5" />
+    <Position X="3.5" Y="11.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
@@ -116,7 +116,7 @@
   <Class Name="Assets.GameController">
     <Position X="20.5" Y="1.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>ACQAAACICjAQkAhAAAhAAEAAAQCIEAAAAGSAAgABkAE=</HashCode>
+      <HashCode>ACwAAACICjAQkAhAAAhAAEAAAQCIEAAAAGSAAAABkAE=</HashCode>
       <FileName>Assets\GameController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -144,15 +144,57 @@
   <Class Name="Assets.StoryTemplate.Infrastructure.Impress">
     <Position X="3.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AECAAEAAAACAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AEDAAEAAAACAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\StoryTemplate\Infrastructure\VisualEffects.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Assets.StoryTemplate.CabinInTheWoods">
     <Position X="15.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgABBMCAICAAAIACJAABgRAAAAEAEAAAAAAAAAIAABA=</HashCode>
+      <HashCode>AgAJBMCAJCAAAIACJAgBgRgCAAEAEAAAAAAQAAMAABA=</HashCode>
       <FileName>Assets\StoryTemplate\CabinInTheWoods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.TextPartial">
+    <Position X="7.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAACAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\TextPartial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindCamera" Collapsed="true">
+    <Position X="2.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindSprite">
+    <Position X="6.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindGameController" Collapsed="true">
+    <Position X="10" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindPanel" Collapsed="true">
+    <Position X="4.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Assets.StoryTemplate.Infrastructure.FindText" Collapsed="true">
+    <Position X="8.25" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\StoryTemplate\Infrastructure\FindObject.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

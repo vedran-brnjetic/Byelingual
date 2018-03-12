@@ -76,10 +76,28 @@ namespace Assets.StoryTemplate
               ["Intro12"] = "You dreamt of flying. From tree to tree you leapt, and a gust of wind swept you up beyond the canopy, from where you were gliding down gracefully, admiring the views, until your descent ended in a dip in ice-cold, dark, murky water. The shock woke you up.",
               ["Intro13"] = "...the fire has gone out.",
 
+
+              //At the Pond
+              ["Act1_Pond_Arrival"] = "You arrive at the pond. Everyone is commenting on Aate’s attempt at fishing with a homemade fishing rod. Some comments are positive, some skeptical.",
+              ["Actt1_Aate_00"] = "Aate asks how you are and whether you like fishing or not.",
+
+              //Questions for Aaate
+              ["Act1_Player_Aate_1"] = "You tell him that you are fine.",
+              ["Act1_Player_Aate_2"] = "You tell him that you like fishing.",
+              ["Act1_Player_Aate_3"] = "You ask him if he is not hungry.",
+              ["Act1_Player_Aate_4"] = "You ask him about Juhani and the Seven Brothers",
+              ["Act1_Player_Aate_5"] = "You tell him he is running away from his father.",
+
+              //Aate's replies
+              ["Act1_Aate_reaction_1"] = "He nods",
+              ["Act1_Aate_reaction_2"] = "He seems pleased and tells you a fishing story. Then he starts whistling.",
+              ["Act1_Aate_reaction_3"] = "He talks to you excitedly about the hare trap he has laid in the woods.",
+              ["Act1_Aate_reaction_4"] = "He tells you that the Juhani he knows is more interested in ice hockey.",
+              ["Act1_Aate_reaction_5"] = "-",
           };
 
         }
-           
+
         private void InitializePhases()
         {
             /* 0. First screen
@@ -89,7 +107,7 @@ namespace Assets.StoryTemplate
              * 4. First Room - ACT1
              * 4.2 Control Point
              */
-           
+
             _phases = new Dictionary<string, Action>
             {
                 ["-1"] = () =>
@@ -103,8 +121,8 @@ namespace Assets.StoryTemplate
                     _mainText.color = Color.white;
                     _mainText.fontSize = 40;
                     Impress.FadeToBlack(_gc.ActiveCanvas.GetComponent<Image>().gameObject, true);
-                    
-                    
+
+
 
                 },
                 ["0"] = () =>
@@ -116,7 +134,7 @@ namespace Assets.StoryTemplate
                     _nextPhase = "4";
                     _phaseTransition = true;
                     AdvancePhase();
-                    
+
                     /*//Intro start
                     var textPanel = GetTextPanel(true);
 
@@ -173,7 +191,7 @@ namespace Assets.StoryTemplate
                     var text4 = GetTextPanel().transform.Find("Intro04").GetComponent<Text>();
                     DisplayText(text4);
                 },
-                ["0.4"] = () => 
+                ["0.4"] = () =>
                 {
                     _phaseTransition = true;
                     _nextPhase = "2";
@@ -182,7 +200,7 @@ namespace Assets.StoryTemplate
                 },
                 ["1"] = () =>
                     {
-                        
+
                         _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro05.0"];
                         _mainText.resizeTextForBestFit = false;
                         _mainText.color = Color.white;
@@ -209,7 +227,7 @@ namespace Assets.StoryTemplate
                 {//this phase starts automatically during crossfade script once the title fades out completely
                   _mainText.GetComponent<TextPartial>().FinalText += _storyPrompts["Intro05.4"];
                   Impress.FadeIn(_mainText.gameObject);
-                  
+
 
                 },
                 ["1.5"] = () =>
@@ -218,7 +236,7 @@ namespace Assets.StoryTemplate
                 },
                 ["2"] = () =>
                 {//show the hands
-                    
+
                     _impressionImage.sprite = _handsSprite;
                     _mainText.text = "";
                     _mainText.color = Color.white;
@@ -228,7 +246,7 @@ namespace Assets.StoryTemplate
                 ["2.1"] = () =>
                 {//show the text with hands
                     _mainText.resizeTextMaxSize = 20;
-                    
+
                     _mainText.GetComponent<TextPartial>().CurrentText = "";
                     _mainText.GetComponent<TextPartial>().FinalText = _storyPrompts["Intro06"];
                     _mainText.alignment = TextAnchor.LowerRight;
@@ -335,7 +353,7 @@ namespace Assets.StoryTemplate
                             GoToRoom("bck");
                         });
 
-                       
+
                         _nextRoomButton.onClick.AddListener(() =>
                         {
                             GoToRoom("fwd");
@@ -347,7 +365,7 @@ namespace Assets.StoryTemplate
                     _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_arrows");
 
                     _previousRoomButton.interactable = true;
-                    
+
                     _nextRoomButton.interactable = true;
 
                     if (Rooms.IndexOf(_currentRoom) == 0)
@@ -363,12 +381,12 @@ namespace Assets.StoryTemplate
                         _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_left_arrow");
                     }
 
-                    
+
 
                     _gc.ShowControlBar(FindPanel.GO("ControlBarText"));
 
-                   
-                   
+
+
                     _currentPhase = "4";
 
 
