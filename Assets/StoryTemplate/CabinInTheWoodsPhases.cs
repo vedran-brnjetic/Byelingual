@@ -85,7 +85,7 @@ namespace Assets.StoryTemplate
               ["Act1_Pond_Arrival"] = "You arrive at the pond. Everyone is commenting on Aate’s attempt at fishing with a homemade fishing rod. Some comments are positive, some skeptical.",
               ["Actt1_Aate_00"] = "Aate asks how you are and whether you like fishing or not.",
 
-              //Questions for Aaate
+              //Questions for Aate
               ["Act1_Player_Aate_1"] = "You tell him that you are fine.",
               ["Act1_Player_Aate_2"] = "You tell him that you like fishing.",
               ["Act1_Player_Aate_3"] = "You ask him if he is not hungry.",
@@ -390,13 +390,20 @@ namespace Assets.StoryTemplate
                     _gc.ShowControlBar(FindPanel.GO("ControlBarText"));
 
 
+                    if(_currentRoom != "Pond")
+                    {
+                        _currentPhase = "4";
+                    }
+                    else
+                    {
 
-                    _currentPhase = "4";
+                    }
 
 
                 },
                 ["4.2"] = () =>
                 {
+
 
                 }
             };
