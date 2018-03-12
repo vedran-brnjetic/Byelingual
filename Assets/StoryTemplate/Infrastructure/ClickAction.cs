@@ -14,6 +14,20 @@ namespace Assets.StoryTemplate.Infrastructure
         }
     }
 
+    public class SomeAction : ClickAction
+    {
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            //#CODE EXAMPLE
+            //write your code here
+            
+            //this allows you to control the active game controller by accessing its public methods and properties
+            var GameController = FindGameController.Named("GameController");
+
+
+        }
+    }
+
     public class LaunchGame : ClickAction
     {
         public override void OnPointerClick(PointerEventData eventData)
@@ -57,7 +71,7 @@ namespace Assets.StoryTemplate.Infrastructure
             backButton.gameObject.GetComponentInChildren<Text>().text = "Back";
             
             //move button a bit to the left
-            backButton.transform.Translate(-200f,0,0);
+            backButton.transform.Translate(-1.5f * VisualEffects.GetDimension('x', backButton.gameObject), 0f, 0f);
             
             //apply the game controller action to the back button
             backButton.onClick.AddListener(gc.BackToMainMenu);
@@ -68,16 +82,42 @@ namespace Assets.StoryTemplate.Infrastructure
             saveButton.gameObject.GetComponentInChildren<Text>().text = "Save";
             
             //move button a bit to the left
-            saveButton.transform.Translate(-350f,0,0);
+            saveButton.transform.Translate(-3f * VisualEffects.GetDimension('x',saveButton.gameObject),0f,0f);
             
             //apply the game controller action to the back button
             saveButton.onClick.AddListener(gc.SaveGame);
 
+
+            ///////////////////////////Load Button
+            var loadButton = Instantiate(panel.GetComponentInChildren<Button>(), panel.transform, true);
+            loadButton.name = "LoadButton";
+            loadButton.transform.SetParent(panel.transform);
+            loadButton.gameObject.GetComponentInChildren<Text>().text = "Load";
+
+            //move button a bit to the left
+            loadButton.transform.Translate(-4.5f * VisualEffects.GetDimension('x', loadButton.gameObject), 0f, 0f);
+
+            //apply the game controller action to the back button
+            loadButton.onClick.AddListener(gc.LoadGame);
+
             if (gc.CurrentStory.SnakeCase() == "cabin_in_the_woods")
             {
-                gc.CabinInTheWoods.PlayIntro();
+                gc.CabinInTheWoods.PlayPhase("0");
             }
             
+        }
+    }
+
+    public class AdvancePhase : ClickAction
+    {
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            var gc = FindGameController.Named("GameController");
+
+            //game controller / cabininthewoods / List<string> choices
+            gc.CabinInTheWoods.AdvancePhase();
+
+
         }
     }
 
@@ -92,6 +132,7 @@ namespace Assets.StoryTemplate.Infrastructure
             
 
         }
+
     }
    
 

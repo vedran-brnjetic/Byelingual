@@ -1,71 +1,138 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Assets.StoryTemplate.Infrastructure;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
-namespace Assets
+namespace Assets.StoryTemplate
 {
-    public class CabinInTheWoods : Story
+    public partial class CabinInTheWoods : Story
     {
-        private Sprite _handsSprite;
-        private Sprite _fireSprite;
-        private GameController _gc;
-        private Canvas _canvas;
-        public List<string> choices;
+        private readonly Sprite _handsSprite;
+        private readonly Sprite _fireSprite;
+        private readonly GameController _gc;
+        private readonly Canvas _canvas;
+        public List<string> Choices;
+        private readonly Dictionary<string, string> _choiceToPhase;
+        private string _currentPhase;
+        private Text _mainText;
+        private Image _impressionImage;
+
 
         public CabinInTheWoods(string name, string description, string imageUrl) : base(name, description, imageUrl)
         {
-            choices = new List<string>();
+            Choices = new List<string>();
+
+
             _gc = FindGameController.Named("GameController");
             _handsSprite = FindSprite.InResources("placeholder_hands");
             _fireSprite = FindSprite.InResources("placeholder_wood-burning_stove");
+            //_canvas = _gc.ActiveCanvas;
             _canvas = FindCanvas.Named(_gc.Stories.Values.ElementAt(0).SnakeCase() + "_canvas");
-            
 
+            InitializeStoryPrompts();
+
+            _choiceToPhase = new Dictionary<string, string>
+            {
+                ["IntroChoice_1"] = "11",
+                ["IntroChoice_2"] = "11",
+                ["IntroChoice_3"] = "11",
+            };
+            InitializePhases();
         }
 
         public void ProcessChoice(string choice)
         {
-            choices.Add(choice);
+            Choices.Add(choice);
             _gc.SaveGame();
-            
+            PlayPhase(_choiceToPhase[choice]);
+
         }
 
-        public void PlayIntro()
+
+
+        private GameObject GetTextPanel(bool clean=false)
         {
-            var imagePanel = FindPanel.GO("ControlBarImage");
-            imagePanel.transform.SetParent(_canvas.transform);
-            _gc.ShowPanel(imagePanel);
+            //GET THE TEXT PANEL
+            //Cleanup from previous stage
+            //remove the all but first text components
 
-            var image1 = FindImage.Named("Image1");
-            var image2 = FindImage.Named("Image2");
+            var textPanel = FindPanel.GO("ControlBarText");
+            var textfields = textPanel.GetComponentsInChildren<Text>();
 
+            if (clean) {
+                var kill = false;
+                foreach (var textfield in textfields)
+                {
 
-            image1.sprite = _handsSprite;
-            image2.sprite = _fireSprite;
+                    if (kill)
+                    {
+                        Object.Destroy(textfield);
+                    }
+                    else {
+                        kill = true;
+                        textfield.text = "";
+                        textfield.resizeTextForBestFit = true;
+                        var choice = textfield.GetComponentInChildren<SaveChoice>();
+                        if (choice) Object.Destroy(choice);
+                    }
+                }
+                    // find the text panel
+            }
+            //move it to the game canvas
+            textPanel.transform.SetParent(_canvas.transform);
+            //push it to front
+            _gc.ShowPanel(textPanel);
 
-            image1.name = "Hands";
-            image2.name = "Fire";
+            return textPanel;
+        }
 
-            image1.gameObject.AddComponent<SaveChoice>();
-            image2.gameObject.AddComponent<SaveChoice>();
-
-            VisualEffects.SetImageTransparent(image1);
-            VisualEffects.SetImageTransparent(image2);
-
-            _gc.ElementsToCrossfade.Add(image1.gameObject);
-            _gc.ElementsToCrossfade.Add(image2.gameObject);
-
-            _gc.DelayLoad(3);
-
-            var canvasBg = FindCanvas.Named(_gc.CurrentStory.SnakeCase() + "_canvas").GetComponent<Image>();
-            canvasBg.sprite = FindSprite.InResources("CabinInterior1");
-
-            //VisualEffects.SetImageTransparent(canvasBg);
-            VisualEffects.ImageFadeIn(canvasBg);
+        public void AdvancePhase()
+        {
+            var test = (Convert.ToDouble(_currentPhase) + 0.1).ToString("N" + 1);
             
-            _gc.ElementsToCrossfade.Add(canvasBg.gameObject);
+            if (_phases.ContainsKey(test))
+            {
+                PlayPhase(test);
+            }
+            else
+            {
+                PlayPhase(
+                    Convert.ToDouble(
+                        Math.Floor(
+                            Double.Parse(_currentPhase) + 1
+                )).ToString("N" + 0));
+            }
+        }
+
+        public void PlayPhase(string phase)
+        {
+            _currentPhase = phase;
+            _phases[phase]();
+            Debug.Log("Phase " + phase);
+        }
+
+        private void DisplayText(Text text1, string choice="")
+        {
+            //Add visual effects - set transparent and fade in
+            //VisualEffects.SetTextTransparent(text1);
+            //VisualEffects.TextFadeIn(text1);
+
+            Impress.FadeIn(text1.gameObject);
+            text1.gameObject.AddComponent<TextPartial>();
+            text1.GetComponent<TextPartial>().FinalText = _storyPrompts[text1.name];
+
+            //change text and set up the choice click actions
+            text1.text = "";
+
+            if (choice.Length > 0)
+            {
+                text1.name = choice;
+                text1.gameObject.AddComponent<SaveChoice>();
+            }
+
         }
     }
 }
