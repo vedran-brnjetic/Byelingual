@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.StoryTemplate.Infrastructure
@@ -97,6 +98,18 @@ namespace Assets.StoryTemplate.Infrastructure
         public string GetReaction(string query)
         {
             return _reactions[query];
+        }
+
+        public List<string> GetAvailableQueries(List<string> choices)
+        {
+            var queries = new List<string>();
+            foreach (var choice in choices)
+            {   
+                if(!string.IsNullOrEmpty(_queryConditions[choice]))
+                queries.Add(_queries[_queryConditions[choice]]);
+            }
+
+            return queries;
         }
 
         public Sprite GetSprite()

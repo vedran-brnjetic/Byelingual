@@ -349,6 +349,8 @@ namespace Assets.StoryTemplate
                         _gc.ActiveCanvas.GetComponent<Image>().sprite = FindSprite.InResources("CabinInterior1");
                         //_gc.ActiveCanvas.GetComponent<Image>().color = Color.white;
 
+                        
+
                         Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
                         _nextRoom = "CabinInterior1";
 
@@ -362,7 +364,7 @@ namespace Assets.StoryTemplate
                         {
                             GoToRoom("fwd");
                         });
-
+                        DisableClickToContinue();
                         GoToRoom("fwd");
                     },
                 ["4.1"] = () =>
@@ -420,6 +422,12 @@ namespace Assets.StoryTemplate
                         var Tuomo = Object.Instantiate(Aate, _gc.ActiveCanvas.transform, true);
                         Tuomo.color = Color.cyan;
 
+                        Aate.transform.Translate(100f, 50f, 0f);
+                        Elina.transform.Translate(-100f, 40f, 0f);
+                        Juhani.transform.Translate(-220f, 0f, 0f);
+                        Annika.transform.Translate(210f, -30f, 0f);
+
+                        DisableRoomMovement();
                     }
 
 

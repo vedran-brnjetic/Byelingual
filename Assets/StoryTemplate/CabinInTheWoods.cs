@@ -22,6 +22,8 @@ namespace Assets.StoryTemplate
         private readonly Image _canvasBackground;
 
 
+        
+
         private void GoToRoom(string direction)
         {
             if (direction == "fwd")
