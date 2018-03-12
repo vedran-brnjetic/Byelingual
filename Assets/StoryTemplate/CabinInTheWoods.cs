@@ -93,16 +93,18 @@ namespace Assets.StoryTemplate
         {
             if (_phaseTransition)
             {
-                Debug.Log("Phase -1");
+               
                 _phaseTransition = false;
                 PlayPhase("-1");
                 return;
             }
             if (!string.IsNullOrEmpty(_nextPhase))
             {
-                
+                var next = _nextPhase;
+                _nextPhase = null;
 
-                PlayPhase(_nextPhase);
+                PlayPhase(next);
+                
                 return;
             }
 
