@@ -15,8 +15,11 @@ namespace Assets.StoryTemplate
         private string _nextPhase; // controls where to go next
         private bool _phaseTransition; // flag to signal reinitialisation of the gameroom and fade out screen between non-linear phase jumps
         private string _currentRoom; // current room for decision-making purposes and selecting the UI elements
+        public List<string> Rooms;
 
         private void InitializeStoryPrompts(){
+            Rooms = new List<string> {"CabinInterior1", "CabinInterior2", "Outside", "Pond"};
+
           _storyPrompts = new Dictionary<string, string>
           {
               //locations
