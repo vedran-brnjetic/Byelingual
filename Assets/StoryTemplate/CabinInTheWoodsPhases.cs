@@ -458,7 +458,9 @@ namespace Assets.StoryTemplate
                 },
                 ["4.3"] = () => 
                 {
-
+                    ShowCharacterDialogBox();
+                    SnapDialogBoxNextToCharacter(_characters["Aate"]);
+                    SetTextToDialogBox(_storyPrompts["Act1_Aate_reaction_2"]);
                 }
             };
         }

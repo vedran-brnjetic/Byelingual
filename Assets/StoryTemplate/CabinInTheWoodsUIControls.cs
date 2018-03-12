@@ -29,5 +29,38 @@ namespace Assets.StoryTemplate
             _previousRoomButton.interactable = false;
             _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_no_arrows");
         }
+
+
+        private GameObject _dialogBox;
+        private void ShowCharacterDialogBox()
+        {
+            _dialogBox = _gc.ActiveCanvas.transform.Find("CharacterDialogueBox").gameObject;
+            var dialogBg = _dialogBox.GetComponent<Image>();
+            var col = dialogBg.color;
+            col.a = 0.76f;
+            dialogBg.color = col;
+        }
+
+        private void HideCharacterDialogBox()
+        {
+            var dialogBg = _dialogBox.GetComponent<Image>();
+            var col = dialogBg.color;
+            col.a = 0.0f;
+            dialogBg.color = col;
+        }
+
+        private void SnapDialogBoxNextToCharacter(Image character)
+        {
+            var rect = _dialogBox.transform.GetComponent<RectTransform>();
+            
+            _dialogBox.transform.position = character.transform.position;
+            _dialogBox.transform.Translate((rect.rect.x - 10f), 27f, 0f);
+
+        }
+
+        private void SetTextToDialogBox(string text)
+        {
+            _dialogBox.transform.Find("CharacterDialogue").gameObject.GetComponent<Text>().text=text;
+        }
     }
 }
