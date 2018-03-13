@@ -88,8 +88,8 @@ namespace Assets.StoryTemplate
               //Situational
               ["Act1_Pond_Arrival"] = "You arrive at the pond. Everyone is commenting on Aate’s attempt at fishing with a homemade fishing rod. Some comments are positive, some skeptical.",
               ["Act1_Aate_Intro"] = "Aate asks how you are and whether you like fishing or not.",
-              ["Act1_Elina_Intro"] = "Elina hints that you might not want to go inside the cabin."
-              ["Act1_Tuomo_Intro"] = "Tuomo enters small talk with you while he is chopping wood."
+              ["Act1_Elina_Intro"] = "Elina hints that you might not want to go inside the cabin.",
+              ["Act1_Tuomo_Intro"] = "Tuomo enters small talk with you while he is chopping wood.",
               ["Act1_Interior2_After_Pond"] = "Go away!",
               ["Act1_Interior1_After_Pond"] = "Get outta here!",
               ["Act2_Juhani_Intro"] = "Juhani greets you casually with a ‘What’s up’.",
@@ -496,6 +496,8 @@ namespace Assets.StoryTemplate
 
 
                         EnableClickToContinue();
+
+                        ControlBarDisplayText("Act1_Pond_Arrival");
                     }
 
 
@@ -507,15 +509,20 @@ namespace Assets.StoryTemplate
                     Impress.FadeOut(_characters["Annika"]);
                     Impress.FadeOut(_characters["Elina"]);
                     Impress.FadeOut(_characters["Juhani"]);
-                    Impress.FadeOut(_characters["Tuomo"], true);
+                    Impress.FadeOut(_characters["Tuomo"]);
 
+                    _characters["Aate"].name = "Aate_Click";
+                    _characters["Aate"].gameObject.AddComponent<SaveChoice>();
 
                 },
                 ["4.3"] = () =>
                 {
+                    Object.Destroy(_characters["Aate"].GetComponent<SaveChoice>());
+
                     ShowCharacterDialogBox();
                     SnapDialogBoxNextToCharacter(_characters["Aate"]);
-                    SetTextToDialogBox(_storyPrompts["Act1_Aate_reaction_2"]);
+                    SetTextToDialogBox(_storyPrompts["Act1_Aate_Intro"]);
+
                 }
             };
         }

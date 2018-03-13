@@ -62,5 +62,19 @@ namespace Assets.StoryTemplate
         {
             _dialogBox.transform.Find("CharacterDialogue").gameObject.GetComponent<Text>().text=text;
         }
+
+        private void ControlBarDisplayText(string text)
+        {
+            var textPanel = GetTextPanel(true);
+            var text1 = textPanel.GetComponentInChildren<Text>();
+
+            var rect = text1.rectTransform.rect;
+            
+            text1.rectTransform.rect.Set(rect.x, rect.y, rect.width, rect.height*2);
+
+            text1.color = Color.black;
+            text1.name = text;
+            DisplayText(text1);
+        }
     }
 }

@@ -84,9 +84,10 @@ namespace Assets
 
             //Testing text transition (fade in)
             var text = FindText.Named("TextGameTitle");
-            text.gameObject.AddComponent<TextPartial>();
-            text.GetComponent<TextPartial>().FinalText = "Byelingual";
-            //VisualEffects.SetTextTransparent(text);
+            //text.gameObject.AddComponent<TextPartial>();
+            //text.GetComponent<TextPartial>().FinalText = "Byelingual";
+            text.text = "Byelingual";
+            VisualEffects.SetTextTransparent(text);
             UIElementEffects["in"].Add(text.gameObject);
 
 
@@ -345,11 +346,9 @@ namespace Assets
                         if (mode == "in")
                         { 
                             if(UIElementEffects["in"].Contains(element))
-                                if (Math.Abs(
-                                        text.text.Trim().Length - text.GetComponent<TextPartial>().FinalText.Length) !=
-                                    0)
+                                if (Math.Abs(text.color.a - targetAlpha) > 0.0001)
                                 {
-                                    transtionsDirty += " txt_length ";
+                                    transtionsDirty += " txt_alpha ";
                                     continue;
                                 }
                         }

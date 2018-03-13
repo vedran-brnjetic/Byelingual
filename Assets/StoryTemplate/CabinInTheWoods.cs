@@ -97,7 +97,7 @@ namespace Assets.StoryTemplate
 
             _choiceToPhase = new Dictionary<string, string>
             {
-                ["IntroChoice_1"] = "11",
+                ["Aate_Click"] = "4.3",
                 ["IntroChoice_2"] = "11",
                 ["IntroChoice_3"] = "11",
             };
@@ -199,11 +199,11 @@ namespace Assets.StoryTemplate
             //VisualEffects.TextFadeIn(text1);
 
             Impress.FadeIn(text1.gameObject);
-            text1.gameObject.AddComponent<TextPartial>();
-            text1.GetComponent<TextPartial>().FinalText = _storyPrompts[text1.name];
+            //text1.gameObject.AddComponent<TextPartial>();
+            //text1.GetComponent<TextPartial>().FinalText = _storyPrompts[text1.name];
 
             //change text and set up the choice click actions
-            text1.text = "";
+            text1.text = _storyPrompts[text1.name];
 
             if (choice.Length > 0)
             {

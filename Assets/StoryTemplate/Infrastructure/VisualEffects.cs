@@ -109,13 +109,13 @@ namespace Assets.StoryTemplate.Infrastructure
 
         }
 
-        public static void TextFadeIn(Text text, float fadeRate=0.7f)
+        public static void TextFadeIn(Text text, float targetAlpha=1f, float fadeRate=0.7f)
         {
             //SetTextTransparent(text);
-            //text.color = Blush(text.color, targetAlpha, fadeRate);
+            text.color = Blush(text.color, targetAlpha, fadeRate);
             
 
-            text.text = TextRoll(text.text.Trim(), text.GetComponent<TextPartial>(), fadeRate);
+            //text.text = TextRoll(text.text.Trim(), text.GetComponent<TextPartial>(), fadeRate);
 
         }
 
