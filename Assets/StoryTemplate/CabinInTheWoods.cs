@@ -98,6 +98,9 @@ namespace Assets.StoryTemplate
             _choiceToPhase = new Dictionary<string, string>
             {
                 ["Aate_Click"] = "4.3",
+                ["Player_Aate_1"] = "4.4",
+                ["Player_Aate_2"] = "4.4",
+                ["Player_Aate_3"] = "4.4",
                 ["IntroChoice_2"] = "11",
                 ["IntroChoice_3"] = "11",
             };

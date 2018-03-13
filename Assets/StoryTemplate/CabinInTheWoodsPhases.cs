@@ -428,29 +428,8 @@ namespace Assets.StoryTemplate
                     },
                 ["4.1"] = () =>
                 {   //This is the free-movement phase in Act 1 until the player arrives at the Pond
-                    _canvasBackground.sprite = FindSprite.InResources(_currentRoom);
-                    _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_arrows");
-
-                    _previousRoomButton.interactable = true;
-
-                    _nextRoomButton.interactable = true;
-
-                    if (Rooms.IndexOf(_currentRoom) == 0)
-                    {
-                        _previousRoomButton.interactable = false;
-                        _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_right_arrow");
-
-                    }
-
-                    if (Rooms.IndexOf(_currentRoom) == Rooms.Count - 1)
-                    {
-                        _nextRoomButton.interactable = false;
-                        _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_left_arrow");
-                    }
-
-
-
-                    _gc.ShowControlBar(FindPanel.GO("ControlBarText"));
+                   
+                    EnableRoomMovement();
 
 
                     if(_currentRoom != "Pond")
@@ -522,6 +501,27 @@ namespace Assets.StoryTemplate
                     ShowCharacterDialogBox();
                     SnapDialogBoxNextToCharacter(_characters["Aate"]);
                     SetTextToDialogBox(_storyPrompts["Act1_Aate_Intro"]);
+
+
+                    var texts = new List<string>
+                    {
+                        "Player_Aate_1",
+                        "Player_Aate_2",
+                        "Player_Aate_3",
+                    };
+
+                    ControlBarDisplayText(texts, texts);
+                },
+                ["4.4"] = () =>
+                {
+                    var prompt = "Aate_reaction_" + Choices[Choices.Count - 1].Split('_')[2];
+                    SetTextToDialogBox(_storyPrompts[prompt]);
+                    GetTextPanel(true);
+                    
+                    EnableRoomMovement();
+                },
+                ["4.5"] = () => 
+                {
 
                 }
             };
