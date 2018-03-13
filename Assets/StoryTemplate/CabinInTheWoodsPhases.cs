@@ -369,7 +369,7 @@ namespace Assets.StoryTemplate
                     _mainText.text = "";
                     _mainText.color = Color.white;
                     Impress.FadeIn(_impressionImage.gameObject);
-                    _currentPhase = "2.8";
+                    CurrentPhase = "2.8";
                 },
                 ["2.1"] = () =>
                 {//show the text with hands
@@ -499,7 +499,7 @@ namespace Assets.StoryTemplate
 
                     if(_currentRoom != "Pond")
                     {
-                        _currentPhase = "4";
+                        CurrentPhase = "4";
                     }
                     else
                     {
@@ -595,7 +595,7 @@ namespace Assets.StoryTemplate
                 ["4.6"]= () => 
                 {
                     EnableRoomMovement();
-                    _currentPhase = "4.5";
+                    CurrentPhase = "4.5";
                 }
             };
         }

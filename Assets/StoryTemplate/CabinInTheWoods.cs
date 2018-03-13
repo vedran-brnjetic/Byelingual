@@ -16,23 +16,12 @@ namespace Assets.StoryTemplate
         private readonly Canvas _canvas;
         public List<string> Choices;
         private readonly Dictionary<string, string> _choiceToPhase;
-        private string _currentPhase;
+        public string CurrentPhase;
         private Text _mainText;
         private Image _impressionImage;
         private readonly Image _canvasBackground;
 
-        public string CurrentPhase
-        {
-            get
-            {
-                return _currentPhase;
-            }
-
-            set
-            {
-                _currentPhase = value;
-            }
-        }
+        
 
         private void GoToRoom(string direction)
         {
@@ -182,7 +171,7 @@ namespace Assets.StoryTemplate
                 return;
             }
 
-            var phase = (Convert.ToDouble(_currentPhase) + 0.1).ToString("N" + 1);
+            var phase = (Convert.ToDouble(CurrentPhase) + 0.1).ToString("N" + 1);
             
             if (_phases.ContainsKey(phase))
             {
@@ -193,14 +182,14 @@ namespace Assets.StoryTemplate
                 PlayPhase(
                     Convert.ToDouble(
                         Math.Floor(
-                            Double.Parse(_currentPhase) + 1
+                            Double.Parse(CurrentPhase) + 1
                 )).ToString("N" + 0));
             }
         }
 
         public void PlayPhase(string phase)
         {
-            _currentPhase = phase;
+            CurrentPhase = phase;
             _phases[phase]();
             Debug.Log("Phase " + phase);
         }
