@@ -518,11 +518,17 @@ namespace Assets.StoryTemplate
                     SetTextToDialogBox(_storyPrompts[prompt]);
                     GetTextPanel(true);
                     
-                    EnableRoomMovement();
+                    
                 },
                 ["4.5"] = () => 
+                {   
+                    HideCharacterDialogBox();
+                    EnableRoomMovement();
+                },
+                ["4.6"]= () => 
                 {
-
+                    EnableRoomMovement();
+                    _currentPhase = "4.5";
                 }
             };
         }

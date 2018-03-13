@@ -1,1 +1,1 @@
-{"Choices":["Aate_Click","Player_Aate_2","Player_Aate_2"],"Rooms":["CabinInterior2","CabinInterior1","Outside","Pond"]}
+{"Choices":["Aate_Click","Player_Aate_1"],"Rooms":["CabinInterior2","CabinInterior1","Outside","Pond"]}
