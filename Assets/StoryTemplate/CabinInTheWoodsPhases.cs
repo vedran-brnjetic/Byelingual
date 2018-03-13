@@ -446,7 +446,7 @@ namespace Assets.StoryTemplate
                          *5. AdvancePhase
                          */
                         var Aate = _gc.ActiveCanvas.transform.Find("StoryCharacter").GetComponent<Image>();
-                        Aate.color = Color.black;
+                        Aate.color = Color.clear;
 
                         var Elina = Object.Instantiate(Aate, _gc.ActiveCanvas.transform, true);
                         Elina.color = Color.magenta;
@@ -489,6 +489,8 @@ namespace Assets.StoryTemplate
                     Impress.FadeOut(_characters["Elina"]);
                     Impress.FadeOut(_characters["Juhani"]);
                     Impress.FadeOut(_characters["Tuomo"]);
+
+                    _canvasBackground.sprite = FindSprite.InResources("PondAct1Aate");
 
                     _characters["Aate"].name = "Aate_Click";
                     _characters["Aate"].gameObject.AddComponent<SaveChoice>();

@@ -173,6 +173,8 @@ namespace Assets
 
                 _init = false;
             }
+            if (Input.GetKeyDown(KeyCode.Escape))
+                EnableCanvas(PreviousCanvas);
 
             CrossFadeElements();
 
