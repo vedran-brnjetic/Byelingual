@@ -85,23 +85,78 @@ namespace Assets.StoryTemplate
               ["Intro13"] = "...the fire has gone out.",
 
 
-              //At the Pond
+              //Situational
               ["Act1_Pond_Arrival"] = "You arrive at the pond. Everyone is commenting on Aate’s attempt at fishing with a homemade fishing rod. Some comments are positive, some skeptical.",
-              ["Actt1_Aate_00"] = "Aate asks how you are and whether you like fishing or not.",
+              ["Act1_Aate_Intro"] = "Aate asks how you are and whether you like fishing or not.",
+              ["Act1_Elina_Intro"] = "Elina hints that you might not want to go inside the cabin."
+              ["Act1_Tuomo_Intro"] = "Tuomo enters small talk with you while he is chopping wood."
+              ["Act1_Interior2_After_Pond"] = "Go away!",
+              ["Act1_Interior1_After_Pond"] = "Get outta here!",
+              ["Act2_Juhani_Intro"] = "Juhani greets you casually with a ‘What’s up’.",
 
               //Questions for Aate
-              ["Act1_Player_Aate_1"] = "You tell him that you are fine.",
-              ["Act1_Player_Aate_2"] = "You tell him that you like fishing.",
-              ["Act1_Player_Aate_3"] = "You ask him if he is not hungry.",
-              ["Act1_Player_Aate_4"] = "You ask him about Juhani and the Seven Brothers",
-              ["Act1_Player_Aate_5"] = "You tell him he is running away from his father.",
+              ["Player_Aate_1"] = "You tell him that you are fine.",
+              ["Player_Aate_2"] = "You tell him that you like fishing.",
+              ["Player_Aate_3"] = "You ask him if he is not hungry.",
+              ["Player_Aate_4"] = "You ask him about Juhani and the Seven Brothers",
+              ["Player_Aate_5"] = "You tell him he is running away from his father.",
 
               //Aate's replies
-              ["Act1_Aate_reaction_1"] = "He nods",
-              ["Act1_Aate_reaction_2"] = "He seems pleased and tells you a fishing story. Then he starts whistling.",
-              ["Act1_Aate_reaction_3"] = "He talks to you excitedly about the hare trap he has laid in the woods.",
-              ["Act1_Aate_reaction_4"] = "He tells you that the Juhani he knows is more interested in ice hockey.",
-              ["Act1_Aate_reaction_5"] = "-",
+              ["Aate_reaction_1"] = "He nods",
+              ["Aate_reaction_2"] = "He seems pleased and tells you a fishing story. Then he starts whistling.",
+              ["Aate_reaction_3"] = "He talks to you excitedly about the hare trap he has laid in the woods.",
+              ["Aate_reaction_4"] = "He tells you that the Juhani he knows is more interested in ice hockey.",
+              ["Aate_reaction_5"] = "-",
+
+              //Questions for Elina
+              ["Player_Elina_1"] = "You ask her if she is not hungry.",
+              ["Player_Elina_2"] = "You tell her that society is escapism.",
+              ["Player_Elina_3"] = "You tell her that this is escapism.",
+              ["Player_Elina_4"] = "You ask her about where the blankets came from.",
+              ["Player_Elina_5"] = "You ask her if she does not want to become a writer.",
+
+              //Elina's Reactions
+              ["Elina_reaction_1"] = "She responds curtly by saying she is used to not eating.",
+              ["Elina_reaction_2"] = "–",
+              ["Elina_reaction_3"] = "–",
+              ["Elina_reaction_4"] = "She shares with you the origin of the blankets: Tuomo robbing houses in the area.",
+              ["Elina_reaction_5"] = "-",
+
+              //Questions for Annika
+              ["Player_Annika_1"] = "You thank her for the blueberries.",
+              ["Player_Annika_2"] = "You make a face and say you are sick of eating nothing but berries.",
+              ["Player_Annika_3"] = "You ask her why Elina is used to eating little.",
+
+              //Annika's Reactions
+              ["Annika_reaction_1"] = "She smiles sweetly.",
+              ["Annika_reaction_2"] = "She raises her eyebrows with some exaggeration.",
+              ["Annika_reaction_3"] = "She enters gossip mode, saying Elina is an anorectic martyr whose biggest problem is that she wants to be a writer.",
+
+              //Questions for Juhani
+              ["Player_Juhani_1"] = "You ask him if he is not hungry.",
+              ["Player_Juhani_2"] = "You ask him to come speak with you in the cabin for a moment.",
+              ["Player_Juhani_3"] = "You persuade him to alert the camp authorities to our location.",
+              ["Player_Juhani_4"] = "You provoke him by inquiring about the hockey game he was supposed to partake in today.",
+
+              //Juhani's reactions
+              ["Juhani_reaction_1"] = "He waves it off by saying that Aate will figure everything out.",
+              ["Juhani_reaction_2"] = "He feigns a casual shrug and follows you.",
+              ["Juhani_reaction_2_alt"] = "He laughs your suggestion off.",
+              ["Juhani_reaction_3"] = "He looks at you funny, asks you to sit down and have some blueberries.",
+              ["Juhani_reaction_4"] = "He is clearly caught off guard, as he freezes and looks around himself nervously.",
+
+              //Questions for Tuomo
+              ["Player_Tuomo_1"] = "You ask him if he is not hungry.",
+              ["Player_Tuomo_2"] = "You ask him to teach you how to do it.",
+              ["Player_Tuomo_3"] = "You ask him to show you the way back to the camp.",
+              ["Player_Tuomo_4"] = "You tell him that you think you spotted the Prodigal Son story.",
+              ["Player_Tuomo_5"] = "You remind him that the cabin belongs to all of us and none of us.",
+
+              ["Tuomo_reaction_1"] = "He divulges that he has broken into the camp’s pantry.",
+              ["Tuomo_reaction_2"] = "He guffaws at your mischief but does not want you to get into trouble.",
+              ["Tuomo_reaction_3"] = "He says we would likely get caught going near the camp now.",
+              ["Tuomo_reaction_4"] = "He thinks you mean Aate. Unlike the Prodigal Son, he says, Aate has an abusive father.",
+
           };
 
         }
@@ -353,7 +408,7 @@ namespace Assets.StoryTemplate
                         _gc.ActiveCanvas.GetComponent<Image>().sprite = FindSprite.InResources("CabinInterior1");
                         //_gc.ActiveCanvas.GetComponent<Image>().color = Color.white;
 
-                        
+
 
                         Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
                         _nextRoom = "CabinInterior1";
@@ -436,10 +491,10 @@ namespace Assets.StoryTemplate
                         _characters["Elina"] = Elina;
                         _characters["Juhani"] = Juhani;
                         _characters["Tuomo"] = Tuomo;
-                        
+
                         DisableRoomMovement();
 
-                        
+
                         EnableClickToContinue();
                     }
 
@@ -456,7 +511,7 @@ namespace Assets.StoryTemplate
 
 
                 },
-                ["4.3"] = () => 
+                ["4.3"] = () =>
                 {
                     ShowCharacterDialogBox();
                     SnapDialogBoxNextToCharacter(_characters["Aate"]);
