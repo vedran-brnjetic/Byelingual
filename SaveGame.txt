@@ -1,1 +1,1 @@
-{"Choices":["Aate_Click","Player_Aate_2","Player_Aate_2"],"CurrentPhase":"4.4","PreviousPhase":"","NextPhase":"","CurrentRoom":"Pond","PreviousRoom":"Outside","NextRoom":"","Rooms":["CabinInterior2","CabinInterior1","Outside","Pond"]}
+{"Choices":["Aate_Click"],"CurrentPhase":"4.2","PreviousPhase":"","NextPhase":"","CurrentRoom":"Pond","PreviousRoom":"Outside","NextRoom":"","Rooms":["CabinInterior2","CabinInterior1","Outside","Pond"]}
