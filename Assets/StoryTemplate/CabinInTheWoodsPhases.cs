@@ -16,83 +16,20 @@ namespace Assets.StoryTemplate
     {
         private Dictionary<string, Action> _phases; // dictionary of all phases (scripting)
         private Dictionary<string, string> _storyPrompts; // dictionary of all ingame strings
-        private string _previousPhase; // not sure for what yet, but this might be useful
-        private string _nextPhase; // controls where to go next
+        public string PreviousPhase; // not sure for what yet, but this might be useful
+        public string NextPhase; // controls where to go next
         private bool _phaseTransition; // flag to signal reinitialisation of the gameroom and fade out screen between non-linear phase jumps
         private Dictionary<string, Image> _characters;
 
         //rooms
-        private string _currentRoom; // current room for decision-making purposes and selecting the UI elements
-        private string _previousRoom; // current room for decision-making purposes and selecting the UI elements
-        private string _nextRoom; // current room for decision-making purposes and selecting the UI elements
+        public string CurrentRoom; // current room for decision-making purposes and selecting the UI elements
+        public string PreviousRoom; // current room for decision-making purposes and selecting the UI elements
+        public string NextRoom; // current room for decision-making purposes and selecting the UI elements
         public List<string> Rooms;
         private Button _nextRoomButton;
         private Button _previousRoomButton;
 
-        public string CurrentRoom
-        {
-            get
-            {
-                return _currentRoom;
-            }
-
-            set
-            {
-                _currentRoom = value;
-            }
-        }
-
-        public string PreviousRoom
-        {
-            get
-            {
-                return _previousRoom;
-            }
-
-            set
-            {
-                _previousRoom = value;
-            }
-        }
-
-        public string NextRoom
-        {
-            get
-            {
-                return _nextRoom;
-            }
-
-            set
-            {
-                _nextRoom = value;
-            }
-        }
-
-        public string PreviousPhase
-        {
-            get
-            {
-                return _previousPhase;
-            }
-
-            set
-            {
-                _previousPhase = value;
-            }
-        }
-
-        public string NextPhase
-        {
-            get
-            {
-                return _nextPhase;
-            }
-
-            set
-            {
-                _nextPhase = value;
-            }
-        }
+        
 
         private void InitializeStoryElements()
         {
@@ -259,7 +196,7 @@ namespace Assets.StoryTemplate
                     _mainText = _gc.ActiveCanvas.transform.Find("GameTitle").gameObject.GetComponent<Text>();
                     _mainText.gameObject.AddComponent<TextPartial>();
                     _impressionImage = _gc.ActiveCanvas.gameObject.transform.Find("ImpressionImage").GetComponent<Image>();
-                    _nextPhase = "4";
+                    NextPhase = "4";
                     _phaseTransition = true;
                     AdvancePhase();
 
@@ -322,7 +259,7 @@ namespace Assets.StoryTemplate
                 ["0.4"] = () =>
                 {
                     _phaseTransition = true;
-                    _nextPhase = "2";
+                    NextPhase = "2";
                     Impress.FadeOut(GetTextPanel(), true);
 
                 },
@@ -476,7 +413,7 @@ namespace Assets.StoryTemplate
 
 
                         Impress.FadeToWhite(_gc.ActiveCanvas.gameObject);
-                        _nextRoom = "CabinInterior1";
+                        NextRoom = "CabinInterior1";
 
                         _previousRoomButton.onClick.AddListener(() =>
                         {
@@ -497,7 +434,7 @@ namespace Assets.StoryTemplate
                     EnableRoomMovement();
 
 
-                    if(_currentRoom != "Pond")
+                    if(CurrentRoom != "Pond")
                     {
                         CurrentPhase = "4";
                     }

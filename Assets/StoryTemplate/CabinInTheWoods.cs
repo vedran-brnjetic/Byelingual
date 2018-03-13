@@ -27,50 +27,50 @@ namespace Assets.StoryTemplate
         {
             if (direction == "fwd")
             {
-                if(!string.IsNullOrEmpty(_nextRoom))
-                _currentRoom = _nextRoom;
+                if(!string.IsNullOrEmpty(NextRoom))
+                CurrentRoom = NextRoom;
 
-                if(Rooms.IndexOf(_currentRoom) < Rooms.Count - 1)
-                    _nextRoom = Rooms[Rooms.IndexOf(_currentRoom) + 1];
+                if(Rooms.IndexOf(CurrentRoom) < Rooms.Count - 1)
+                    NextRoom = Rooms[Rooms.IndexOf(CurrentRoom) + 1];
                 else
                 {
-                    _nextRoom = null;
+                    NextRoom = null;
                 }
 
-                if (Rooms.IndexOf(_currentRoom) > 1)
-                    _previousRoom = Rooms[Rooms.IndexOf(_currentRoom) - 1];
+                if (Rooms.IndexOf(CurrentRoom) > 1)
+                    PreviousRoom = Rooms[Rooms.IndexOf(CurrentRoom) - 1];
                 else
                 {
-                    _previousRoom = null;
+                    PreviousRoom = null;
                 }
 
 
-                Debug.Log(Rooms.IndexOf(_currentRoom));
-                Debug.Log(_currentRoom);
+                Debug.Log(Rooms.IndexOf(CurrentRoom));
+                Debug.Log(CurrentRoom);
                 AdvancePhase();
             }
             if (direction == "bck")
             {
-                if (!string.IsNullOrEmpty(_previousRoom))
-                    _currentRoom = _previousRoom;
+                if (!string.IsNullOrEmpty(PreviousRoom))
+                    CurrentRoom = PreviousRoom;
 
-                if (Rooms.IndexOf(_currentRoom) >  1)
-                    _nextRoom = Rooms[Rooms.IndexOf(_currentRoom) + 1];
+                if (Rooms.IndexOf(CurrentRoom) >  1)
+                    NextRoom = Rooms[Rooms.IndexOf(CurrentRoom) + 1];
                 else
                 {
-                    _nextRoom = null;
+                    NextRoom = null;
                 }
 
-                if (Rooms.IndexOf(_currentRoom) > 0)
-                    _previousRoom = Rooms[Rooms.IndexOf(_currentRoom) - 1];
+                if (Rooms.IndexOf(CurrentRoom) > 0)
+                    PreviousRoom = Rooms[Rooms.IndexOf(CurrentRoom) - 1];
                 else
                 {
-                    _previousRoom = null;
+                    PreviousRoom = null;
                 }
 
 
-                Debug.Log(Rooms.IndexOf(_currentRoom));
-                Debug.Log(_currentRoom);
+                Debug.Log(Rooms.IndexOf(CurrentRoom));
+                Debug.Log(CurrentRoom);
                 AdvancePhase();
             }
 
@@ -161,10 +161,10 @@ namespace Assets.StoryTemplate
                 PlayPhase("-1");
                 return;
             }
-            if (!string.IsNullOrEmpty(_nextPhase))
+            if (!string.IsNullOrEmpty(NextPhase))
             {
-                var next = _nextPhase;
-                _nextPhase = null;
+                var next = NextPhase;
+                NextPhase = null;
 
                 PlayPhase(next);
                 

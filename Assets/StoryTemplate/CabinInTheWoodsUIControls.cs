@@ -129,21 +129,21 @@ namespace Assets.StoryTemplate
 
         private void EnableRoomMovement()
         {
-            _canvasBackground.sprite = FindSprite.InResources(_currentRoom);
+            _canvasBackground.sprite = FindSprite.InResources(CurrentRoom);
             _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_arrows");
 
             _previousRoomButton.interactable = true;
 
             _nextRoomButton.interactable = true;
 
-            if (Rooms.IndexOf(_currentRoom) == 0)
+            if (Rooms.IndexOf(CurrentRoom) == 0)
             {
                 _previousRoomButton.interactable = false;
                 _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_right_arrow");
 
             }
 
-            if (Rooms.IndexOf(_currentRoom) == Rooms.Count - 1)
+            if (Rooms.IndexOf(CurrentRoom) == Rooms.Count - 1)
             {
                 _nextRoomButton.interactable = false;
                 _gc.ActivePanel.GetComponent<Image>().sprite = FindSprite.InResources("UI_left_arrow");
