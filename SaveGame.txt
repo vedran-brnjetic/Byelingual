@@ -1,1 +1,1 @@
-{"Choices":["Aate_Click","Player_Aate_1"],"Rooms":["CabinInterior2","CabinInterior1","Outside","Pond"]}
+{"Choices":[],"CurrentPhase":"4","Rooms":["CabinInterior2","CabinInterior1","Outside","Pond"]}
