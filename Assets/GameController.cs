@@ -23,6 +23,7 @@ namespace Assets
         private List<string> _effectMode;
         public GameObject ActivePanel; //currently active control panel
         public Canvas ActiveCanvas;
+        public Canvas PreviousCanvas;
 
         private StoryTemplate.CabinInTheWoods _cabinInTheWoods;
         public bool _advance=false;
@@ -71,7 +72,7 @@ namespace Assets
 
             //get stories from internet - needed when online
             _stories = BLResources.GetStoriesFromInternet();
-            if (_stories.Count < 2) { 
+            if (_stories.Count < 2) {
                 _stories.Add("cabin_in_the_woods",new Story("Cabin In The Woods","A story by Sontra Samela", ""));
                 _stories.Add("yojijukugo:_a_play_in_four_characters", new Story("Yojijukugo:A Play in Four Characters","A story by Sontra Samela", ""));
             }
@@ -81,7 +82,18 @@ namespace Assets
             }
             // add ExitGame callback to ExitButton listener
             FindButton.Named("ExitButton").onClick.AddListener(ExitGame);
+            FindButton.Named("QuitButton").onClick.AddListener(ExitGame);
 
+            FindButton.Named("MainMenuButton").onClick.AddListener(BackToMainMenu);
+            FindButton.Named("SaveButton").onClick.AddListener(SaveGame);
+            FindButton.Named("LoadButton").onClick.AddListener(LoadGame);
+
+            FindButton.Named("MenuButton").onClick.AddListener(()=>{
+                EnableCanvasByName("PauseCanvas");
+            });
+            FindButton.Named("ReturnButton").onClick.AddListener(()=>{
+                EnableCanvas(PreviousCanvas);
+            });
             //Testing text transition (fade in)
             var text = FindText.Named("TextGameTitle");
             //text.gameObject.AddComponent<TextPartial>();
@@ -115,11 +127,11 @@ namespace Assets
 
             /*Button initialization
             _exitButton = GameObject.Find("btnExit").GetComponent<Button>();
-            
+
 
             //Assigning Methods to Unity actions
             _exit += ExitGame;
-            
+
 
             //Assigning Unity actions to button Events
             _exitButton.onClick.AddListener(_exit);
@@ -146,7 +158,7 @@ namespace Assets
             Destroy(FindButton.Named("BackButton").gameObject);
         }
 
-        
+
 
 
         // Update is called once per frame
@@ -155,7 +167,7 @@ namespace Assets
 
             if (_init)
             {
-                EnableCanvas(FindCanvas.Named("MainMenuCanvas"));
+                EnableCanvasByName("MainMenuCanvas");
                 if(_internetWorking) LoadButtons(_internetWorking);
                 else LoadButtons();
 
@@ -314,7 +326,7 @@ namespace Assets
                             {
                                 transtionsDirty += " black ";
                                 continue;
-                                
+
                             }
                         }
                         if (Math.Abs(image.color.a - targetAlpha) > 0.0001)
@@ -324,7 +336,7 @@ namespace Assets
                         }
 
                         if (mode == "cross") Impress.FadeIn(element);
-                        
+
                         itemsToRemove[mode].Add(element);
                         //transitionComplete = true;
                     } //test if the element is text
@@ -344,7 +356,7 @@ namespace Assets
                         }
 
                         if (mode == "in")
-                        { 
+                        {
                             if(UIElementEffects["in"].Contains(element))
                                 if (Math.Abs(text.color.a - targetAlpha) > 0.0001)
                                 {
@@ -360,18 +372,18 @@ namespace Assets
 
                                 continue;
                             }
-                            
+
                         }
 
                         itemsToRemove[mode].Add(element);
                         if(mode=="cross") Impress.FadeIn(element);
-                        
+
                         //transitionComplete = true;
-                        
+
                     }
 
 
-                }    
+                }
             }
 
             if (string.IsNullOrEmpty(transtionsDirty))
@@ -385,8 +397,8 @@ namespace Assets
                 foreach (var item in itemsToRemove[mode])
                 {
                     UIElementEffects[mode].Remove(item);
-                    
-                }    
+
+                }
             }
 
             if (transitionComplete)
@@ -399,7 +411,7 @@ namespace Assets
             if (!_advance) return;
             _advance = false;
             _cabinInTheWoods.AdvancePhase();
-                
+
             var ap = ActiveCanvas.GetComponent<AdvancePhase>();
             if (!ap) ActiveCanvas.gameObject.AddComponent<AdvancePhase>();
         }
@@ -434,7 +446,7 @@ namespace Assets
         public void ShowControlBar(GameObject panel)
         {
             ShowControlBar(panel, Color.white);
-            
+
         }
 
         public void ShowControlBar(GameObject panel, Color color)
@@ -453,6 +465,7 @@ namespace Assets
 
         public void EnableCanvas(Canvas canvas)
         {
+            PreviousCanvas = ActiveCanvas;
             DisableAllCanvases();
             canvas.enabled = true;
             ActiveCanvas = canvas;
