@@ -92,7 +92,8 @@ namespace Assets
                 EnableCanvasByName("PauseCanvas");
             });
             FindButton.Named("ReturnButton").onClick.AddListener(()=>{
-                EnableCanvas(PreviousCanvas);
+                EnableCanvasByName("cabin_in_the_woods_canvas");
+                ShowControlBar(ActivePanel);
             });
             //Testing text transition (fade in)
             var text = FindText.Named("TextGameTitle");
