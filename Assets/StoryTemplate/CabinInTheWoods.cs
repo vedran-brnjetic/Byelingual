@@ -21,8 +21,18 @@ namespace Assets.StoryTemplate
         private Image _impressionImage;
         private readonly Image _canvasBackground;
 
+        public string CurrentPhase
+        {
+            get
+            {
+                return _currentPhase;
+            }
 
-        
+            set
+            {
+                _currentPhase = value;
+            }
+        }
 
         private void GoToRoom(string direction)
         {

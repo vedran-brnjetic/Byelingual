@@ -29,6 +29,71 @@ namespace Assets.StoryTemplate
         private Button _nextRoomButton;
         private Button _previousRoomButton;
 
+        public string CurrentRoom
+        {
+            get
+            {
+                return _currentRoom;
+            }
+
+            set
+            {
+                _currentRoom = value;
+            }
+        }
+
+        public string PreviousRoom
+        {
+            get
+            {
+                return _previousRoom;
+            }
+
+            set
+            {
+                _previousRoom = value;
+            }
+        }
+
+        public string NextRoom
+        {
+            get
+            {
+                return _nextRoom;
+            }
+
+            set
+            {
+                _nextRoom = value;
+            }
+        }
+
+        public string PreviousPhase
+        {
+            get
+            {
+                return _previousPhase;
+            }
+
+            set
+            {
+                _previousPhase = value;
+            }
+        }
+
+        public string NextPhase
+        {
+            get
+            {
+                return _nextPhase;
+            }
+
+            set
+            {
+                _nextPhase = value;
+            }
+        }
+
         private void InitializeStoryElements()
         {
             _characters = new Dictionary<string, Image>();
